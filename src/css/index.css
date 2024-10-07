@@ -1,0 +1,31 @@
+@import "variables.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 15rem;
+}
+
+.primary-background {
+    background-color: var(--primary-color);
+}
+
+.secondary-background {
+    background-color: var(--secondary-color);
+}
+
+.primary-text {
+    color: var(--primary-text);
+}
+
+.secondary-text {
+    color: var(--secondary-text);
+}
