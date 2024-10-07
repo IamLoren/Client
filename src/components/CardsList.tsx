@@ -34,7 +34,7 @@ const CardsList:React.FC = () => {
             price: {"hour": 2.5, "day": 30},
             color:"black",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239381/cars/GL-Class_350D_4Matic.jpg",
-            availability: [{start: new Date, end: new Date(new Date)}],
+            availability: [{start: new Date, end: new Date('2024-10-20')}],
             scheduled_maintenance: "03-31-2024",
             removed:false
         },
