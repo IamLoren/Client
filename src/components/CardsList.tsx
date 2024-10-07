@@ -34,7 +34,7 @@ const CardsList:React.FC = () => {
             price: {"hour": 2.5, "day": 30},
             color:"black",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239381/cars/GL-Class_350D_4Matic.jpg",
-            availability: [453],
+            availability: [{start: new Date, end: new Date(new Date)}],
             scheduled_maintenance: "03-31-2024",
             removed:false
         },
@@ -55,12 +55,29 @@ const CardsList:React.FC = () => {
             scheduled_maintenance: "03-31-2025",
             removed:false
         },
+        {
+            id: 4,
+            make: "Mercedes",
+            model:"S 350 d 4MATIC",
+            year: "2024",
+            mileage: 1000,
+            type:"sedan",
+            engeen: 4,
+            fuel: "diesel",
+            transmission:"manual",
+            price: {"hour": 3, "day": 35},
+            color:"green",
+            img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239023/cars/manufaktur_olive.webp",
+            availability: [],
+            scheduled_maintenance: "03-31-2024",
+            removed:false
+        }
     ]
 
   return (
     <ul className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-[29px] mb-[50px]">
         {cars.map(car => {
-            return <Card key={car.id} car={car}/>
+            return <Card key={car.id} carProps={car}/>
         })}
     </ul>
   )

@@ -7,7 +7,7 @@ const HomePage:React.FC = () => {
   return (
     <>
     <Header />
-    <main className="h-96 flex-1 secondary-background secondary-text p-4">
+    <main className="flex-1 secondary-background secondary-text p-4">
     <CardsList/>
     </main>
     <Footer />
