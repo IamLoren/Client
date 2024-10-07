@@ -3,6 +3,12 @@
     --secondary-color: rgba(195, 212, 233, 0.4);
     --primary-text: #1A202C;
     --secondary-text: #90A3BF;
+    --white-text: #ffffff;
     --accent-primary:#3563E9;
     --accent-secondary: #5CAFFC;
+
   }
+
+/* .dark-mode {
+
+} */
