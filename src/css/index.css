@@ -21,6 +21,10 @@ span>[id*="tooltip"] {
     background-color: var(--primary-color);
 }
 
+.opacity {
+    opacity: 0.5;
+}
+
 .secondary-background {
     background-color: var(--secondary-color);
 }
