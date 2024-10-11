@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Loader:React.FC = () => {
   return (
@@ -6,4 +6,4 @@ const Loader:React.FC = () => {
   )
 }
 
-export default Loader
+export default Loader;

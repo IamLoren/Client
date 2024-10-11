@@ -3,31 +3,9 @@ import { FiHeart } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import { BsFuelPump } from "react-icons/bs";
 import { TbSteeringWheel } from "react-icons/tb";
-import Button from "./Button";
-import NotAvailable from "./NotAvailable";
-// import Modal from "./Modal";
-
-interface CardProperties {
-  id: number;
-  make: string;
-  model: string;
-  year: string;
-  mileage: number;
-  type: string;
-  engeen: number;
-  fuel: string;
-  transmission: string;
-  price: { hour: number; day: number };
-  color: string;
-  img: string;
-  availability: { start: Date; end: Date }[] | [];
-  scheduled_maintenance: string;
-  removed: boolean;
-}
-
-interface CardProps {
-  carProps: CardProperties;
-}
+import Button from "../Button/Button";
+import NotAvailable from "../NotAvailable/NotAvailable";
+import { CardProps } from "./CardTypes";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
@@ -122,7 +100,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           <span className="block">per hour: {price.hour}$</span>
           <span className="block">per day: {price.day}$</span>
         </span>
-        <Button buttonName="Rent now" onClick={handleButtonClick} />
+        <Button type="button" buttonName="Rent now" onClick={handleButtonClick} />
       </div>
     </li>
   );

@@ -1,5 +1,5 @@
-import React from 'react'
-import Card from './Card'
+import React from 'react';
+import Card from '../Card/Card'
 
 const CardsList:React.FC = () => {
 
@@ -11,14 +11,14 @@ const CardsList:React.FC = () => {
             year: "2024",
             mileage: 1000,
             type:"sedan",
-            engeen: 4,
+            engine: 4,
             fuel: "diesel",
             transmission:"manual",
             price: {"hour": 3, "day": 35},
             color:"green",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239023/cars/manufaktur_olive.webp",
             availability: [],
-            scheduled_maintenance: "03-31-2024",
+            scheduled_maintenance: new Date(),
             removed:false
         },
         {
@@ -28,14 +28,14 @@ const CardsList:React.FC = () => {
             year: "2015",
             mileage: 150000,
             type:"crossover",
-            engeen: 3,
+            engine: 3,
             fuel: "diesel",
             transmission:"automatic",
             price: {"hour": 2.5, "day": 30},
             color:"black",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239381/cars/GL-Class_350D_4Matic.jpg",
             availability: [{start: new Date, end: new Date('2024-10-20')}],
-            scheduled_maintenance: "03-31-2024",
+            scheduled_maintenance: new Date(),
             removed:false
         },
         {
@@ -45,14 +45,14 @@ const CardsList:React.FC = () => {
             year: "2019",
             mileage: 10000,
             type:"sedan",
-            engeen: 2,
+            engine: 2,
             fuel: "gasoline",
             transmission:"manual",
             price: {"hour": 3, "day": 35},
             color:"blue",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239585/cars/BMW_i530_blue.jpg",
             availability: [],
-            scheduled_maintenance: "03-31-2025",
+            scheduled_maintenance: new Date(),
             removed:false
         },
         {
@@ -62,14 +62,14 @@ const CardsList:React.FC = () => {
             year: "2024",
             mileage: 1000,
             type:"sedan",
-            engeen: 4,
+            engine: 4,
             fuel: "diesel",
             transmission:"manual",
             price: {"hour": 3, "day": 35},
             color:"green",
             img:"https://res.cloudinary.com/carsphoto/image/upload/v1728239023/cars/manufaktur_olive.webp",
             availability: [],
-            scheduled_maintenance: "03-31-2024",
+            scheduled_maintenance: new Date(),
             removed:false
         }
     ]

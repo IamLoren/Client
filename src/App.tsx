@@ -8,6 +8,7 @@ const LazyAdmin = lazy(() => import("./pages/AdminPage"));
 const LazyError = lazy(() => import("./pages/ErrorPage"));
 
 const App: React.FC = () => {
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>

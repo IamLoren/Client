@@ -21,6 +21,12 @@ span>[id*="tooltip"] {
     background-color: var(--primary-color);
 }
 
+dialog::backdrop {
+    background-color: var(--primary-color);
+    opacity: 0.7;
+  }
+
+
 .secondary-background {
     background-color: var(--secondary-color);
 }
