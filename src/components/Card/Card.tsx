@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip";
 import { BsFuelPump } from "react-icons/bs";
 import { TbSteeringWheel } from "react-icons/tb";
 import Button from "../Button/Button";
-import NotAvailable from "../NotAvailable";
+import NotAvailable from "../NotAvailable/NotAvailable";
 import { CardProps } from "./CardTypes";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {

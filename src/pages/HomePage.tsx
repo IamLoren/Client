@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import CardsList from '../components/CardsList'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
+import CardsList from '../components/CardList/CardsList'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { changeTheme } from '../redux/authSlice/authSlice'
-import Modal from '../components/Modal'
+import Modal from '../components/Modal/Modal'
 import { isModalOpen } from '../redux/selectors'
 
 const HomePage:React.FC = () => {

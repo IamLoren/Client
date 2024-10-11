@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { closeModal } from "../redux/modalSlice/modalSlice";
-import { isLogoutForm, isSignInForm, isSignUpForm } from "../redux/selectors";
-import SignUpForm from "./SignUpForm/SignUpForm";
-import SignInForm from "./SignInForm/SignInForm";
-import LogoutForm from "./LogoutForm/LogoutForm";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { closeModal } from "../../redux/modalSlice/modalSlice";
+import { isLogoutForm, isSignInForm, isSignUpForm } from "../../redux/selectors";
+import SignUpForm from "../SignUpForm/SignUpForm";
+import SignInForm from "../SignInForm/SignInForm";
+import LogoutForm from "../LogoutForm/LogoutForm";
 
 const Modal: React.FC = () => {
   const dispatch = useAppDispatch();
