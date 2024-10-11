@@ -17,6 +17,9 @@ const modalSlice = createSlice({
     },
     closeModal: (state: StateType) => {
       state.isOpen = false;
+      state.isSignUpForm = false;
+      state.isSignInForm = false;
+      state.isLogoutForm = false;
     },
   },
 });
