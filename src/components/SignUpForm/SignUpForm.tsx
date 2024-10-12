@@ -2,8 +2,14 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../Button/Button";
+import { registerThunk } from "../../redux/authSlice/operations";
+import { RegTypes } from "../../redux/authSlice/authSliceTypes";
+import { useAppDispatch } from "../../hooks";
 
 const SignUpForm: React.FC = () => {
+
+const dispatch = useAppDispatch();
+
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .min(2, "Must be at least 2 characters")
@@ -31,8 +37,9 @@ const SignUpForm: React.FC = () => {
       terms: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: RegTypes) => {
+      const registerData = {...values, role:"user"};
+     dispatch(registerThunk(registerData)) ;
     },
   });
 
@@ -119,6 +126,8 @@ const SignUpForm: React.FC = () => {
           type="checkbox"
           name="terms"
           id="terms"
+          onChange={formik.handleChange} 
+          checked={formik.values.terms} 
           className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400"
         />
         <label
