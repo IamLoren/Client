@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { MdOutlineClose } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import {
@@ -42,10 +43,10 @@ const Modal: React.FC = () => {
   return ReactDOM.createPortal(
     <dialog ref={ref} onClick={handleClose}>
       <div
-        className="fixed w-auto top-1/2 left-1/2 p-[20px] primary-background transform -translate-x-1/2 -translate-y-1/2"
+        className="fixed w-auto top-1/2 left-1/2 p-[30px] shadow-lg border border-gray-300 rounded-2xl primary-background transform -translate-x-1/2 -translate-y-1/2"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={handleClose}>Close</button>
+        <button onClick={handleClose} className="absolute top-[20px] right-[20px] outline-0"><MdOutlineClose /></button>
         {isSignUp && <SignUpForm />}
         {isSignIn && <SignInForm />}
         {isLogout && <LogoutForm />}
