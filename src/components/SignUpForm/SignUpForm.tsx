@@ -37,9 +37,10 @@ const dispatch = useAppDispatch();
       terms: false,
     },
     validationSchema,
-    onSubmit: (values: RegTypes) => {
+    onSubmit: (values: RegTypes, { resetForm }) => {
       const registerData = {...values, role:"user"};
-     dispatch(registerThunk(registerData)) ;
+     dispatch(registerThunk(registerData));
+     resetForm();
     },
   });
 
