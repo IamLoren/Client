@@ -1,17 +1,14 @@
 export interface StateType {
   user: {
+    userId: string;
     email: string;
     firstName: string;
     lastName: string;
     role: null | "admin" | "user";
     avatarURL: string;
-    registrationDate: string | Date;
-    theme: string;
+    theme: "light" | "dark";
     favorites: [];
     ordersHistory: [];
-    verify: boolean;
-    verificationToken: string;
-    //   language:
   };
   token: string;
   isLogged: boolean;

@@ -10,6 +10,7 @@ export const registerThunk = createAsyncThunk(
       try {
         const { data } = await api.post('api/auth/signup', credentials);
         setToken(data.token);
+        console.log(data)
         return data;
       } catch (error: unknown) {
         if (error instanceof Error) {

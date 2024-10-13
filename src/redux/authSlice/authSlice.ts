@@ -4,19 +4,16 @@ import { registerThunk } from "./operations";
 import { toast } from "react-toastify";
 
 const initialState: StateType = {
-  user: {
-    email: "",
+  user: { 
+    userId: "",
     firstName: "",
     lastName: "",
+    email: "",
     role: null,
     avatarURL: "",
-    registrationDate: "",
     theme: "light",
     favorites: [],
     ordersHistory: [],
-    verify: false,
-    verificationToken: "",
-    //   language:
   },
   token: "",
   isLogged: false,
@@ -29,7 +26,7 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    changeTheme: (state, { payload }: PayloadAction<string>) => {
+    changeTheme: (state, { payload }: PayloadAction<"light" |"dark">) => {
       state.user.theme = payload;
     },
   },
@@ -39,12 +36,13 @@ export const authSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(registerThunk.fulfilled, (state, { payload }) => {
-      toast.success(`${payload.user.firstName}, You have been registered as a new user! Enjoy the additional features!`)
+      toast.success(`${payload.user.firstName}, You have been registered as a new user!
+         Enjoy the additional features!`)
+         state.user.userId = payload.user.id;
       state.user.firstName = payload.user.firstName;
       state.user.lastName = payload.user.lastName;
       state.user.role = payload.user.role;
-      state.user.email = payload.email;
-      state.user.theme = payload.theme;
+      state.user.email = payload.user.email;
       state.token = payload.token;
       state.isLoading = false;
       state.isLogged = true;

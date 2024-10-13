@@ -5,9 +5,9 @@ import Button from "../Button/Button";
 import { registerThunk } from "../../redux/authSlice/operations";
 import { RegTypes } from "../../redux/authSlice/authSliceTypes";
 import { useAppDispatch } from "../../hooks";
+import { closeModal } from "../../redux/modalSlice/modalSlice";
 
 const SignUpForm: React.FC = () => {
-
 const dispatch = useAppDispatch();
 
   const validationSchema = Yup.object({
@@ -41,6 +41,7 @@ const dispatch = useAppDispatch();
       const registerData = {...values, role:"user"};
      dispatch(registerThunk(registerData));
      resetForm();
+      dispatch(closeModal())
     },
   });
 
