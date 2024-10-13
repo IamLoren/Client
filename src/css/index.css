@@ -3,55 +3,69 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 #root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: 15rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 15rem;
 }
 
-span>[id*="tooltip"] {
-    background-color: var(--primary-color);
-    border: 1px solid lightgray;
-    border-radius: 15px;
-    color: var(--secondary-text);
-  }
+#modal-root {
+  position: relative;
+}
+
+#toasts-root {
+    position: fixed;
+    z-index: 9999 !important;
+}
+
+span > [id*="tooltip"] {
+  background-color: var(--primary-color);
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  color: var(--secondary-text);
+}
 
 .primary-background {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 dialog::backdrop {
-    background-color: var(--primary-color);
-    opacity: 0.7;
-  }
+  background-color: var(--primary-color);
+  opacity: 0.8;
+}
 
 .secondary-background {
-    background-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 }
 
 .bg-red {
-    background-color: red;
+  background-color: red;
 }
 
 .primary-text {
-    color: var(--primary-text);
+  color: var(--primary-text);
 }
 
 .secondary-text {
-    color: var(--secondary-text);
+  color: var(--secondary-text);
 }
 
 .accent-text {
-    color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 .accent-background {
-    background-color: var(--accent-primary);
+  background-color: var(--accent-primary);
 }
 
 .white-text {
-    color: var(--white-text);
+  color: var(--white-text);
 }
+/* 
+.Toastify__toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+ 
+} */
