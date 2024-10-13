@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { openModal, openSignInForm, openSignUpForm } from '../../redux/modalSlice/modalSlice'
+import { openLogoutForm, openModal, openSignInForm, openSignUpForm } from '../../redux/modalSlice/modalSlice'
 import { selectIsLogged } from '../../redux/selectors';
 
 const Header:React.FC = () => {
@@ -16,10 +16,16 @@ const isLogged = useAppSelector(selectIsLogged);
     dispatch(openModal())
     dispatch(openSignInForm())
   }
+
+  const handleClickLogout = () => {
+    dispatch(openModal())
+    dispatch(openLogoutForm())
+  }
   return (
     <header className="sticky top-0 primary-background p-4 primary-text">
     {!isLogged &&  <button onClick={handleClickREgister}>зареєструватися</button>} <br />
     {!isLogged && <button onClick={handleClickLogin}>залогінитися</button>}
+    {isLogged && <button onClick={handleClickLogout}> вийти</button>} 
     </header>
   )
 }

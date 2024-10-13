@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { api, setToken } from "../../axios/axios";
+import { api, clearToken, setToken } from "../../axios/axios";
 import {
   loginData,
   refreshData,
@@ -78,3 +78,21 @@ export const refreshThunk = createAsyncThunk<
     }
   }
 });
+
+export const logoutThunk = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkApi) => {
+    try {
+      await api.post("api/auth/logout");
+      localStorage.removeItem("authToken");
+      clearToken();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        return thunkApi.rejectWithValue(error.message);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    }
+  }
+);
