@@ -3,7 +3,7 @@ import axios from "axios";
 const URL = import.meta.env.VITE_API_URL;
 
 export const api = axios.create({
-  baseURL: URL,
+  baseURL: "http://localhost:2800",
 });
 
 export const setToken = (token: string) => {

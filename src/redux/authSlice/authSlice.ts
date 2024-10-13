@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StateType } from "./authSliceTypes";
-import { refreshThunk, registerThunk } from "./operations";
+import { loginThunk, refreshThunk, registerThunk } from "./operations";
 import { toast } from "react-toastify";
 
 const initialState: StateType = {
@@ -61,12 +61,32 @@ export const authSlice = createSlice({
         state.user.lastName = payload.lastName;
         state.user.role = payload.role;
         state.user.email = payload.email;
+        state.user.avatarURL = payload.avatarURL  
         state.token = payload.token;
         state.isLoading = false;
         state.isLogged = true;
       })
       .addCase(refreshThunk.rejected, (state) => {
         toast.error("It looks like your session has timed out. Log in again");
+        state.isLogged = false;
+        state.isLoading = false;
+      })
+      .addCase(loginThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginThunk.fulfilled, (state, { payload }) => {
+        toast.success(`${payload.user.firstName}, You succesfully accessed your personal profile!`);
+        state.user.userId = payload.user.id;
+        state.user.firstName = payload.user.firstName;
+        state.user.lastName = payload.user.lastName;
+        state.user.role = payload.user.role;
+        state.user.email = payload.user.email;
+        state.token = payload.token;
+        state.isLoading = false;
+        state.isLogged = true;
+      })
+      .addCase(loginThunk.rejected, (state) => {
+        toast.error("Your email or password is wrong");
         state.isLogged = false;
         state.isLoading = false;
       })

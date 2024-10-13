@@ -41,7 +41,7 @@ const dispatch = useAppDispatch();
       const registerData = {...values, role:"user"};
      dispatch(registerThunk(registerData));
      resetForm();
-      dispatch(closeModal())
+      dispatch(closeModal());
     },
   });
 

@@ -29,7 +29,7 @@ const Loader: React.FC = () => {
           color="lightblue"
           radius="9"
           ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{border: "none"}}
           wrapperClass="loaderWrapper"
         />
       </div>
