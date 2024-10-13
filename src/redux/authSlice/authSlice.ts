@@ -1,22 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StateType } from "./authSliceTypes";
-import { registerThunk } from "./operations";
+import { refreshThunk, registerThunk } from "./operations";
 import { toast } from "react-toastify";
 
 const initialState: StateType = {
   user: {
-    email: "",
+    userId: "",
     firstName: "",
     lastName: "",
+    email: "",
     role: null,
     avatarURL: "",
-    registrationDate: "",
     theme: "light",
     favorites: [],
     ordersHistory: [],
-    verify: false,
-    verificationToken: "",
-    //   language:
   },
   token: "",
   isLogged: false,
@@ -29,31 +26,46 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    changeTheme: (state, { payload }: PayloadAction<string>) => {
+    changeTheme: (state, { payload }: PayloadAction<"light" | "dark">) => {
       state.user.theme = payload;
     },
   },
-    extraReducers: (builder) => {
+  extraReducers: (builder) => {
     builder
-    .addCase(registerThunk.pending, (state) => {
-      state.isLoading = true;
-    })
-    .addCase(registerThunk.fulfilled, (state, { payload }) => {
-      toast.success(`${payload.user.firstName}, You have been registered as a new user! Enjoy the additional features!`)
-      state.user.firstName = payload.user.firstName;
-      state.user.lastName = payload.user.lastName;
-      state.user.role = payload.user.role;
-      state.user.email = payload.email;
-      state.user.theme = payload.theme;
-      state.token = payload.token;
-      state.isLoading = false;
-      state.isLogged = true;
-    })
-    .addCase(registerThunk.rejected, (state) => {
-      toast.error('User already exists');
-      state.isLogged = false;
-      state.isLoading = false;
-    })
+      .addCase(registerThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerThunk.fulfilled, (state, { payload }) => {
+        toast.success(`${payload.user.firstName}, You have been registered as a new user!
+         Enjoy the additional features!`);
+        state.user.userId = payload.user.id;
+        state.user.firstName = payload.user.firstName;
+        state.user.lastName = payload.user.lastName;
+        state.user.role = payload.user.role;
+        state.user.email = payload.user.email;
+        state.token = payload.token;
+        state.isLoading = false;
+        state.isLogged = true;
+      })
+      .addCase(registerThunk.rejected, (state) => {
+        toast.error("User already exists");
+        state.isLogged = false;
+        state.isLoading = false;
+      })
+      .addCase(refreshThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshThunk.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.user.userId = payload.id;
+        state.user.firstName = payload.firstName;
+        state.user.lastName = payload.lastName;
+        state.user.role = payload.role;
+        state.user.email = payload.email;
+        state.token = payload.token;
+        state.isLoading = false;
+        state.isLogged = true;
+      });
   },
 });
 

@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const URL = import.meta.env.VITE_API_URL;
-console.log(URL)
 
 export const api = axios.create({
   baseURL: URL,
@@ -9,6 +8,7 @@ export const api = axios.create({
 
 export const setToken = (token: string) => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  localStorage.setItem("authToken", token);
 };
 
 export const clearToken = () => {

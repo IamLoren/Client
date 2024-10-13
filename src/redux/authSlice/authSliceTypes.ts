@@ -1,17 +1,14 @@
 export interface StateType {
   user: {
+    userId: string;
     email: string;
     firstName: string;
     lastName: string;
     role: null | "admin" | "user";
     avatarURL: string;
-    registrationDate: string | Date;
-    theme: string;
+    theme: "light" | "dark";
     favorites: [];
     ordersHistory: [];
-    verify: boolean;
-    verificationToken: string;
-    //   language:
   };
   token: string;
   isLogged: boolean;
@@ -26,4 +23,26 @@ export interface RegTypes {
   email: string;
   password: string;
   terms: boolean;
+}
+
+export interface RegResponse {
+  token: string;
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: "admin" | "user";
+  };
+}
+
+export interface refreshData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURL: string;
+  theme: "light" | "dark";
+  role: "admin" | "user";
+  token: string;
 }
