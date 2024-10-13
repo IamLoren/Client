@@ -1,16 +1,49 @@
 import { toast } from 'react-toastify';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, setToken } from '../../axios/axios';
-import { RegTypes } from './authSliceTypes';
+import { refreshData, RegResponse, RegTypes } from './authSliceTypes';
+import { RootState } from '../store';
 
 
-export const registerThunk = createAsyncThunk(
+export const registerThunk = createAsyncThunk<RegResponse, RegTypes,{
+  state: RootState;
+  rejectValue: string;
+}
+>(
     'auth/register',
-    async (credentials:RegTypes, thunkApi) => {
+    async (credentials, thunkApi) => {
       try {
         const { data } = await api.post('api/auth/signup', credentials);
         setToken(data.token);
-        console.log(data)
+        return data;
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+            toast.error(error.message);
+        return thunkApi.rejectWithValue(error.message);
+        }else {
+            toast.error('An unexpected error occurred');
+          }
+      }
+    }
+  );
+
+  export const refreshThunk = createAsyncThunk<refreshData, void,  {
+    state: RootState;
+    rejectValue: string;
+    getState:  () => RootState;
+  }
+  >(
+    'auth/refresh',
+    async (_, thunkApi) => {
+      const savedToken = localStorage.getItem('authToken');
+      if (savedToken) {
+        setToken(savedToken);
+      } else {
+        return thunkApi.rejectWithValue("Token doesn't exist");
+      }
+  
+      try {
+        const { data } = await api.get('api/auth/current');
         return data;
       } catch (error: unknown) {
         if (error instanceof Error) {

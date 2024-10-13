@@ -1,11 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import "./css/App.css";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
-import { useAppSelector } from "./hooks";
-import { isModalOpen } from "./redux/selectors";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { isModalOpen} from "./redux/selectors";
 import Modal from "./components/Modal/Modal";
 import { ToastContainer } from "react-toastify";
+import PrivateAdminRoute from "./routesConfig/PrivateAdminRoute";
+import PrivateUserRoute from "./routesConfig/PrivatUserRoute";
+import { refreshThunk } from "./redux/authSlice/operations";
 
 
 const LazyHome = lazy(() => import("./pages/HomePage"));
@@ -14,14 +17,23 @@ const LazyAdmin = lazy(() => import("./pages/AdminPage"));
 const LazyError = lazy(() => import("./pages/ErrorPage"));
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch()
   const isModal = useAppSelector(isModalOpen);
+
+
+  useEffect(()=> {
+    const token = localStorage.getItem('authToken');
+  if (token) {
+    dispatch(refreshThunk());
+  }
+  }, [dispatch])
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<LazyHome />} />
-        <Route path="/client" element={<LazyClient />} />
-        <Route path="/admin" element={<LazyAdmin />} />
+        <Route path="/client" element={<PrivateUserRoute><LazyClient /></PrivateUserRoute>} />
+        <Route path="/admin" element={<PrivateAdminRoute><LazyAdmin /></PrivateAdminRoute>} />
         <Route path="*" element={<LazyError />} />
       </Routes>
       {isModal && <Modal/>}

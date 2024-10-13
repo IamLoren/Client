@@ -24,3 +24,25 @@ export interface RegTypes {
   password: string;
   terms: boolean;
 }
+
+export interface RegResponse {
+  token: string;
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: "admin" | "user";
+  };
+}
+
+export interface refreshData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarURL: string;
+  theme: "light" | "dark";
+  role: "admin" | "user";
+  token: string;
+}
