@@ -39,7 +39,10 @@ export const authSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(registerThunk.fulfilled, (state, { payload }) => {
-      state.user.firstName = payload.email;
+      toast.success(`${payload.user.firstName}, You have been registered as a new user! Enjoy the additional features!`)
+      state.user.firstName = payload.user.firstName;
+      state.user.lastName = payload.user.lastName;
+      state.user.role = payload.user.role;
       state.user.email = payload.email;
       state.user.theme = payload.theme;
       state.token = payload.token;
