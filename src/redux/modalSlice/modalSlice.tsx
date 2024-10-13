@@ -23,9 +23,15 @@ const modalSlice = createSlice({
     },
     openSignUpForm: (state: StateType) => {
       state.isSignUpForm = true;
-    }
+    },
+    openSignInForm: (state: StateType) => {
+      state.isSignInForm = true;
+    },
+    openLogoutForm: (state: StateType) => {
+      state.isLogoutForm = true;
+    },
   },
 });
 
-export const { openModal, closeModal, openSignUpForm } = modalSlice.actions;
+export const { openModal, closeModal, openSignUpForm, openSignInForm, openLogoutForm } = modalSlice.actions;
 export default modalSlice.reducer;

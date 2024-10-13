@@ -46,3 +46,16 @@ export interface refreshData {
   role: "admin" | "user";
   token: string;
 }
+
+export interface loginData {
+  token: string;
+  user: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    theme: "light" | "dark";
+    avatarURL: string;
+    role: "admin" | "user";
+  };
+}
