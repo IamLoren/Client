@@ -15,7 +15,10 @@ const Loader: React.FC = () => {
       ref.current.close();
       document.body.style.overflow = "auto";
     }
-  });
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLoader]);
   return (
     <dialog ref={ref}>
       <div className="border-0">
