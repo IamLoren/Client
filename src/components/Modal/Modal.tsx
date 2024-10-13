@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { MdOutlineClose } from "react-icons/md";
+import 'react-toastify/dist/ReactToastify.css';
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import {
@@ -12,6 +13,7 @@ import {
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/SignInForm";
 import LogoutForm from "../LogoutForm/LogoutForm";
+// import CustomToasts from "../CustomToasts/CustomToasts";
 
 const Modal: React.FC = () => {
   const dispatch = useAppDispatch();

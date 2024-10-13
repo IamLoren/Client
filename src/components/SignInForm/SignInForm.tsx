@@ -2,8 +2,13 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../Button/Button";
+import { useAppDispatch } from "../../hooks";
+import { loginThunk } from "../../redux/authSlice/operations";
+import { closeModal } from "../../redux/modalSlice/modalSlice";
 
 const SignInForm: React.FC = () => {
+const dispatch = useAppDispatch()
+
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string()
@@ -18,7 +23,8 @@ const SignInForm: React.FC = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(loginThunk(values));
+      dispatch(closeModal())
     },
   });
 
