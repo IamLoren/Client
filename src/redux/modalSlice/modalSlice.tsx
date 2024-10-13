@@ -3,9 +3,9 @@ import { StateType } from "./modalSliceTypes";
 
 const initialState: StateType = {
   isOpen: true,
-  isSignUpForm: false,
+  isSignUpForm: true,
   isSignInForm: false,
-  isLogoutForm: true,
+  isLogoutForm: false,
 };
 
 const modalSlice = createSlice({
