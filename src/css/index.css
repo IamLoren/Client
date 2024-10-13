@@ -62,10 +62,8 @@ dialog::backdrop {
 .white-text {
   color: var(--white-text);
 }
-/* 
-.Toastify__toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
- 
-} */
+
+.loaderWrapper {
+    border: none;
+    outline: none;
+}

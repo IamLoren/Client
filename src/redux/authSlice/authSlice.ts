@@ -56,7 +56,6 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.user.userId = payload.id;
         state.user.firstName = payload.firstName;
         state.user.lastName = payload.lastName;
@@ -65,7 +64,12 @@ export const authSlice = createSlice({
         state.token = payload.token;
         state.isLoading = false;
         state.isLogged = true;
-      });
+      })
+      .addCase(refreshThunk.rejected, (state) => {
+        toast.error("It looks like your session has timed out. Log in again");
+        state.isLogged = false;
+        state.isLoading = false;
+      })
   },
 });
 
