@@ -8,7 +8,7 @@ const Navigation: React.FC = () => {
 
   return (
     <nav>
-      <ul>
+      <ul className="flex gap-3">
         <li>
           <NavLink to="/">Catalog</NavLink>
         </li>

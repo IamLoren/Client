@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./authSlice/authSlice";
 import modalReducer from './modalSlice/modalSlice';
+import { carRentalReducer } from "./carRentalSlice/carRentalSlice";
 
 const rootReducer = combineReducers({
     auth: authReducer,
     modal: modalReducer,
+    cars: carRentalReducer,
   });
 
 export const store = configureStore({

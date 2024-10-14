@@ -1,9 +1,8 @@
 interface CardProperties {
-    id: number;
+    _id: string;
     make: string;
     model: string;
     year: string;
-    mileage: number;
     type: string;
     engine: number;
     fuel: string;
@@ -12,8 +11,7 @@ interface CardProperties {
     color: string;
     img: string;
     availability: { start: Date; end: Date }[] | [];
-    scheduled_maintenance: Date;
-    removed: boolean;
+    isRemoved: boolean;
   }
   
   export interface CardProps {
