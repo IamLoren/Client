@@ -9,7 +9,7 @@ import { CardProps } from "./CardTypes";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
-    id,
+    _id,
     make,
     model,
     year,
@@ -47,12 +47,12 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     <li className="relative flex flex-col x-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
       <span
         className="absolute top-[20px] right-[20px]"
-        data-tooltip-id={`${id}-tooltip`}
+        data-tooltip-id={`${_id}-tooltip`}
         data-tooltip-content={
           isFavorite ? "Remove from favorites" : "Add to favorites"
         }
       >
-        <Tooltip id={`${id.toString()}-tooltip`} />
+        <Tooltip id={`${_id.toString()}-tooltip`} />
         <FiHeart
           className=""
           size="25px"

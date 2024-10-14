@@ -1,33 +1,46 @@
-import React from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { openLogoutForm, openModal, openSignInForm, openSignUpForm } from '../../redux/modalSlice/modalSlice'
-import { selectIsLogged } from '../../redux/selectors';
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import {
+  openLogoutForm,
+  openModal,
+  openSignInForm,
+  openSignUpForm,
+} from "../../redux/modalSlice/modalSlice";
+import { selectIsLogged } from "../../redux/selectors";
+import Navigation from "../Navigation/Navigation";
+import Container from "../Container/Container";
 
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   const dispatch = useAppDispatch();
-const isLogged = useAppSelector(selectIsLogged);
+  const isLogged = useAppSelector(selectIsLogged);
 
-  const handleClickREgister = ()=> {
-    dispatch(openModal())
-    dispatch(openSignUpForm())
-  }
+  const handleClickREgister = () => {
+    dispatch(openModal());
+    dispatch(openSignUpForm());
+  };
 
   const handleClickLogin = () => {
-    dispatch(openModal())
-    dispatch(openSignInForm())
-  }
+    dispatch(openModal());
+    dispatch(openSignInForm());
+  };
 
   const handleClickLogout = () => {
-    dispatch(openModal())
-    dispatch(openLogoutForm())
-  }
+    dispatch(openModal());
+    dispatch(openLogoutForm());
+  };
   return (
     <header className="sticky top-0 primary-background p-4 primary-text">
-    {!isLogged &&  <button onClick={handleClickREgister}>зареєструватися</button>} <br />
-    {!isLogged && <button onClick={handleClickLogin}>залогінитися</button>}
-    {isLogged && <button onClick={handleClickLogout}> вийти</button>} 
+      <Container>
+        {!isLogged && (
+          <button onClick={handleClickREgister}>зареєструватися</button>
+        )}{" "}
+        <br />
+        {!isLogged && <button onClick={handleClickLogin}>залогінитися</button>}
+        {isLogged && <Navigation />}
+        {isLogged && <button onClick={handleClickLogout}> вийти</button>}
+      </Container>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
