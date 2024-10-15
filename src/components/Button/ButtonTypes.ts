@@ -3,4 +3,5 @@ export interface ButtonProps {
     style?: string;
     buttonName: string;
     onClick?:()=>void;
+    children?: React.ReactNode
 }
