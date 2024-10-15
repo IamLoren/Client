@@ -9,3 +9,6 @@ export const selectIsLogged = (state: RootState) => state.auth.isLogged;
 export const selectRole = (state: RootState) => state.auth.user.role;
 export const selectLoading = (state: RootState) => state.auth.isLoading;
 export const selectAllCars = (state: RootState) => state.cars.cars;
+export const selectUserListOfCars  = (state: RootState) => state.cars.userListOfCars;
+export const selectCarTypeFilter = (state: RootState) => state.cars.carTypeFilter;
+export const selectedTransmissionType = (state: RootState) => state.cars.carTransmissionFilter;
