@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Card from "../Card/Card";
-import Container from "../Container/Container";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getAllCarsThunk } from "../../redux/carRentalSlice/operations";
 import { selectAllCars } from "../../redux/selectors";
@@ -14,15 +13,13 @@ const cars = useAppSelector(selectAllCars);
     },[dispatch])
 
   return (
-    <section>
-      <Container>
+    <div>
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-[29px] mb-[50px]">
           {cars.map((car) => {
             return <Card key={car._id} carProps={car} />;
           })}
         </ul>
-      </Container>
-    </section>
+    </div>
   );
 };
 
