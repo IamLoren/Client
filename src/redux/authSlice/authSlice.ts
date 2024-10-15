@@ -7,7 +7,6 @@ import {
   registerThunk,
 } from "./operations";
 import { toast } from "react-toastify";
-import { CarInterface } from "../carRentalSlice/carRentalSliceTypes";
 
 const initialState: StateType = {
   user: {
@@ -121,4 +120,4 @@ export const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { changeTheme, addFavoriteCar, deleteFavoriteCar} = authSlice.actions;
+export const { changeTheme} = authSlice.actions;
