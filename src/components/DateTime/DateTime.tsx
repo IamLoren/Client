@@ -4,7 +4,7 @@ import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateTime: React.FC = () => {
-    const [startDate, setStartDate] = useState(
+    const [startDate, setStartDate] = useState<Date | null>(
         setHours(setMinutes(new Date(), 30), 16),
       );
   return (
