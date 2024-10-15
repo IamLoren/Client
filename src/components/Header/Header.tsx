@@ -29,7 +29,7 @@ const Header: React.FC = () => {
     dispatch(openLogoutForm());
   };
   return (
-    <header className="sticky top-0 primary-background p-4 primary-text">
+    <header className="sticky z-10 top-0 primary-background p-4 primary-text">
       <Container>
         {!isLogged && (
           <button onClick={handleClickREgister}>зареєструватися</button>
