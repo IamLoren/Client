@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import { BsFuelPump } from "react-icons/bs";
@@ -6,6 +6,9 @@ import { TbSteeringWheel } from "react-icons/tb";
 import Button from "../Button/Button";
 import NotAvailable from "../NotAvailable/NotAvailable";
 import { CardProps } from "./CardTypes";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
+import { addFavoriteCar, deleteFavoriteCar } from "../../redux/authSlice/authSlice";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
@@ -21,23 +24,27 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     img,
     availability,
   } = carProps;
+  const dispatch = useAppDispatch()
+  const favoriteList = useAppSelector(selectFavoriteCars);
+  const isLogged = useAppSelector(selectIsLogged);
+  const [isFavorite, setIsFavorite] = useState(() =>
+    favoriteList?.some((car) => car._id === _id)
+  );
 
-  const isFavorite = false;
-  const isAutorized = false;
-  //   const handleFavoriteClick = () => {
-  //     if (isFavorite) {
-  //       dispatch(deleteFavoriteCar(id));
-  //     } else {
-  //       dispatch(addFavoriteCar(car));
-  //     }
-  //     setIsFavorite(!isFavorite);
-  //   };
+    const handleFavoriteClick = () => {
+      if (isFavorite) {
+        dispatch(deleteFavoriteCar(_id));
+      } else {
+        dispatch(addFavoriteCar(carProps));
+      }
+      setIsFavorite(!isFavorite);
+    };
 
   const handleButtonClick = () => {
-    if (!isAutorized) {
+    if (!isLogged) {
       //Перевести isModalOpen в true
       // Вміст: Вам слід авторизуватися для можливості оренди авто
-    } else if (isAutorized) {
+    } else if (isLogged) {
       //Перевести isModalOpen в true
       // Вміст: форма для замовлення авто
     }
@@ -56,7 +63,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         <FiHeart
           className=""
           size="25px"
-          //   onClick={handleFavoriteClick}
+            onClick={handleFavoriteClick}
           style={{
             fill: isFavorite ? "red" : "transparent",
             color: isFavorite ? "red" : "gray",

@@ -12,3 +12,4 @@ export const selectAllCars = (state: RootState) => state.cars.cars;
 export const selectUserListOfCars  = (state: RootState) => state.cars.userListOfCars;
 export const selectCarTypeFilter = (state: RootState) => state.cars.carTypeFilter;
 export const selectedTransmissionType = (state: RootState) => state.cars.carTransmissionFilter;
+export const selectFavoriteCars = (state: RootState) => state.auth.user.favorites;

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./css/App.css";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, LazyExoticComponent, Suspense, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { isModalOpen, selectLoading } from "./redux/selectors";
@@ -10,11 +10,13 @@ import PrivateAdminRoute from "./routesConfig/PrivateAdminRoute";
 import PrivateUserRoute from "./routesConfig/PrivatUserRoute";
 import { refreshThunk } from "./redux/authSlice/operations";
 import Loader from "./components/Loader/Loader";
+import ClientsHistory from "./components/ClientsHistory/ClientsHistory";
+import Favorites from "./components/Favorites/Favorites";
 
-const LazyHome = lazy(() => import("./pages/HomePage"));
-const LazyClient = lazy(() => import("./pages/ClientPage"));
-const LazyAdmin = lazy(() => import("./pages/AdminPage"));
-const LazyError = lazy(() => import("./pages/ErrorPage"));
+const LazyHome: LazyExoticComponent<React.FC> = lazy(() => import("./pages/HomePage"));
+const LazyClient: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ClientPage"));
+const LazyAdmin: LazyExoticComponent<React.FC> = lazy(() => import("./pages/AdminPage"));
+const LazyError: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ErrorPage"));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +41,10 @@ const App: React.FC = () => {
               <LazyClient />
             </PrivateUserRoute>
           }
-        />
+        > 
+        <Route path="history" element={<ClientsHistory/>}/>
+        <Route path="favorites" element={<Favorites/>}/>
+        </Route>
         <Route
           path="/admin"
           element={

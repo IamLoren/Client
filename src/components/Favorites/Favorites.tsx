@@ -1,0 +1,15 @@
+import React from 'react'
+import { useAppSelector } from '../../hooks'
+import { selectFavoriteCars } from '../../redux/selectors'
+import Card from '../Card/Card';
+
+const Favorites:React.FC = () => {
+    const favorites = useAppSelector(selectFavoriteCars);
+  return (
+    <ul className='flex gap-[30px] p-[20px]'>{ favorites?.map((car) => {
+        return <Card key={car._id} carProps={car} />;
+      })}</ul>
+  )
+}
+
+export default Favorites
