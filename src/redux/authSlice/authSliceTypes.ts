@@ -1,3 +1,5 @@
+import { CarInterface } from "../carRentalSlice/carRentalSliceTypes";
+
 export interface StateType {
   user: {
     userId: string;
@@ -7,7 +9,7 @@ export interface StateType {
     role: null | "admin" | "user";
     avatarURL: string;
     theme: "light" | "dark";
-    favorites: [];
+    favorites: CarInterface[] | [];
     ordersHistory: [];
   };
   token: string;
