@@ -7,6 +7,7 @@ import {
   registerThunk,
 } from "./operations";
 import { toast } from "react-toastify";
+import { CarInterface } from "../carRentalSlice/carRentalSliceTypes";
 
 const initialState: StateType = {
   user: {
@@ -36,6 +37,18 @@ export const authSlice = createSlice({
       { payload }: PayloadAction<"light" | "dark">
     ) => {
       state.user.theme = payload;
+    },
+    addFavoriteCar: (state: StateType, { payload }:{payload: CarInterface}) => {
+      if (state.user.favorites.some((car:CarInterface) => car._id === payload._id)) {
+        return;
+      } else {
+        state.user.favorites.push(payload);
+      }
+    },
+    deleteFavoriteCar: (state:StateType, { payload }:{payload:string }) => {
+      state.user.favorites = state.user.favorites.filter(
+        (car) => car._id !== payload
+      );
     },
   },
   extraReducers: (builder) => {
@@ -120,4 +133,4 @@ export const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { changeTheme } = authSlice.actions;
+export const { changeTheme, addFavoriteCar, deleteFavoriteCar} = authSlice.actions;

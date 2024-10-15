@@ -67,3 +67,7 @@ dialog::backdrop {
     border: none;
     outline: none;
 }
+
+.react-datepicker-wrapper input {
+    width: 200px !important;
+}

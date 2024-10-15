@@ -5,12 +5,12 @@ interface CardProperties {
     year: string;
     type: string;
     engine: number;
-    fuel: string;
-    transmission: string;
+    fuel: "diesel" | "gasoline" | "electric" | "hybrid";
+    transmission: "manual" | "automatic";
     price: { hour: number; day: number };
     color: string;
     img: string;
-    availability: { start: Date; end: Date }[] | [];
+    availability: /*{ start: Date; end: Date }[]*/ | [];
     isRemoved: boolean;
   }
   

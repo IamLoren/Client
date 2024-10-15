@@ -8,7 +8,7 @@ const DateTime: React.FC = () => {
         setHours(setMinutes(new Date(), 30), 16),
       );
   return (
-    <div className=" w-[45%] primary-background rounded-lg">
+    <div className=" w-[45%] primary-background rounded-lg p-[10px]">
        <DatePicker
       selected={startDate}
       onChange={(date) => setStartDate(date)}
