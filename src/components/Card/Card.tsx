@@ -8,7 +8,7 @@ import NotAvailable from "../NotAvailable/NotAvailable";
 import { CardProps } from "./CardTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
-import { addFavoriteCar, deleteFavoriteCar } from "../../redux/authSlice/authSlice";
+import { updateFavoriteList } from "../../redux/authSlice/operations";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
@@ -32,11 +32,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
   );
 
     const handleFavoriteClick = () => {
-      if (isFavorite) {
-        dispatch(deleteFavoriteCar(_id));
-      } else {
-        dispatch(addFavoriteCar(carProps));
-      }
+      dispatch(updateFavoriteList(carProps))
       setIsFavorite(!isFavorite);
     };
 

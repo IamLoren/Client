@@ -38,18 +38,6 @@ export const authSlice = createSlice({
     ) => {
       state.user.theme = payload;
     },
-    addFavoriteCar: (state: StateType, { payload }:{payload: CarInterface}) => {
-      if (state.user.favorites.some((car:CarInterface) => car._id === payload._id)) {
-        return;
-      } else {
-        state.user.favorites.push(payload);
-      }
-    },
-    deleteFavoriteCar: (state:StateType, { payload }:{payload:string }) => {
-      state.user.favorites = state.user.favorites.filter(
-        (car) => car._id !== payload
-      );
-    },
   },
   extraReducers: (builder) => {
     builder

@@ -8,6 +8,7 @@ import {
   RegTypes,
 } from "./authSliceTypes";
 import { RootState } from "../store";
+import { CarInterface } from "../carRentalSlice/carRentalSliceTypes";
 
 export const registerThunk = createAsyncThunk<
   RegResponse,
@@ -97,19 +98,23 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-export const updateFavoriteList = createAsyncThunk(
-    "auth/userUpdate",
-    async (credentials, thunkApi) => {
-      try {
-        const response = await api.post("api/auth/update", credentials);
-        return response.data;
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          toast.error(error.message);
-          return thunkApi.rejectWithValue(error.message);
-        } else {
-          toast.error("An unexpected error occurred");
-        }
-      }
+export const updateFavoriteList = createAsyncThunk<
+  CarInterface,
+  CarInterface,
+  {
+    state: RootState;
+    rejectValue: string;
+  }
+>("auth/userUpdate", async (credentials, thunkApi) => {
+  try {
+    const response = await api.post("api/auth/update", credentials);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      toast.error(error.message);
+      return thunkApi.rejectWithValue(error.message);
+    } else {
+      toast.error("An unexpected error occurred");
     }
-  );
+  }
+});
