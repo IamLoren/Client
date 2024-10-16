@@ -46,6 +46,8 @@ export interface refreshData {
   avatarURL: string;
   theme: "light" | "dark";
   role: "admin" | "user";
+  favorites: CarInterface[];
+  ordersHistory: [];
   token: string;
 }
 

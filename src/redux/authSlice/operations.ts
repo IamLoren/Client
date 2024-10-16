@@ -99,15 +99,16 @@ export const logoutThunk = createAsyncThunk(
 );
 
 export const updateFavoriteList = createAsyncThunk<
-  CarInterface,
+  { arrFavorite: CarInterface[] },
   CarInterface,
   {
     state: RootState;
     rejectValue: string;
   }
->("auth/userUpdate", async (credentials, thunkApi) => {
+>("user/updatefavorites", async (credentials, thunkApi) => {
   try {
-    const response = await api.post("api/auth/update", credentials);
+    const response = await api.put("api/user/updatefavorites", credentials);
+    console.log(response.data);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {

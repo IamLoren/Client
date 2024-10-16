@@ -31,9 +31,9 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     favoriteList?.some((car) => car._id === _id)
   );
 
-    const handleFavoriteClick = () => {
-      dispatch(updateFavoriteList(carProps))
-      setIsFavorite(!isFavorite);
+    const handleFavoriteClick = () => { 
+       setIsFavorite(!isFavorite);
+       dispatch(updateFavoriteList(carProps))   
     };
 
   const handleButtonClick = () => {
