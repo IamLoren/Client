@@ -122,9 +122,6 @@ export const authSlice = createSlice({
         state.isLogged = false;
         state.isLoading = false;
       })
-      .addCase(updateFavoriteList.pending, (state: StateType) => {
-        state.isLoading = true;
-      })
       .addCase(
         updateFavoriteList.fulfilled,
         (
