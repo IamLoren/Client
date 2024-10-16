@@ -69,10 +69,6 @@ dialog::backdrop {
     outline: none;
 }
 
-.react-datepicker-wrapper input {
-    width: 200px !important;
-}
-
 ::-webkit-scrollbar {
   width: 5px;
 }
