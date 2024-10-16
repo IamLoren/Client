@@ -24,17 +24,20 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     img,
     availability,
   } = carProps;
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const favoriteList = useAppSelector(selectFavoriteCars);
   const isLogged = useAppSelector(selectIsLogged);
   const [isFavorite, setIsFavorite] = useState(() =>
     favoriteList?.some((car) => car._id === _id)
   );
 
-    const handleFavoriteClick = () => { 
-       setIsFavorite(!isFavorite);
-       dispatch(updateFavoriteList(carProps))   
-    };
+  const handleFavoriteClick = () => {
+    if (isLogged) {
+      setIsFavorite(!isFavorite);
+      dispatch(updateFavoriteList(carProps));
+    } else {
+    }
+  };
 
   const handleButtonClick = () => {
     if (!isLogged) {
@@ -52,14 +55,18 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         className="absolute top-[20px] right-[20px]"
         data-tooltip-id={`${_id}-tooltip`}
         data-tooltip-content={
-          isFavorite ? "Remove from favorites" : "Add to favorites"
+          isFavorite && isLogged
+            ? "Remove from favorites"
+            : !isFavorite && isLogged
+            ? "Add to favorites"
+            : "Please sign up or log in to be able to add a car"
         }
       >
         <Tooltip id={`${_id.toString()}-tooltip`} />
         <FiHeart
           className=""
           size="25px"
-            onClick={handleFavoriteClick}
+          onClick={handleFavoriteClick}
           style={{
             fill: isFavorite ? "red" : "transparent",
             color: isFavorite ? "red" : "gray",
@@ -103,7 +110,11 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           <span className="block">per hour: {price.hour}$</span>
           <span className="block">per day: {price.day}$</span>
         </span>
-        <Button type="button" buttonName="Rent now" onClick={handleButtonClick} />
+        <Button
+          type="button"
+          buttonName="Rent now"
+          onClick={handleButtonClick}
+        />
       </div>
     </li>
   );
