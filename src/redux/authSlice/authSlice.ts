@@ -5,8 +5,10 @@ import {
   logoutThunk,
   refreshThunk,
   registerThunk,
+  updateFavoriteList,
 } from "./operations";
 import { toast } from "react-toastify";
+import { CarInterface } from "../carRentalSlice/carRentalSliceTypes";
 
 const initialState: StateType = {
   user: {
@@ -70,6 +72,8 @@ export const authSlice = createSlice({
         state.user.role = payload.role;
         state.user.email = payload.email;
         state.user.avatarURL = payload.avatarURL;
+        state.user.favorites = payload.favorites;
+        state.user.ordersHistory = payload.ordersHistory;
         state.token = payload.token;
         state.isLoading = false;
         state.isLogged = true;
@@ -115,9 +119,28 @@ export const authSlice = createSlice({
         state.token = "";
         state.isLogged = false;
         state.isLoading = false;
+      })
+      .addCase(updateFavoriteList.pending, (state: StateType) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        updateFavoriteList.fulfilled,
+        (
+          state: StateType,
+          { payload }: PayloadAction<{ arrFavorite: CarInterface[] }>
+        ) => {
+          state.user.favorites = payload.arrFavorite;
+          state.isLoading = false;
+          state.isLogged = true;
+        }
+      )
+      .addCase(updateFavoriteList.rejected, (state: StateType) => {
+        toast.error("Updating of your favorite list was failed");
+        state.isLogged = false;
+        state.isLoading = false;
       });
   },
 });
 
 export const authReducer = authSlice.reducer;
-export const { changeTheme} = authSlice.actions;
+export const { changeTheme } = authSlice.actions;
