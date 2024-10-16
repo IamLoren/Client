@@ -47,7 +47,7 @@ export interface refreshData {
   theme: "light" | "dark";
   role: "admin" | "user";
   favorites: CarInterface[];
-  ordersHistory: [];
+  history: [];
   token: string;
 }
 
@@ -61,5 +61,7 @@ export interface loginData {
     theme: "light" | "dark";
     avatarURL: string;
     role: "admin" | "user";
+    favorites: CarInterface[];
+    history: [];
   };
 }
