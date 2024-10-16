@@ -41,7 +41,7 @@ const CardsList: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="h-[800px] overflow-y-scroll">
       <ul className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-[29px] mb-[50px]">
         {carsForRender?.map((car) => {
           return <Card key={car._id} carProps={car} />;
