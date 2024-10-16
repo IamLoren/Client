@@ -73,7 +73,7 @@ export const authSlice = createSlice({
         state.user.email = payload.email;
         state.user.avatarURL = payload.avatarURL;
         state.user.favorites = payload.favorites;
-        state.user.ordersHistory = payload.ordersHistory;
+        state.user.ordersHistory = payload.history;
         state.token = payload.token;
         state.isLoading = false;
         state.isLogged = true;
@@ -96,6 +96,8 @@ export const authSlice = createSlice({
         state.user.role = payload.user.role;
         state.user.email = payload.user.email;
         state.token = payload.token;
+        state.user.favorites = payload.user.favorites;
+        state.user.ordersHistory = payload.user.history;
         state.isLoading = false;
         state.isLogged = true;
       })
