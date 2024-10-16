@@ -35,8 +35,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     if (isLogged) {
       setIsFavorite(!isFavorite);
       dispatch(updateFavoriteList(carProps));
-    } else {
-    }
+    } 
   };
 
   const handleButtonClick = () => {
