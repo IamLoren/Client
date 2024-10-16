@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import "./DateTime.modules.css";
 
 const DateTime: React.FC = () => {
     const [startDate, setStartDate] = useState<Date | null>(

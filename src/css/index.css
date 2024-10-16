@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "../components/DateTime/DateTime.modules.css";
 
 #root {
   display: flex;
@@ -70,4 +71,17 @@ dialog::backdrop {
 
 .react-datepicker-wrapper input {
     width: 200px !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-primary); /* колір самого скрола */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: lightgray; /* колір треку скрола */
 }
