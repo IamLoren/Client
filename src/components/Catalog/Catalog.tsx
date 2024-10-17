@@ -8,9 +8,9 @@ const Catalog:React.FC = () => {
   return (
     <div className='flex-grow'>
         <div className='flex w-[100%] justify-between mb-[30px]'>
-            <DateTime />
-            <Button type="button" buttonName=""><HiArrowsUpDown color="white"/></Button>
-            <DateTime />
+            <DateTime name="Pick-Up"/>
+            <Button type="button" buttonName="" style="h-[55px] self-center" ><HiArrowsUpDown color="white"/></Button>
+            <DateTime name="Drop-Off"/>
         </div>
         <CardsList/>
     </div>
