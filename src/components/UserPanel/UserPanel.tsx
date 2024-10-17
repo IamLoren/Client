@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { selectTheme, selectUserIMG } from "../../redux/selectors";
+import { selectUserIMG } from "../../redux/selectors";
 import Driver from "../../img/driver-avatar.avif";
 import { IoIosNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -12,7 +12,7 @@ import { changeTheme } from "../../redux/authSlice/authSlice";
 
 const UserPanel: React.FC = () => {
   const dispatch = useAppDispatch();
-  const selectedMode = useAppSelector(selectTheme)
+//   const selectedMode = useAppSelector(selectTheme)
   const [isChecked, setIsChecked] = useState(false)
 
   let userPhoto = useAppSelector(selectUserIMG);
