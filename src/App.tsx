@@ -12,6 +12,8 @@ import { refreshThunk } from "./redux/authSlice/operations";
 import Loader from "./components/Loader/Loader";
 import ClientsHistory from "./components/ClientsHistory/ClientsHistory";
 import Favorites from "./components/Favorites/Favorites";
+import Settings from "./components/Settings/Settings";
+import Notifications from "./components/Notifications/Notifications";
 
 const LazyHome: LazyExoticComponent<React.FC> = lazy(() => import("./pages/HomePage"));
 const LazyClient: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ClientPage"));
@@ -42,8 +44,10 @@ const App: React.FC = () => {
             </PrivateUserRoute>
           }
         > 
+        <Route index element={<Settings/>}/>
         <Route path="history" element={<ClientsHistory/>}/>
         <Route path="favorites" element={<Favorites/>}/>
+        <Route path="notifications" element={<Notifications/>}/>
         </Route>
         <Route
           path="/admin"

@@ -64,6 +64,10 @@ dialog::backdrop {
   color: var(--white-text);
 }
 
+.border-color {
+  border-color: var(--borders-color);
+}
+
 .loaderWrapper {
     border: none;
     outline: none;
