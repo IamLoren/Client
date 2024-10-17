@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
-  openLogoutForm,
   openModal,
   openSignInForm,
   openSignUpForm,
@@ -9,6 +8,8 @@ import {
 import { selectIsLogged } from "../../redux/selectors";
 import Navigation from "../Navigation/Navigation";
 import Container from "../Container/Container";
+import { Link } from "react-router-dom";
+import UserPanel from "../UserPanel/UserPanel";
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,20 +25,17 @@ const Header: React.FC = () => {
     dispatch(openSignInForm());
   };
 
-  const handleClickLogout = () => {
-    dispatch(openModal());
-    dispatch(openLogoutForm());
-  };
   return (
     <header className="sticky z-10 top-0 primary-background p-4 primary-text">
-      <Container>
+      <Container addStyles="flex justify-between">
+        <Link to="/" className="block p-[15px] accent-text font-bold">LOGO</Link>  
         {!isLogged && (
           <button onClick={handleClickREgister}>зареєструватися</button>
         )}{" "}
         <br />
         {!isLogged && <button onClick={handleClickLogin}>залогінитися</button>}
         {isLogged && <Navigation />}
-        {isLogged && <button onClick={handleClickLogout}> вийти</button>}
+        {isLogged && <UserPanel />}
       </Container>
     </header>
   );
