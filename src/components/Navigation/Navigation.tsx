@@ -8,18 +8,21 @@ const Navigation: React.FC = () => {
 
   return (
     <nav>
-      <ul className="flex gap-3">
-        <li>
-          <NavLink to="/">Catalog</NavLink>
+      <ul className="flex gap-3 accent-text font-bold">
+        <li className="self-center">
+          <NavLink to="/" className={({ isActive }) =>
+              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>CATALOG</NavLink>
         </li>
         {role === "user" && (
           <li>
-            <NavLink to="/client">Client Profile</NavLink>
+            <NavLink to="/client" className={({ isActive }) =>
+              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>CLIENT PROFILE</NavLink>
           </li>
         )}
         {role === "admin" && (
           <li>
-            <NavLink to="/admin">Admin Panel</NavLink>
+            <NavLink to="/admin" className={({ isActive }) =>
+              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>Admin Panel</NavLink>
           </li>
         )}
       </ul>

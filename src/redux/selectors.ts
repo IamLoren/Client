@@ -13,3 +13,4 @@ export const selectUserListOfCars  = (state: RootState) => state.cars.userListOf
 export const selectCarTypeFilter = (state: RootState) => state.cars.carTypeFilter;
 export const selectedTransmissionType = (state: RootState) => state.cars.carTransmissionFilter;
 export const selectFavoriteCars = (state: RootState) => state.auth.user.favorites;
+export const selectUserIMG = (state: RootState) => state.auth.user.avatarURL;
