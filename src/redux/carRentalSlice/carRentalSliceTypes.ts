@@ -22,5 +22,7 @@ export interface CarsStateType {
   userListOfCars: CarInterface[];
   carTypeFilter: string[];
   carTransmissionFilter: string[];
+  selectedMinPrice: number,
+  selectedMaxPrice: number,
   isLoading: boolean;
 }

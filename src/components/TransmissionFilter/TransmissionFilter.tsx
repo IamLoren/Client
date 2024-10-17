@@ -37,13 +37,14 @@ const TransmissionFilter:React.FC = () => {
         <h2 className="text-lg font-semibold mb-4">Select type of transmission</h2>
     {carTypes.map((type, index) => (
       <div key={index}>
-        <label>
+        <label className="text-lg">
           <input
             type="checkbox"
             name="selectedTypes"
             value={type}
             checked={formik.values.selectedTypes.includes(type)}
             onChange={() => handleCheckboxChange(type)}
+            className="mr-[10px]"
           />
           {type}
         </label>

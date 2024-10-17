@@ -14,3 +14,5 @@ export const selectCarTypeFilter = (state: RootState) => state.cars.carTypeFilte
 export const selectedTransmissionType = (state: RootState) => state.cars.carTransmissionFilter;
 export const selectFavoriteCars = (state: RootState) => state.auth.user.favorites;
 export const selectUserIMG = (state: RootState) => state.auth.user.avatarURL;
+export const selectMinPrice = (state: RootState) => state.cars.selectedMinPrice;
+export const selectMaxPrice = (state: RootState) => state.cars.selectedMaxPrice;
