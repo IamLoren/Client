@@ -23,21 +23,21 @@ const UserPanel: React.FC = () => {
   return (
     <div className="flex gap-[40px] ">
       {/* <ThemeToggler/> */}
-      <Link to="/client/notifications" className="flex justify-center w-[50px] h-[50px] self-center border-[2px] border-color rounded-[50%]">
-        <IoIosNotifications style={{ fontSize: "30px", alignSelf:"center" }} />
+      <Link
+        to="/client/notifications"
+        className="flex justify-center w-[50px] h-[50px] self-center border-[2px] border-color rounded-[50%]"
+      >
+        <IoIosNotifications style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
-      <Link to="/client" className=" flex justify-center w-[50px] h-[50px] self-center border-[2px] border-color rounded-[50%]">
-        <IoSettingsSharp style={{ fontSize: "30px", alignSelf:"center" }} />
+      <Link
+        to="/client"
+        className=" flex justify-center w-[50px] h-[50px] self-center border-[2px] border-color rounded-[50%]"
+      >
+        <IoSettingsSharp style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
-      <div className="relative">
-        <div className=" relative z-1 w-[50px] h-[50px] overflow-hidden border-[2px] border-color rounded-[50%]">
-          <img
-            src={userPhoto}
-            alt="personal user photo"
-            width={50}
-            height={30}
-          />
-        </div>
+
+      <div className="m-0 relative z-1 w-[50px] h-[50px] self-center overflow-hidden border-[2px] border-color rounded-[50%]">
+        <img src={userPhoto} alt="personal user photo" width={50} height={30} />
         <button
           onClick={handleClickLogout}
           className="absolute bottom-0 right-0 opacity-0 hidden"

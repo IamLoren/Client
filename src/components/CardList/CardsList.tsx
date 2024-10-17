@@ -6,6 +6,8 @@ import {
   selectAllCars,
   selectCarTypeFilter,
   selectedTransmissionType,
+  selectMaxPrice,
+  selectMinPrice,
   selectRole,
   selectUserListOfCars,
 } from "../../redux/selectors";
@@ -15,6 +17,9 @@ const CardsList: React.FC = () => {
   const cars = useAppSelector(selectAllCars);
   const role = useAppSelector(selectRole);
   const carsUserList = useAppSelector(selectUserListOfCars);
+  const selectedMinPrice = useAppSelector(selectMinPrice);
+  const selectedMaxPrice = useAppSelector(selectMaxPrice);
+
   const listOfCars = role === "admin" ? cars : carsUserList;
   const selectedTypes = useAppSelector(selectCarTypeFilter);
   const selectedTransmissions = useAppSelector(selectedTransmissionType);
@@ -34,6 +39,10 @@ const CardsList: React.FC = () => {
     carsForRender = listOfCars
       .filter((car) => selectedTransmissions.includes(car.transmission))
       .filter((car) => selectedTypes.includes(car.type));
+  }
+
+  if(selectedMaxPrice > 0) {
+    carsForRender = carsForRender.filter(car => (car.price.day >= selectedMinPrice) && (car.price.day <= selectedMaxPrice))
   }
 
   useEffect(() => {
