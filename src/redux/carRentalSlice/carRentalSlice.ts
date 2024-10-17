@@ -8,6 +8,8 @@ const initialState: CarsStateType = {
   userListOfCars: [],
   carTypeFilter: [],
   carTransmissionFilter:[],
+  selectedMinPrice: 0,
+  selectedMaxPrice: 0,
   isLoading: false,
 };
 
@@ -26,6 +28,18 @@ export const carRentalSlice = createSlice({
         { payload }: { payload: string[] }
       ) => {
         state.carTransmissionFilter = payload;
+      },
+      changeMinPrice: (
+        state: CarsStateType,
+        { payload }: {payload: number}
+      ) => {
+        state.selectedMinPrice = payload;
+      },
+      changeMaxPrice: (
+        state: CarsStateType,
+        { payload }: {payload: number}
+      ) => {
+        state.selectedMaxPrice = payload;
       },
   },
   extraReducers: (builder) => {
@@ -49,4 +63,4 @@ export const carRentalSlice = createSlice({
 });
 
 export const carRentalReducer = carRentalSlice.reducer;
-export const { changeCarTypeFilter, changeCarTransmissionFilter } = carRentalSlice.actions;
+export const { changeCarTypeFilter, changeCarTransmissionFilter, changeMinPrice, changeMaxPrice } = carRentalSlice.actions;

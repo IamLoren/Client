@@ -40,13 +40,14 @@ const TypeFilter: React.FC = () => {
       <h2 className="text-lg font-semibold mb-4">Select Car Types</h2>
       {carTypes.map((type) => (
         <div key={type}>
-          <label>
+          <label className="text-lg">
             <input
               type="checkbox"
               name="selectedTypes"
               value={type}
               checked={formik.values.selectedTypes.includes(type)}
               onChange={() => handleCheckboxChange(type)}
+              className="mr-[10px]"
             />
             {type}
           </label>
