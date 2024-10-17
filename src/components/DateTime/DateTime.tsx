@@ -8,8 +8,10 @@ const DateTime: React.FC = () => {
     const [startDate, setStartDate] = useState<Date | null>(
         setHours(setMinutes(new Date(), 30), 16),
       );
+      const minDate = new Date();
+      console.log(startDate)
   return (
-    <div className=" w-[45%] primary-background rounded-lg p-[10px]">
+    <div className=" w-[45%] primary-background rounded-lg p-[10px] box-shadow">
        <DatePicker
       selected={startDate}
       onChange={(date) => setStartDate(date)}
@@ -21,6 +23,7 @@ const DateTime: React.FC = () => {
         setHours(setMinutes(new Date(), 30), 17),
       ]}
       dateFormat="MMMM d, yyyy h:mm aa"
+      minDate={minDate}
     />
     </div>
   );
