@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky z-10 top-0 primary-background p-4 primary-text">
+    <header className="sticky z-10 top-0 primary-background p-4 primary-text box-shadow">
       <Container addStyles="flex justify-between">
         <Link to="/" className="block p-[15px] accent-text font-bold">
           LOGO

@@ -16,3 +16,4 @@ export const selectFavoriteCars = (state: RootState) => state.auth.user.favorite
 export const selectUserIMG = (state: RootState) => state.auth.user.avatarURL;
 export const selectMinPrice = (state: RootState) => state.cars.selectedMinPrice;
 export const selectMaxPrice = (state: RootState) => state.cars.selectedMaxPrice;
+export const selectTheme = (state: RootState) => state.auth.user.theme;

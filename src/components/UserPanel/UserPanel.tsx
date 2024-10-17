@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { selectUserIMG } from "../../redux/selectors";
+import { selectTheme, selectUserIMG } from "../../redux/selectors";
 import Driver from "../../img/driver-avatar.avif";
 import { IoIosNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoExitOutline } from "react-icons/io5";
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { openLogoutForm, openModal } from "../../redux/modalSlice/modalSlice";
+import { changeTheme } from "../../redux/authSlice/authSlice";
 
 const UserPanel: React.FC = () => {
   const dispatch = useAppDispatch();
+  const selectedMode = useAppSelector(selectTheme)
+  const [isChecked, setIsChecked] = useState(false)
 
   let userPhoto = useAppSelector(selectUserIMG);
   if (!userPhoto) {
@@ -20,9 +24,27 @@ const UserPanel: React.FC = () => {
     dispatch(openModal());
     dispatch(openLogoutForm());
   };
+
+  const toggleDarkMode = (checked: boolean) => {
+    console.log(checked)
+    if(checked) {
+        dispatch(changeTheme("dark"))
+        document.body.classList.add('dark-mode')
+    } else {
+        dispatch(changeTheme("light"))
+        document.body.classList.remove('dark-mode')
+    }
+    setIsChecked(checked)
+  };
   return (
     <div className="flex gap-[40px] ">
-      {/* <ThemeToggler/> */}
+        <div className="pt-[8px] flex justify-center self-center w-[50px] h-[50px] border-[2px] border-color rounded-[50%]">
+            <DarkModeSwitch
+      style={{ marginBottom: '2rem'}}
+      checked={isChecked} 
+      onChange={toggleDarkMode}
+      size={30} />
+        </div>
       <Link
         to="/client/notifications"
         className="flex justify-center w-[50px] h-[50px] self-center border-[2px] border-color rounded-[50%]"

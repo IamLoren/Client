@@ -1,8 +1,9 @@
 @import "variables.css";
+@import "../components/DateTime/DateTime.modules.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "../components/DateTime/DateTime.modules.css";
+
 
 #root {
   display: flex;
@@ -66,6 +67,10 @@ dialog::backdrop {
 
 .border-color {
   border-color: var(--borders-color);
+}
+
+.box-shadow {
+  box-shadow: var(--cards-shadow);
 }
 
 .loaderWrapper {
