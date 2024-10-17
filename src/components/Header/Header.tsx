@@ -10,6 +10,7 @@ import Navigation from "../Navigation/Navigation";
 import Container from "../Container/Container";
 import { Link } from "react-router-dom";
 import UserPanel from "../UserPanel/UserPanel";
+import Button from "../Button/Button";
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -28,12 +29,15 @@ const Header: React.FC = () => {
   return (
     <header className="sticky z-10 top-0 primary-background p-4 primary-text">
       <Container addStyles="flex justify-between">
-        <Link to="/" className="block p-[15px] accent-text font-bold">LOGO</Link>  
+        <Link to="/" className="block p-[15px] accent-text font-bold">
+          LOGO
+        </Link>
         {!isLogged && (
-          <button onClick={handleClickREgister}>зареєструватися</button>
-        )}{" "}
-        <br />
-        {!isLogged && <button onClick={handleClickLogin}>залогінитися</button>}
+          <div className="flex gap-[20px]">
+            <Button type="button" buttonName="SIGN UP" onClick={handleClickREgister}></Button>
+            <Button type="button" buttonName="SIGN IN" onClick={handleClickLogin}></Button>
+          </div>
+        )}
         {isLogged && <Navigation />}
         {isLogged && <UserPanel />}
       </Container>
