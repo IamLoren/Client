@@ -3,7 +3,7 @@
   border-color: var(--accent-primary); */
   border-radius: 8px;
   background-color: var(--primary-color);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--cards-shadow);
 }
 
 .react-datepicker-wrapper input {
@@ -41,4 +41,9 @@
   ul.react-datepicker__time-list
   li.react-datepicker__time-list-item--selected {
   background-color: var(--accent-primary);
+}
+
+.react-datepicker__week .react-datepicker__day--disabled {
+  border-radius:5px;
+  background-color: var(--secondary-color) !important;
 }

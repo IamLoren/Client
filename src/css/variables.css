@@ -4,11 +4,24 @@
     --primary-text: #1A202C;
     --secondary-text: #90A3BF;
     --white-text: #ffffff;
+    --accent-primary:rgb(53, 99, 233);
+    --accent-secondary: #5CAFFC;
+    --borders-color: #C3D4E9;
+    --cards-shadow:   0 1px 2px rgba(53, 99, 233, 0.2),  /* базова м'яка блакитна тінь */
+    0 0 3px rgba(0, 102, 255, 0.2),  /* середнє блакитне підсвічування */
+    0 0 7px rgba(0, 120, 220, 0.3);
+  }
+
+.dark-mode {
+  --primary-color: #1a1a1a;
+    --secondary-color:#000000 ;
+    --primary-text: #ffffff;
+    --secondary-text: #90A3BF;
+    --white-text: #ffffff;
     --accent-primary:#3563E9;
     --accent-secondary: #5CAFFC;
     --borders-color: #C3D4E9;
-  }
-
-/* .dark-mode {
-
-} */
+    --cards-shadow:  0 4px 8px rgba(255, 255, 255, 0.1), 
+    0 0 15px rgba(255, 255, 255, 0.2), 
+    0 0 30px rgba(128, 128, 128, 0.3);
+}

@@ -49,7 +49,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
   };
 
   return (
-    <li className="relative flex flex-col x-auto max-w-[21rem] overflow-hidden rounded-lg bg-white shadow">
+    <li className="relative flex flex-col x-auto max-w-[21rem] primary-background overflow-hidden rounded-lg bg-white box-shadow">
       <span
         className="absolute top-[20px] right-[20px]"
         data-tooltip-id={`${_id}-tooltip`}
