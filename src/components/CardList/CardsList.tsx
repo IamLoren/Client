@@ -50,8 +50,8 @@ const CardsList: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <ul className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-[29px] mb-[50px] pt-[10px] pl-[10px] pr-[10px]">
+    <div className="w-[100%]">
+      <ul className="w-[100%] grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-[29px] mb-[50px] justify-items-center">
         {carsForRender?.map((car) => {
           return <Card key={car._id} carProps={car} />;
         })}

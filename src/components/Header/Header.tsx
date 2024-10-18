@@ -11,8 +11,11 @@ import Container from "../Container/Container";
 import { Link } from "react-router-dom";
 import UserPanel from "../UserPanel/UserPanel";
 import Button from "../Button/Button";
+import useResponsive from '../../hooks'
+import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
 
 const Header: React.FC = () => {
+  const {isMobile, isTablet} = useResponsive();
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
 
@@ -38,7 +41,8 @@ const Header: React.FC = () => {
             <Button type="button" buttonName="SIGN IN" onClick={handleClickLogin}></Button>
           </div>
         )}
-        {isLogged && <Navigation />}
+         {isMobile && isLogged && <FiltersMobileMenu/>}
+        {isTablet && isLogged && <Navigation />}
         {isLogged && <UserPanel />}
       </Container>
     </header>

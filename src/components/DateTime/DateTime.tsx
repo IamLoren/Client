@@ -21,7 +21,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
   };
   
   return (
-    <div className=" w-[45%] primary-background rounded-lg p-[10px] box-shadow">
+    <div className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow">
       <p>{name}</p>
       <DatePicker
         selected={name === "Pick-Up" ? new Date(startDate) : new Date(endDate)}
