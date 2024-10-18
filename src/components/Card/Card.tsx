@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
     if (isLogged) {
       setIsFavorite(!isFavorite);
       dispatch(updateFavoriteList(carProps));
-    } 
+    }
   };
 
   const handleButtonClick = () => {
@@ -50,6 +50,13 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
 
   return (
     <li className="relative flex flex-col x-auto max-w-[21rem] primary-background overflow-hidden rounded-lg bg-white box-shadow">
+      <div className="h-[159px] overflow-hidden">
+        <img
+          src={img}
+          className="aspect-video w-full object-cover scale-110 hover:scale-100 transition duration-300 ease-in-out"
+          alt={model}
+        />
+      </div>
       <span
         className="absolute top-[20px] right-[20px]"
         data-tooltip-id={`${_id}-tooltip`}
@@ -72,8 +79,6 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           }}
         />
       </span>
-
-      <img src={img} className="aspect-video w-full object-cover" alt={model} />
       <div className="p-4">
         <h3 className="h-[56px] text-xl font-medium primary-text">
           {make} {model}
@@ -93,13 +98,13 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         </div>
 
         <div className="mt-4 flex gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600">
+          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             <BsFuelPump /> {fuel}{" "}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
+          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             <TbSteeringWheel /> {transmission}{" "}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-600">
+          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             Color {color}{" "}
           </span>
         </div>

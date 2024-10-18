@@ -6,9 +6,12 @@ import PriceRangeSlider from '../PriceSlider/PriceSlider';
 const FiltersBar: React.FC = () => {
   return (
     <div className=' flex flex-col gap-[30px] w-[300px] primary-background rounded-lg p-[20px] box-shadow'>
-      <TypeFilter/>
+      <div className='sticky top-[90px]'>
+        <TypeFilter/>
       <TransmissionFilter />
       <PriceRangeSlider />
+      </div>
+      
     </div>
   )
 }
