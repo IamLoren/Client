@@ -24,7 +24,7 @@ export interface CarsStateType {
   carTransmissionFilter: string[];
   selectedMinPrice: number,
   selectedMaxPrice: number,
-  startDate: Date ,
-  endDate: Date ,
+  startDate: string ,
+  endDate: string ,
   isLoading: boolean;
 }

@@ -10,8 +10,8 @@ const initialState: CarsStateType = {
   carTransmissionFilter: [],
   selectedMinPrice: 0,
   selectedMaxPrice: 0,
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: new Date().toISOString(),
+  endDate: new Date().toISOString(),
   isLoading: false,
 };
 
@@ -45,7 +45,7 @@ export const carRentalSlice = createSlice({
     },
     setRentalTime: (
       state: CarsStateType,
-      { payload }: { payload: { name: string; time: Date } }
+      { payload }: { payload: { name: string; time: string } }
     ) => {
       if (payload.name === "Pick-Up") {
         state.startDate = payload.time;

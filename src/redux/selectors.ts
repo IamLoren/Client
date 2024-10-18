@@ -18,3 +18,4 @@ export const selectMinPrice = (state: RootState) => state.cars.selectedMinPrice;
 export const selectMaxPrice = (state: RootState) => state.cars.selectedMaxPrice;
 export const selectTheme = (state: RootState) => state.auth.user.theme;
 export const selectStartRentalDate = (state: RootState) => state.cars.startDate;
+export const selectEndRentalDate = (state: RootState) => state.cars.endDate;
