@@ -5,8 +5,15 @@
 }
 
 .react-datepicker-wrapper input {
-  width: 300px !important;
+  width: 200px;
   padding: 5px;
+}
+
+@media screen and (min-width:300px) {
+  .react-datepicker-wrapper input  {
+    width: 200px;
+    padding: 5px;
+  }
 }
 
 .react-datepicker-wrapper input {

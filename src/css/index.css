@@ -84,10 +84,16 @@ dialog::backdrop {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--accent-primary); /* колір самого скрола */
+  background-color: var(--accent-primary);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: lightgray; /* колір треку скрола */
+  background-color: lightgray;
+}
+
+@layer utilities {
+  .h-100vh-minus-86px {
+    height: calc(100vh - 86px);
+  }
 }

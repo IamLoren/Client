@@ -49,11 +49,11 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
   };
 
   return (
-    <li className="relative flex flex-col x-auto max-w-[21rem] primary-background overflow-hidden rounded-lg bg-white box-shadow">
-      <div className="h-[159px] overflow-hidden">
+    <li className="relative flex flex-col x-auto w-[100%] max-w-[320px] primary-background overflow-hidden rounded-lg bg-white box-shadow">
+      <div className="h-[150px] md:h-[180px] overflow-hidden">
         <img
           src={img}
-          className="aspect-video w-full object-cover scale-110 hover:scale-100 transition duration-300 ease-in-out"
+          className="aspect-video w-[100%] object-cover scale-110 hover:scale-100 transition duration-300 ease-in-out"
           alt={model}
         />
       </div>
@@ -79,17 +79,17 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           }}
         />
       </span>
-      <div className="p-4">
-        <h3 className="h-[56px] text-xl font-medium primary-text">
+      <div className=" p-[10px] md:p-[15px]">
+        <h3 className="sm:h-[56px] text-md sm:text-xl font-medium primary-text">
           {make} {model}
         </h3>
         <div className="flex justify-between">
           <span>{type}</span>
           <span>{year}</span>
         </div>
-        <div className="mt-1">
+        <div className="mb-2">
           {availability.length === 0 ? (
-            <span className="mt-1 text-green-700">
+            <span className="mb-1 text-sm text-green-700">
               "Available at any time for you!"
             </span>
           ) : (
@@ -97,20 +97,20 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           )}
         </div>
 
-        <div className="mt-4 flex gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+        <div className="flex flex-col items-start md:flex-row gap-2">
+          <span className="w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             <BsFuelPump /> {fuel}{" "}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             <TbSteeringWheel /> {transmission}{" "}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
             Color {color}{" "}
           </span>
         </div>
       </div>
       <div className="flex justify-between pr-[16px] pb-[16px] pl-[16px] last:mt-auto">
-        <span>
+        <span className="text-sm md:text-[15px]">
           <span className="block">per hour: {price.hour}$</span>
           <span className="block">per day: {price.day}$</span>
         </span>

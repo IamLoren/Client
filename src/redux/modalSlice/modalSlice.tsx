@@ -6,6 +6,7 @@ const initialState: StateType = {
   isSignUpForm: false,
   isSignInForm: false,
   isLogoutForm: false,
+  isMobileMenuOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -30,8 +31,18 @@ const modalSlice = createSlice({
     openLogoutForm: (state: StateType) => {
       state.isLogoutForm = true;
     },
+    openMobailMenu: (state: StateType, {payload}) => {
+      state.isMobileMenuOpen = payload;
+    },
   },
 });
 
-export const { openModal, closeModal, openSignUpForm, openSignInForm, openLogoutForm } = modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  openSignUpForm,
+  openSignInForm,
+  openLogoutForm,
+  openMobailMenu,
+} = modalSlice.actions;
 export default modalSlice.reducer;

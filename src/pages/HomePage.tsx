@@ -1,24 +1,28 @@
-import React from 'react'
-import Header from '../components/Header/Header'
-import Footer from '../components/Footer/Footer'
-import Container from '../components/Container/Container'
-import FiltersBar from '../components/FiltersBar/FiltersBar'
-import Catalog from '../components/Catalog/Catalog'
+import React from "react";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Container from "../components/Container/Container";
+import FiltersBar from "../components/FiltersBar/FiltersBar";
+import Catalog from "../components/Catalog/Catalog";
+import useResponsive from "../hooks";
+import MobileFilters from "../components/MobileFilters/MobileFilters";
 
-const HomePage:React.FC = () => {
+const HomePage: React.FC = () => {
+  const { isMobile, isTablet} = useResponsive();
 
   return (
     <>
-    <Header />
-    <main className="flex-1 secondary-background secondary-text p-4">
-      <Container addStyles='flex gap-[30px]'>
-        <FiltersBar/>
-        <Catalog />
-      </Container>
-    </main>
-    <Footer />
+      <Header />
+      <main className="flex-1 secondary-background secondary-text p-4">
+        <Container addStyles={isTablet ? "flex gap-[20px]" : ""}>
+          {isTablet && <FiltersBar />}
+          <Catalog />
+        </Container>
+      </main>
+      <Footer />
+      {isMobile &&  <MobileFilters/>}
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

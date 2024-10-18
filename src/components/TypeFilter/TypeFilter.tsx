@@ -36,11 +36,11 @@ const TypeFilter: React.FC = () => {
   };
 
   return (
-    <form>
-      <h2 className="text-lg font-semibold mb-4">Select Car Types</h2>
+    <form className="mb-4">
+      <h2 className="text-md lg:text-lg font-semibold mb-4">Select Car Types</h2>
       {carTypes.map((type) => (
         <div key={type}>
-          <label className="text-lg">
+          <label className="text-[15px] lg:text-lg">
             <input
               type="checkbox"
               name="selectedTypes"
