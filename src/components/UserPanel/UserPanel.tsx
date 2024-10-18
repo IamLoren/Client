@@ -37,7 +37,7 @@ const UserPanel: React.FC = () => {
     setIsChecked(checked)
   };
   return (
-    <div className="flex gap-[40px] ">
+    <div className="flex gap-[20px] ">
         <div className="pt-[8px] flex justify-center self-center w-[50px] h-[50px] border-[2px] border-color rounded-[50%]">
             <DarkModeSwitch
       style={{ marginBottom: '2rem'}}
@@ -58,15 +58,14 @@ const UserPanel: React.FC = () => {
         <IoSettingsSharp style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
 
-      <div className="m-0 relative z-1 w-[50px] h-[50px] self-center overflow-hidden border-[2px] border-color rounded-[50%]">
+      <div className="m-0 z-1 w-[50px] h-[50px] self-center overflow-hidden border-[2px] border-color rounded-[50%]">
         <img src={userPhoto} alt="personal user photo" width={50} height={30} />
-        <button
+      </div>
+      <button
           onClick={handleClickLogout}
-          className="absolute bottom-0 right-0 opacity-0 hidden"
         >
           <IoExitOutline style={{ fontSize: "30px" }} />
         </button>
-      </div>
     </div>
   );
 };

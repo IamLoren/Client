@@ -1,0 +1,30 @@
+@keyframes moveLight {
+    from {
+      transform: translateX(-5.5em) skewX(-45deg);
+    }
+    to {
+      transform: translateX(335px) skewX(-45deg);
+    }
+  }
+
+  .styled-button {
+    position: relative;
+  overflow: hidden;
+
+  }
+
+  .styled-button::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5.5em) skewX(-45deg);
+  }
+  
+  .styled-button:hover::before {
+    animation: moveLight 1s;
+  }

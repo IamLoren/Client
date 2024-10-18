@@ -48,7 +48,7 @@ const Modal: React.FC = () => {
         className="fixed w-auto top-1/2 left-1/2 p-[30px] shadow-lg border border-gray-300 rounded-2xl primary-background transform -translate-x-1/2 -translate-y-1/2"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={handleClose} className="absolute top-[20px] right-[20px] outline-0"><MdOutlineClose /></button>
+        <button onClick={handleClose} className="absolute top-[20px] right-[20px] outline-0 primary-text"><MdOutlineClose /></button>
         {isSignUp && <SignUpForm />}
         {isSignIn && <SignInForm />}
         {isLogout && <LogoutForm />}

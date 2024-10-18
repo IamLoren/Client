@@ -1,5 +1,6 @@
 @import "variables.css";
 @import "../components/DateTime/DateTime.modules.css";
+@import "../components/Button/Button.modules.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

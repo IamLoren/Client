@@ -5,17 +5,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DateTime.modules.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setRentalTime } from "../../redux/carRentalSlice/carRentalSlice";
-import { selectStartRentalDate } from "../../redux/selectors";
+import { selectEndRentalDate, selectStartRentalDate } from "../../redux/selectors";
 
 const DateTime: React.FC<{ name: string }> = ({ name }) => {
   const dispatch = useAppDispatch();
   const startDate = useAppSelector(selectStartRentalDate);
+  const endDate = useAppSelector(selectEndRentalDate);
 
   const minDate = new Date();
 
   const handleDataChanging = (date: Date | null) => {
     if (date) {
-      dispatch(setRentalTime({ name, time: date }));
+      dispatch(setRentalTime({ name, time: date.toISOString() }));
     }
   };
   
@@ -23,7 +24,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
     <div className=" w-[45%] primary-background rounded-lg p-[10px] box-shadow">
       <p>{name}</p>
       <DatePicker
-        selected={startDate}
+        selected={name === "Pick-Up" ? new Date(startDate) : new Date(endDate)}
         onChange={(date) => handleDataChanging(date)}
         showTimeSelect
         excludeTimes={[
