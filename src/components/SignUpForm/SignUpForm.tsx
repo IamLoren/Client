@@ -134,7 +134,7 @@ const dispatch = useAppDispatch();
         />
         <label
           htmlFor="terms"
-          className=" block  text-sm font-medium primary-text"
+          className=" block text-[12px] font-medium primary-text"
         >
           I accept the terms and conditions
         </label>

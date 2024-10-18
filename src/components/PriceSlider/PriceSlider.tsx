@@ -43,8 +43,8 @@ const PriceRangeSlider: React.FC = () => {
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-lg font-semibold mb-4">Select Price per day</h2>
-      <span className="text-lg">
+      <h2 className="text-md lg:text-lg font-semibold mb-4">Select Price per day</h2>
+      <span className="text-[15px] lg:text-lg">
         Min Price: ${minPrice}
       </span>{" "}
       <input
@@ -55,7 +55,7 @@ const PriceRangeSlider: React.FC = () => {
         onChange={handleMinChange}
         className="my-4"
       />
-      <span className="text-lg">
+      <span className="text-[15px] lg:text-lg">
         Max Price: ${maxPrice}
       </span>
       <input

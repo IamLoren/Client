@@ -3,4 +3,5 @@ export interface StateType {
     isSignUpForm: boolean;
     isSignInForm: boolean;
     isLogoutForm: boolean;
+    isMobileMenuOpen: boolean;
 }
