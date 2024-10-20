@@ -11,11 +11,11 @@ import Container from "../Container/Container";
 import { Link, useLocation } from "react-router-dom";
 import UserPanel from "../UserPanel/UserPanel";
 import Button from "../Button/Button";
-import useResponsive from '../../hooks'
+import useResponsive from "../../hooks";
 import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
 
 const Header: React.FC = () => {
-  const {isMobile, isSM, isTablet} = useResponsive();
+  const { isMobile, isSM, isTablet } = useResponsive();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
@@ -36,14 +36,22 @@ const Header: React.FC = () => {
         <Link to="/" className="block p-[15px] accent-text font-bold">
           LOGO
         </Link>
+        {isMobile && location.pathname === "/" && <FiltersMobileMenu />}
+        {isSM && location.pathname === "/" && <FiltersMobileMenu />}
         {!isLogged && (
           <div className="flex gap-[20px]">
-            <Button type="button" buttonName="SIGN UP" onClick={handleClickREgister}></Button>
-            <Button type="button" buttonName="SIGN IN" onClick={handleClickLogin}></Button>
+            <Button
+              type="button"
+              buttonName="SIGN UP"
+              onClick={handleClickREgister}
+            ></Button>
+            <Button
+              type="button"
+              buttonName="SIGN IN"
+              onClick={handleClickLogin}
+            ></Button>
           </div>
         )}
-         {isMobile && isLogged && (location.pathname==="/") && <FiltersMobileMenu/>}
-         {isSM && isLogged && (location.pathname==="/") && <FiltersMobileMenu/>}
         {isTablet && isLogged && <Navigation />}
         {isLogged && <UserPanel />}
       </Container>
