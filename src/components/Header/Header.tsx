@@ -15,7 +15,7 @@ import useResponsive from '../../hooks'
 import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
 
 const Header: React.FC = () => {
-  const {isMobile, isTablet} = useResponsive();
+  const {isMobile, isSM, isTablet} = useResponsive();
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
 
@@ -42,6 +42,7 @@ const Header: React.FC = () => {
           </div>
         )}
          {isMobile && isLogged && <FiltersMobileMenu/>}
+         {isSM && isLogged && <FiltersMobileMenu/>}
         {isTablet && isLogged && <Navigation />}
         {isLogged && <UserPanel />}
       </Container>

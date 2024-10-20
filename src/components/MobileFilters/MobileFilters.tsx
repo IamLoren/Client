@@ -16,7 +16,7 @@ const MobileFilters: React.FC = () => {
   };
   return (
     <div
-      className={`fixed left-0 bottom-0 w-[80%] h-100vh-minus-86px primary-background translate-x-[-100%] transition-transform duration-250 ease-in-out ${
+      className={`fixed left-0 bottom-0 w-[80%] sm:w-[50%] h-100vh-minus-86px primary-background translate-x-[-100%] p-[30px] secondary-text transition-transform duration-250 ease-in-out ${
         isOpen && "translate-x-[0]"
       }`}
     >

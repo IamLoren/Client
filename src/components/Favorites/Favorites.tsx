@@ -6,7 +6,7 @@ import Card from '../Card/Card';
 const Favorites:React.FC = () => {
     const favorites = useAppSelector(selectFavoriteCars);
   return (
-    <ul className='flex gap-[30px] p-[20px]'>{ favorites?.map((car) => {
+    <ul className='flex gap-[30px] p-[20px] flex-wrap'>{ favorites?.map((car) => {
         return <Card key={car._id} carProps={car} />;
       })}</ul>
   )
