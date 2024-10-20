@@ -11,6 +11,7 @@ import {selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
 import { updateFavoriteList } from "../../redux/authSlice/operations";
 import { openModal, openRentalCArForm } from "../../redux/modalSlice/modalSlice";
 import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
+import { toast } from "react-toastify";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
@@ -42,8 +43,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
 
   const handleButtonClick = () => {
     if (!isLogged) {
-      //Перевести isModalOpen в true
-      // Вміст: Вам слід авторизуватися для можливості оренди авто
+      toast.success(`You should sign up or sign in to rent a car`)
     } else if (isLogged) {
       dispatch(changeSelectedCar(carProps))
       dispatch(openModal())
