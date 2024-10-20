@@ -7,8 +7,10 @@ import Button from "../Button/Button";
 import NotAvailable from "../NotAvailable/NotAvailable";
 import { CardProps } from "./CardTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
+import {selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
 import { updateFavoriteList } from "../../redux/authSlice/operations";
+import { openModal, openRentalCArForm } from "../../redux/modalSlice/modalSlice";
+import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
 
 const Card: React.FC<CardProps> = ({ carProps }) => {
   const {
@@ -43,8 +45,9 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
       //Перевести isModalOpen в true
       // Вміст: Вам слід авторизуватися для можливості оренди авто
     } else if (isLogged) {
-      //Перевести isModalOpen в true
-      // Вміст: форма для замовлення авто
+      dispatch(changeSelectedCar(carProps))
+      dispatch(openModal())
+      dispatch(openRentalCArForm())
     }
   };
 

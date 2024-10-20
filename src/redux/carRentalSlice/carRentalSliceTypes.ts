@@ -26,5 +26,6 @@ export interface CarsStateType {
   selectedMaxPrice: number,
   startDate: string ,
   endDate: string ,
+  selectedCar: CarInterface | null,
   isLoading: boolean;
 }

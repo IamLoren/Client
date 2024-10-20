@@ -7,12 +7,14 @@ import { closeModal } from "../../redux/modalSlice/modalSlice";
 import {
   isLogoutForm,
   isModalOpen,
+  isRentalCarForm,
   isSignInForm,
   isSignUpForm,
 } from "../../redux/selectors";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/SignInForm";
 import LogoutForm from "../LogoutForm/LogoutForm";
+import RentalCarForm from "../RentalCarForm/RentalCarForm";
 // import CustomToasts from "../CustomToasts/CustomToasts";
 
 const Modal: React.FC = () => {
@@ -20,6 +22,7 @@ const Modal: React.FC = () => {
   const isSignUp = useAppSelector(isSignUpForm);
   const isSignIn = useAppSelector(isSignInForm);
   const isLogout = useAppSelector(isLogoutForm);
+  const isRentalForm = useAppSelector(isRentalCarForm);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -58,6 +61,7 @@ const Modal: React.FC = () => {
         {isSignUp && <SignUpForm />}
         {isSignIn && <SignInForm />}
         {isLogout && <LogoutForm />}
+        {isRentalForm && <RentalCarForm/>}
       </div>
     </dialog>,
     modalRoot

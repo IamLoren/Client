@@ -44,7 +44,7 @@ const App: React.FC = () => {
             </PrivateUserRoute>
           }
         > 
-        <Route index element={<UserSettings/>}/>
+        <Route path="settings" element={<UserSettings/>}/>
         <Route path="history" element={<ClientsHistory/>}/>
         <Route path="favorites" element={<Favorites/>}/>
         <Route path="notifications" element={<Notifications/>}/>

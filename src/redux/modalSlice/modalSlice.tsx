@@ -6,6 +6,7 @@ const initialState: StateType = {
   isSignUpForm: false,
   isSignInForm: false,
   isLogoutForm: false,
+  isRentalCarForm: false,
   isMobileMenuOpen: false,
 };
 
@@ -21,6 +22,7 @@ const modalSlice = createSlice({
       state.isSignUpForm = false;
       state.isSignInForm = false;
       state.isLogoutForm = false;
+      state.isRentalCarForm = false;
     },
     openSignUpForm: (state: StateType) => {
       state.isSignUpForm = true;
@@ -34,6 +36,9 @@ const modalSlice = createSlice({
     openMobailMenu: (state: StateType, {payload}) => {
       state.isMobileMenuOpen = payload;
     },
+    openRentalCArForm: (state: StateType) => {
+      state.isRentalCarForm = true;
+    },
   },
 });
 
@@ -44,5 +49,6 @@ export const {
   openSignInForm,
   openLogoutForm,
   openMobailMenu,
+  openRentalCArForm,
 } = modalSlice.actions;
 export default modalSlice.reducer;
