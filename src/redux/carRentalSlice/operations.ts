@@ -5,12 +5,14 @@ import { RootState } from "../store";
 import { CarInterface } from "./carRentalSliceTypes";
 
 export const getAllCarsThunk = createAsyncThunk<
-CarInterface[],
+{data:CarInterface[],
+  minPrice: number,
+  maxPrice: number
+},
   void,
   {
     state: RootState;
     rejectValue: string;
-    getState: ()=> void
   }
 >("cars/getAll", async (_, thunkApi) => {
   const state = thunkApi.getState(); 
@@ -36,5 +38,6 @@ CarInterface[],
     } else {
       toast.error("An unexpected error occurred");
     }
+    return thunkApi.rejectWithValue("An unexpected error occurred"); 
   }
 });
