@@ -43,13 +43,13 @@ const UserPanel: React.FC = () => {
     "flex justify-center self-center w-[20px] md:w-[30px] lg:w-[40px] xl:w-[50px] h-[20px] md:h-[30px] lg:h-[40px] xl:h-[50px] border-[2px] border-color rounded-[50%]";
   return (
     <div className="flex gap-[20px]">
-      <div className={` relative ${commonStyles} content-center lg:pt-[8px]`}>
+      <div className={` relative ${commonStyles} content-center`}>
         <DarkModeSwitch
           style={{ marginBottom: "2rem" }}
           checked={isChecked}
           onChange={toggleDarkMode}
           size={25}
-          className="w-[15px] md:w-[25px] absolute top-[-5px] md:top-0 lg:top-[11px]"
+          className="w-[15px] md:w-[25px] absolute top-[-5px] md:top-0 lg:top-[7px] xl:top-[11px]"
         />
       </div>
       <Link to="/client/notifications" className={`${commonStyles}`}>

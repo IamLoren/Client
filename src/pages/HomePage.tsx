@@ -8,7 +8,7 @@ import useResponsive from "../hooks";
 import MobileFilters from "../components/MobileFilters/MobileFilters";
 
 const HomePage: React.FC = () => {
-  const { isMobile, isTablet} = useResponsive();
+  const { isMobile, isSM, isTablet} = useResponsive();
 
   return (
     <>
@@ -21,6 +21,7 @@ const HomePage: React.FC = () => {
       </main>
       <Footer />
       {isMobile &&  <MobileFilters/>}
+      {isSM &&  <MobileFilters/>}
     </>
   );
 };
