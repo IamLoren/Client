@@ -50,7 +50,7 @@ const RentalCarForm: React.FC = () => {
     lastName: user.lastName || "",
     email: user.email || "",
     phoneNumber: "",
-    carName: `${selectedCar?.make, selectedCar?.model }`,
+    carName: `${selectedCar?.make} ${selectedCar?.model} `,
     startDate: new Date(startDate).toLocaleString(),
     endDate: new Date(endDate).toLocaleString(),
   };
