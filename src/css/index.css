@@ -46,6 +46,10 @@ dialog::backdrop {
   background-color: red;
 }
 
+.accent-secondary-background {
+  background-color: var(--accent-secondary);
+}
+
 .primary-text {
   color: var(--primary-text);
 }

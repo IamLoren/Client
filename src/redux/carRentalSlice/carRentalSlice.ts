@@ -12,6 +12,7 @@ const initialState: CarsStateType = {
   selectedMaxPrice: 0,
   startDate: new Date().toISOString(),
   endDate: new Date().toISOString(),
+  selectedCar: null,
   isLoading: false,
 };
 
@@ -54,6 +55,12 @@ export const carRentalSlice = createSlice({
         state.endDate = payload.time;
       }
     },
+    changeSelectedCar: (
+      state: CarsStateType,
+      { payload }: { payload: CarInterface }
+    ) => {
+      state.selectedCar = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -85,5 +92,6 @@ export const {
   changeCarTransmissionFilter,
   changeMinPrice,
   changeMaxPrice,
-  setRentalTime
+  setRentalTime,
+  changeSelectedCar
 } = carRentalSlice.actions;
