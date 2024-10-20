@@ -53,7 +53,7 @@ const PriceRangeSlider: React.FC = () => {
         max={maxPrice}
         value={minPrice}
         onChange={handleMinChange}
-        className="my-4"
+        className="my-4 max-w-[300px]"
       />
       <span className="text-[15px] lg:text-lg">
         Max Price: ${maxPrice}
@@ -64,7 +64,7 @@ const PriceRangeSlider: React.FC = () => {
         max={max}
         value={maxPrice}
         onChange={handleMaxChange}
-        className="my-4"
+        className="my-4 max-w-[300px]"
       />
     </div>
   );

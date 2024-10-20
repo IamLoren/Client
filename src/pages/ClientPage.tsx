@@ -7,21 +7,21 @@ const ClientPage: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="h-96 flex-1 secondary-background secondary-text p-4">
-        <div className="flex px-[20px] py-[10px] pb-0 border-b border-b-blue-300">
-        <Link to="/client" className="border border-blue-200 p-[10px]">
+      <main className="flex-1 secondary-background secondary-text p-4">
+          <nav className="flex flex-wrap px-[20px] py-[10px] pb-0 ">
+            <Link to="/client" className="w-[124px] flex justify-center border border-blue-200 p-[10px]">
             Settings
           </Link>
-          <Link to="history" className="border border-blue-200 p-[10px]">
+          <Link to="history" className="w-[124px] flex justify-center border border-blue-200 p-[10px]">
             Orders History
           </Link>
-          <Link to="favorites" className="border border-blue-200 p-[10px]">
+          <Link to="favorites" className="w-[124px] flex justify-center border border-blue-200 p-[10px]">
             Favorites
           </Link>
-          <Link to="notifications" className="border border-blue-200 p-[10px]">
+          <Link to="notifications" className="w-[124px] flex justify-center border border-blue-200 p-[10px]">
             Notifications
           </Link>
-        </div>
+          </nav> 
         <Outlet />
       </main>
       <Footer />

@@ -4,17 +4,32 @@
   box-shadow: var(--cards-shadow);
 }
 
-.react-datepicker-wrapper input {
-  width: 200px;
-  padding: 5px;
+.react-datepicker-wrapper {
+  width: 100%;
 }
 
+.react-datepicker__input-container .react-datepicker-ignore-onclickoutside {
+  width: 100%;
+}
+
+.react-datepicker-wrapper input {
+  max-width: 250px;
+  padding: 5px;
+}
 @media screen and (min-width:300px) {
   .react-datepicker-wrapper input  {
-    width: 200px;
+    min-width:100%;
     padding: 5px;
+    font-size: 13px;
   }
 }
+
+@media screen and (min-width:800px) {
+  .react-datepicker-wrapper input  {
+    font-size: 14px;
+  }
+}
+
 
 .react-datepicker-wrapper input {
   outline-color: rgb(250, 249, 249);

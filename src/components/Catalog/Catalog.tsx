@@ -6,7 +6,7 @@ import { HiArrowsUpDown } from "react-icons/hi2";
 import useResponsive from "../../hooks";
 
 const Catalog: React.FC = () => {
-  const { isSM} = useResponsive();
+  const { isSM, isWideTablet} = useResponsive();
   return (
     <div className="flex-grow relative">
       <div className="flex w-[100%] md:mb-[20px] sm:gap-[10px] flex-col sm:flex-row sm:justify-between">
@@ -16,6 +16,9 @@ const Catalog: React.FC = () => {
             <HiArrowsUpDown color="white" />
           </Button>
         )}
+        {isWideTablet && <Button type="button" buttonName="" style="h-[55px] self-center">
+            <HiArrowsUpDown color="white" />
+          </Button>}
         <DateTime name="Drop-Off" />
       </div>
       <CardsList />
