@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   selectAllCars,
@@ -28,6 +28,11 @@ const PriceRangeSlider: React.FC = () => {
   const max = Math.max(...prices);
   const [minPrice, setMinPrice] = useState(selectedMinPrice);
   const [maxPrice, setMaxPrice] = useState(selectedMaxPrice);
+
+  useEffect(()=> {
+    setMinPrice(selectedMinPrice);
+    setMaxPrice(selectedMaxPrice);
+  },[selectedMaxPrice, selectedMinPrice])
 
   const handleMinChange = (event: RangeChangeEvent) => {
     const value = event.target.value;

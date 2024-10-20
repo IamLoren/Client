@@ -62,11 +62,13 @@ export const carRentalSlice = createSlice({
       })
       .addCase(
         getAllCarsThunk.fulfilled,
-        (state: CarsStateType, { payload }: { payload: CarInterface[] }) => {
-          state.cars = payload;
-          state.userListOfCars = payload.filter(
+        (state: CarsStateType, { payload }:{payload: {data:CarInterface[], minPrice: number, maxPrice:number }}) => {
+          state.cars = payload.data;
+          state.userListOfCars = payload.data.filter(
             (car) => car.isRemoved === false
           );
+          state.selectedMinPrice = payload.minPrice;
+          state.selectedMaxPrice = payload.maxPrice;
           state.isLoading = false;
         }
       )
