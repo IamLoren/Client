@@ -11,18 +11,18 @@ const Navigation: React.FC = () => {
       <ul className="flex gap-3 accent-text font-bold">
         <li className="self-center">
           <NavLink to="/" className={({ isActive }) =>
-              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>CATALOG</NavLink>
+             `border-b-2  ${isActive ? 'block p-[15px] border-blue-500' : 'block p-[15px] border-transparent'}` }>CATALOG</NavLink>
         </li>
         {role === "user" && (
           <li>
-            <NavLink to="/client" className={({ isActive }) =>
-              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>CLIENT PROFILE</NavLink>
+            <NavLink to="/client/favorites" className={({ isActive }) =>
+              `border-b-2 ${isActive ? 'block p-[15px] border-blue-500' : 'block p-[15px] border-transparent'}` }>CLIENT PROFILE</NavLink>
           </li>
         )}
         {role === "admin" && (
           <li>
             <NavLink to="/admin" className={({ isActive }) =>
-              isActive ? 'block p-[15px] border-b-2 border-blue-500' : 'block p-[15px]'}>Admin Panel</NavLink>
+              `border-b-2 ${isActive ? 'block p-[15px] border-blue-500' : 'block p-[15px] border-transparent'}` }>Admin Panel</NavLink>
           </li>
         )}
       </ul>

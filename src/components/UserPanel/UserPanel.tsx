@@ -55,7 +55,7 @@ const UserPanel: React.FC = () => {
       <Link to="/client/notifications" className={`${commonStyles}`}>
         <IoIosNotifications style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
-      <Link to="/client" className={`${commonStyles}`}>
+      <Link to="/client/settings" className={`${commonStyles}`}>
         <IoSettingsSharp style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
 
