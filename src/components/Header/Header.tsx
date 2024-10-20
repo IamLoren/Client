@@ -8,7 +8,7 @@ import {
 import { selectIsLogged } from "../../redux/selectors";
 import Navigation from "../Navigation/Navigation";
 import Container from "../Container/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import UserPanel from "../UserPanel/UserPanel";
 import Button from "../Button/Button";
 import useResponsive from '../../hooks'
@@ -16,6 +16,7 @@ import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
 
 const Header: React.FC = () => {
   const {isMobile, isSM, isTablet} = useResponsive();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
 
@@ -41,8 +42,8 @@ const Header: React.FC = () => {
             <Button type="button" buttonName="SIGN IN" onClick={handleClickLogin}></Button>
           </div>
         )}
-         {isMobile && isLogged && <FiltersMobileMenu/>}
-         {isSM && isLogged && <FiltersMobileMenu/>}
+         {isMobile && isLogged && (location.pathname==="/") && <FiltersMobileMenu/>}
+         {isSM && isLogged && (location.pathname==="/") && <FiltersMobileMenu/>}
         {isTablet && isLogged && <Navigation />}
         {isLogged && <UserPanel />}
       </Container>

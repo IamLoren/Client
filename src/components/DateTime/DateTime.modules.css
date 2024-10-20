@@ -1,7 +1,32 @@
 .react-datepicker {
   border-radius: 8px;
+  overflow: hidden;
   background-color: var(--primary-color);
   box-shadow: var(--cards-shadow);
+}
+
+.react-datepicker__month-container {
+  width: 215px;
+}
+
+.react-datepicker__header.react-datepicker__header--has-time-select {
+  width: 215px;
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+  width: 1.5rem;
+}
+.react-datepicker__day-names {
+  width: 100%;
+}
+
+.react-datepicker__time-container,
+.react-datepicker__time-list  {
+  width: 70px !important;
+}
+
+.react-datepicker__time-list-item {
+  width: 70px;
 }
 
 .react-datepicker-wrapper {
