@@ -8,7 +8,7 @@ const ClientPage: React.FC = () => {
     <>
       <Header />
       <main className="flex-1 secondary-background secondary-text p-4">
-          <nav className="flex flex-wrap px-[20px] py-[10px] pb-0 ">
+          <nav className="flex flex-wrap px-[20px] py-[10px] mb-[10px]">
             <Link to="/client" className="w-[124px] flex justify-center border border-blue-200 p-[10px]">
             Settings
           </Link>
