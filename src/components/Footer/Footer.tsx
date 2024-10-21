@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const { isTablet, isWideTablet, isDesktop } = useResponsive();
   return (
     <footer className="primary-background p-4">
-      <Container addStyles="flex flex-col md:justify-between">
+      <Container addStyles="flex flex-col md:flex-row md:justify-between">
         <div>
           <a href="/" className="block p-[15px] pl-[0] accent-text font-bold">LOGO</a>
           {(isTablet || isWideTablet || isDesktop) && (
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
             </p>
           )}
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between md:gap-[50px]">
           <div className="flex flex-col w-[100px]">
             <p className="mb-[10px]">About</p>
             <Link to="">How it works</Link>
