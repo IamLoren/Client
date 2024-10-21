@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div>
           <a href="/" className="block p-[15px] pl-[0] accent-text font-bold">LOGO</a>
           {(isTablet || isWideTablet || isDesktop) && (
-            <p>
+            <p className="w-[250px]">
               Our vision is to provide convenience and help increase your sales
               business.
             </p>
