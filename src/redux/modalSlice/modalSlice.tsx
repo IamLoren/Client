@@ -23,6 +23,7 @@ const modalSlice = createSlice({
       state.isSignInForm = false;
       state.isLogoutForm = false;
       state.isRentalCarForm = false;
+      document.body.style.overflow = "auto";
     },
     openSignUpForm: (state: StateType) => {
       state.isSignUpForm = true;
