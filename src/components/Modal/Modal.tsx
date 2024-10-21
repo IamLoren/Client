@@ -26,7 +26,6 @@ const Modal: React.FC = () => {
 
   const handleClose = () => {
     dispatch(closeModal());
-    document.body.style.overflow = "auto";
   };
   const isModal = useAppSelector(isModalOpen);
   const ref = useRef<HTMLDialogElement>(null);
