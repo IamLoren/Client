@@ -79,7 +79,7 @@ const RentalCarForm: React.FC = () => {
             id="firstName"
             name="firstName"
             type="text"
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="firstName"
@@ -96,7 +96,7 @@ const RentalCarForm: React.FC = () => {
             id="lastName"
             name="lastName"
             type="text"
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="lastName"
@@ -113,7 +113,7 @@ const RentalCarForm: React.FC = () => {
             id="email"
             name="email"
             type="email"
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="email"
@@ -130,7 +130,7 @@ const RentalCarForm: React.FC = () => {
             id="phoneNumber"
             name="phoneNumber"
             type="text"
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="phoneNumber"
@@ -147,7 +147,7 @@ const RentalCarForm: React.FC = () => {
             id="carName"
             name="carName"
             type="text"
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
             disabled={true}
           />
           <ErrorMessage
@@ -164,9 +164,8 @@ const RentalCarForm: React.FC = () => {
           <Field
             id="startDate"
             name="startDate"
-        
             readOnly
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="startDate"
@@ -183,7 +182,7 @@ const RentalCarForm: React.FC = () => {
             id="endDate"
             name="endDate"
             readOnly
-            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md"
+            className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
             name="endDate"
