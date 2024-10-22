@@ -20,24 +20,24 @@ const Footer: React.FC = () => {
         <div className="flex justify-between md:gap-[50px]  secondary-text">
           <div className="flex flex-col w-[100px]">
             <p className="mb-[10px]">About</p>
-            <Link to="">How it works</Link>
-            <Link to="">Featured</Link>
-            <Link to="">Partnership</Link>
-            <Link to="">Bussiness Relation</Link>
+            <Link to="" className="filters-color">How it works</Link>
+            <Link to="" className="filters-color">Featured</Link>
+            <Link to="" className="filters-color">Partnership</Link>
+            <Link to="" className="filters-color">Bussiness Relation</Link>
           </div>
           <div className="flex flex-col">
             <p className="mb-[10px]">Community</p>
-            <Link to="">Events</Link>
-            <Link to="">Blog</Link>
-            <Link to="">Podcast</Link>
-            <Link to="">Invite a friend</Link>
+            <Link to="" className="filters-color">Events</Link>
+            <Link to="" className="filters-color">Blog</Link>
+            <Link to="" className="filters-color">Podcast</Link>
+            <Link to="" className="filters-color">Invite a friend</Link>
           </div>
           <div className="flex flex-col">
             <p className="mb-[10px]">Socials</p>
-            <Link to="">Discord</Link>
-            <Link to="">Instagram</Link>
-            <Link to="">Twitter</Link>
-            <Link to="">Facebook</Link>
+            <Link to="" className="filters-color">Discord</Link>
+            <Link to="" className="filters-color">Instagram</Link>
+            <Link to="" className="filters-color">Twitter</Link>
+            <Link to="" className="filters-color">Facebook</Link>
           </div>
         </div>
       </Container>
