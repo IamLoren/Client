@@ -62,6 +62,22 @@ dialog::backdrop {
   color: var(--accent-primary);
 }
 
+.navigation-color {
+  color: var(--accent-primary);
+}
+
+.navigation-color:hover {
+  color: purple;
+}
+
+.filters-color {
+  color: var(--primary-text);
+}
+.filters-color:hover {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
 .accent-background {
   background-color: var(--accent-primary);
 }
@@ -100,4 +116,9 @@ dialog::backdrop {
   .h-100vh-minus-86px {
     height: calc(100vh - 86px);
   }
+}
+
+.customHover:hover {
+  color: blue;
+  transition: color 0.3s;
 }
