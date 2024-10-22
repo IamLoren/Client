@@ -94,7 +94,7 @@ const UserSettings: React.FC = () => {
               id="firstName"
               name="firstName"
               type="text"
-              className="block w-full px-4 py-2 border border-color rounded-md primary-background"
+              className="block w-full px-4 py-2 border border-color rounded-md primary-background shadow-sm outline-0 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 "
             />
             <ErrorMessage
               name="firstName"
@@ -111,7 +111,7 @@ const UserSettings: React.FC = () => {
               id="lastName"
               name="lastName"
               type="text"
-              className="block w-full px-4 py-2 border border-color rounded-md primary-background"
+              className="block w-full px-4 py-2 border border-color rounded-md primary-background outline-0 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
             />
             <ErrorMessage
               name="lastName"
@@ -128,7 +128,7 @@ const UserSettings: React.FC = () => {
               id="email"
               name="email"
               type="email"
-              className="block w-full px-4 py-2 border border-color rounded-md primary-background"
+              className="block w-full px-4 py-2 border border-color rounded-md primary-background outline-0 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
             />
             <ErrorMessage
               name="email"
@@ -137,7 +137,7 @@ const UserSettings: React.FC = () => {
             />
           </div>
 
-            <Button type="button" buttonName="Save changes"/> 
+            <Button type="submit" buttonName="Save changes"/> 
         </Form>
       )}
     </Formik>

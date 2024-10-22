@@ -37,7 +37,7 @@ const TransmissionFilter:React.FC = () => {
         <h2 className="text-md lg:text-lg font-semibold mb-4">Select type of transmission</h2>
     {carTypes.map((type, index) => (
       <div key={index}>
-        <label className="text-[15px] lg:text-lg filters-color">
+        <label className="text-[15px] lg:text-lg filters-color cursor-pointer">
           <input
             type="checkbox"
             name="selectedTypes"

@@ -35,6 +35,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
         minDate={minDate}
+        className="cursor-pointer"
       />
     </div>
   );
