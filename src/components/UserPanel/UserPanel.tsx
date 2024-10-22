@@ -43,7 +43,7 @@ const UserPanel: React.FC = () => {
     "flex justify-center self-center w-[20px] md:w-[30px] lg:w-[40px] xl:w-[50px] h-[20px] md:h-[30px] lg:h-[40px] xl:h-[50px] border-[2px] border-color transition-border duration-300 ease-in-out hover:border-blue-600 transition rounded-[50%]";
   return (
     <div className="flex gap-[20px]">
-      <div role="button" aria-label='switch mode' className={`relative ${commonStyles} content-center`}>
+      <div role="button"  tabIndex={0} aria-label='switch mode' className={`relative ${commonStyles} content-center`}>
         <DarkModeSwitch
           style={{ marginBottom: "2rem" }}
           checked={isChecked}
