@@ -11,14 +11,11 @@ const Catalog: React.FC = () => {
     <div className="flex-grow relative">
       <div className="flex w-[100%] md:mb-[20px] sm:gap-[10px] flex-col sm:flex-row sm:justify-between">
         <DateTime name="Pick-Up" />
-        {isSM && (
-          <Button type="button" buttonName="" style="h-[55px] self-center">
+        {(isSM || isWideTablet) && (
+          <Button type="button" ariaLabel="sort by price" style="h-[55px] self-center">
             <HiArrowsUpDown color="white" />
           </Button>
         )}
-        {isWideTablet && <Button type="button" buttonName="" style="h-[55px] self-center">
-            <HiArrowsUpDown color="white" />
-          </Button>}
         <DateTime name="Drop-Off" />
       </div>
       <CardsList />
