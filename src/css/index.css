@@ -57,25 +57,27 @@ dialog::backdrop {
 .secondary-text {
   color: var(--secondary-text);
 }
-
+.filters-color {
+  color: var(--primary-text);
+  transition: all 0.3s;
+}
 .accent-text {
   color: var(--accent-primary);
 }
 
 .navigation-color {
   color: var(--accent-primary);
+  transition: all 0.3s;
 }
 
 .navigation-color:hover {
   color: purple;
+  text-shadow: 2px 2px 4px rgba(128, 0, 128, 0.5);
 }
 
-.filters-color {
-  color: var(--primary-text);
-}
 .filters-color:hover {
   color: var(--accent-primary);
-  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 255, 0.5);
 }
 
 .accent-background {

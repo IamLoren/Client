@@ -7,14 +7,14 @@ const ClientPage: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="flex-1 secondary-background secondary-text p-4">
+      <main className="flex-1 secondary-background p-4">
         <nav className="flex flex-wrap px-[20px] py-[10px] mb-[10px]">
           <NavLink
             to="/client/settings"
             className={({ isActive }) =>
-              `w-[124px] flex justify-center border border-blue-200 p-[10px] ${
-                isActive ? "primary-background box-shadow" : ""
-              }`
+              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+                isActive ? "primary-background box-shadow accent-text font-bold" : ""
+              } hover:shadow-lg `
             }
           >
             Settings
@@ -22,9 +22,9 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/history"
             className={({ isActive }) =>
-              `w-[124px] flex justify-center border border-blue-200 p-[10px] ${
-                isActive ? "primary-background box-shadow" : ""
-              }`
+              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+                isActive ? "primary-background box-shadow accent-text font-bold" : ""
+              } hover:shadow-lg`
             }
           >
             Orders History
@@ -32,9 +32,9 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/favorites"
             className={({ isActive }) =>
-              `w-[124px] flex justify-center border border-blue-200 p-[10px] ${
-                isActive ? "primary-background box-shadow" : ""
-              }`
+              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+                isActive ? "primary-background box-shadow accent-text font-bold" : ""
+              } hover:shadow-lg`
             }
           >
             Favorites
@@ -42,9 +42,9 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/notifications"
             className={({ isActive }) =>
-              `w-[124px] flex justify-center border border-blue-200 p-[10px] ${
-                isActive ? "primary-background box-shadow" : ""
-              }`
+              `w-[128px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+                isActive ? "primary-background box-shadow accent-text font-bold" : ""
+              } hover:shadow-lg `
             }
           >
             Notifications
