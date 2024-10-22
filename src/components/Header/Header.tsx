@@ -33,7 +33,7 @@ const Header: React.FC = () => {
   return (
     <header className="sticky z-10 top-0 primary-background p-4 primary-text box-shadow">
       <Container addStyles="flex justify-between">
-        <Link to="/" className="block p-[15px] accent-text font-bold">
+        <Link to="/" className="block p-[15px] accent-text font-bold" aria-label='pass to home page'>
           LOGO
         </Link>
         {isMobile && location.pathname === "/" && <FiltersMobileMenu />}

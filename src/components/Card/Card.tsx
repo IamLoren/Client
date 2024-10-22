@@ -7,9 +7,12 @@ import Button from "../Button/Button";
 import NotAvailable from "../NotAvailable/NotAvailable";
 import { CardProps } from "./CardTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import {selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
+import { selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
 import { updateFavoriteList } from "../../redux/authSlice/operations";
-import { openModal, openRentalCArForm } from "../../redux/modalSlice/modalSlice";
+import {
+  openModal,
+  openRentalCArForm,
+} from "../../redux/modalSlice/modalSlice";
 import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
 import { toast } from "react-toastify";
 
@@ -43,11 +46,11 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
 
   const handleButtonClick = () => {
     if (!isLogged) {
-      toast.success(`You should sign up or sign in to rent a car`)
+      toast.success(`You should sign up or sign in to rent a car`);
     } else if (isLogged) {
-      dispatch(changeSelectedCar(carProps))
-      dispatch(openModal())
-      dispatch(openRentalCArForm())
+      dispatch(changeSelectedCar(carProps));
+      dispatch(openModal());
+      dispatch(openRentalCArForm());
     }
   };
 
@@ -61,6 +64,8 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         />
       </div>
       <span
+        role="button"
+        aria-label="press to add this car to favorites"
         className="absolute top-[20px] right-[20px]"
         data-tooltip-id={`${_id}-tooltip`}
         data-tooltip-content={
@@ -101,13 +106,13 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         </div>
 
         <div className="flex flex-col items-start md:flex-row gap-2">
-          <span className="w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+          <span className="w-[100px] inline-flex items-center gap-1 rounded-full border px-2 py-1 text-xs font-semibold secondary-text">
             <BsFuelPump /> {fuel}{" "}
           </span>
-          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full border px-2 py-1 text-xs font-semibold secondary-text">
             <TbSteeringWheel /> {transmission}{" "}
           </span>
-          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full secondary-background px-2 py-1 text-xs font-semibold secondary-text">
+          <span className=" w-[100px] inline-flex items-center gap-1 rounded-full border px-2 py-1 text-xs font-semibold secondary-text">
             Color {color}{" "}
           </span>
         </div>
@@ -120,6 +125,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         <Button
           type="button"
           buttonName="Rent now"
+          ariaLabel="create Order"
           onClick={handleButtonClick}
         />
       </div>

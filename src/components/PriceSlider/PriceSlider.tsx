@@ -53,6 +53,7 @@ const PriceRangeSlider: React.FC = () => {
         Min Price: ${minPrice}
       </span>{" "}
       <input
+      aria-label="select minimum price"
         type="range"
         min={min}
         max={maxPrice}
@@ -65,6 +66,7 @@ const PriceRangeSlider: React.FC = () => {
       </span>
       <input
         type="range"
+        aria-label="select maximum price"
         min={minPrice}
         max={max}
         value={maxPrice}

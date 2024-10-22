@@ -40,14 +40,15 @@ const TypeFilter: React.FC = () => {
       <h2 className="text-md lg:text-lg font-semibold mb-4">Select Car Types</h2>
       {carTypes.map((type) => (
         <div key={type}>
-          <label className="text-[15px] lg:text-lg">
+          <label className="text-[15px] lg:text-lg filters-color">
             <input
+              aria-label={`select ${type}`}
               type="checkbox"
               name="selectedTypes"
               value={type}
               checked={formik.values.selectedTypes.includes(type)}
               onChange={() => handleCheckboxChange(type)}
-              className="mr-[10px]"
+              className="mr-[10px] filters-color"
             />
             {type}
           </label>

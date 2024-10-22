@@ -40,10 +40,10 @@ const UserPanel: React.FC = () => {
   };
 
   const commonStyles =
-    "flex justify-center self-center w-[20px] md:w-[30px] lg:w-[40px] xl:w-[50px] h-[20px] md:h-[30px] lg:h-[40px] xl:h-[50px] border-[2px] border-color rounded-[50%]";
+    "flex justify-center self-center w-[20px] md:w-[30px] lg:w-[40px] xl:w-[50px] h-[20px] md:h-[30px] lg:h-[40px] xl:h-[50px] border-[2px] border-color transition-border duration-300 ease-in-out hover:border-blue-600 transition rounded-[50%]";
   return (
     <div className="flex gap-[20px]">
-      <div className={` relative ${commonStyles} content-center`}>
+      <div role="button" aria-label='switch mode' className={`relative ${commonStyles} content-center`}>
         <DarkModeSwitch
           style={{ marginBottom: "2rem" }}
           checked={isChecked}
@@ -52,10 +52,10 @@ const UserPanel: React.FC = () => {
           className="w-[15px] md:w-[25px] absolute top-[-5px] md:top-0 lg:top-[7px] xl:top-[11px]"
         />
       </div>
-      <Link to="/client/notifications" className={`${commonStyles}`}>
+      <Link to="/client/notifications" className={`${commonStyles}`} aria-label='pass to notification page'>
         <IoIosNotifications style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
-      <Link to="/client/settings" className={`${commonStyles}`}>
+      <Link to="/client/settings" className={`${commonStyles}`} aria-label='pass to settings page'>
         <IoSettingsSharp style={{ fontSize: "30px", alignSelf: "center" }} />
       </Link>
 
@@ -68,11 +68,12 @@ const UserPanel: React.FC = () => {
       </div>
       <button
         onClick={handleClickLogout}
-        className="flex justify-center content-center "
+        className="flex justify-center content-center"
+        aria-label="Exit button"
       >
         <IoExitOutline
           style={{ fontSize: "40px" }}
-          className="w-[20px] md:w-[30px] lg:h-[40px] self-center"
+          className="w-[20px] md:w-[30px] lg:h-[40px] self-center customHover"
         />
       </button>
     </div>

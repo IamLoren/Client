@@ -52,6 +52,7 @@ const Modal: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         <button
+          aria-label="close the form"
           onClick={handleClose}
           className="absolute top-[20px] right-[20px] outline-0 primary-text"
         >
@@ -60,7 +61,7 @@ const Modal: React.FC = () => {
         {isSignUp && <SignUpForm />}
         {isSignIn && <SignInForm />}
         {isLogout && <LogoutForm />}
-        {isRentalForm && <RentalCarForm/>}
+        {isRentalForm && <RentalCarForm />}
       </div>
     </dialog>,
     modalRoot
