@@ -62,7 +62,7 @@ const UserSettings: React.FC = () => {
       onSubmit={handleSubmit}
     >
       {({ setFieldValue }) => (
-        <Form className="p-[20px] md:m-auto max-w-lg primary-background shadow-lg rounded-lg box-shadow">
+        <Form className="p-[20px] md:m-auto max-w-lg primary-background shadow-lg rounded-lg box-shadow primary-text">
           <h2 className="text-xl font-bold mb-4">You can update your user data</h2>
 
           <div className="mb-4">
