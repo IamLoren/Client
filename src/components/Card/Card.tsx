@@ -65,6 +65,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
       </div>
       <span
         role="button"
+        tabIndex={0}
         aria-label="press to add this car to favorites"
         className="absolute top-[20px] right-[20px]"
         data-tooltip-id={`${_id}-tooltip`}
@@ -75,6 +76,10 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
             ? "Add to favorites"
             : "Please sign up or log in to be able to add a car"
         }
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleFavoriteClick()
+          }}}
       >
         <Tooltip id={`${_id.toString()}-tooltip`} />
         <FiHeart

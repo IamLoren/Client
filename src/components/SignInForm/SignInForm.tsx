@@ -29,7 +29,7 @@ const dispatch = useAppDispatch()
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} >
+    <form onSubmit={formik.handleSubmit} data-cy="signInForm">
       <label
         htmlFor="email"
         className="mb-1 block text-sm font-medium primary-text"

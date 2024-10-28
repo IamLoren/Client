@@ -39,6 +39,7 @@ const TransmissionFilter:React.FC = () => {
       <div key={index}>
         <label className="text-[15px] lg:text-lg filters-color cursor-pointer">
           <input
+            data-cy="transmission"
             type="checkbox"
             name="selectedTypes"
             value={type}
