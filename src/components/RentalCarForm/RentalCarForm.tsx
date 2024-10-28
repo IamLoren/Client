@@ -68,7 +68,7 @@ const RentalCarForm: React.FC = () => {
       onSubmit={handleSubmit}
       enableReinitialize={true}
     >
-      <Form className="max-w-lg mx-auto secondary-text">
+      <Form className="max-w-lg mx-auto secondary-text" data-cy="rentalCarForm">
         <h2 className="text-lg font-bold mb-2">Car Rental Order Form</h2>
 
         <div className="mb-2">
