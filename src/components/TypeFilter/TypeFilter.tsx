@@ -42,6 +42,7 @@ const TypeFilter: React.FC = () => {
         <div key={type}>
           <label className="text-[15px] lg:text-lg filters-color cursor-pointer">
             <input
+              data-cy="carType"
               aria-label={`select ${type}`}
               type="checkbox"
               name="selectedTypes"
