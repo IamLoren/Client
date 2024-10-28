@@ -26,23 +26,14 @@ const PriceRangeSlider: React.FC = () => {
     listOfCars.length > 0 ? listOfCars.map((car) => car.price.day) : [];
   const min = Math.min(...prices);
   const max = Math.max(...prices);
-  const [minPrice, setMinPrice] = useState(selectedMinPrice);
-  const [maxPrice, setMaxPrice] = useState(selectedMaxPrice);
-
-  useEffect(()=> {
-    setMinPrice(selectedMinPrice);
-    setMaxPrice(selectedMaxPrice);
-  },[selectedMaxPrice, selectedMinPrice])
-
+ 
   const handleMinChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
-    setMinPrice(Number(value));
     dispatch(changeMinPrice(Number(value)))
   };
 
   const handleMaxChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
-    setMaxPrice(Number(value));
     dispatch(changeMaxPrice(Number(value)));
   };
 
@@ -56,8 +47,8 @@ const PriceRangeSlider: React.FC = () => {
       aria-label="select minimum price"
         type="range"
         min={min}
-        max={maxPrice}
-        value={minPrice}
+        max={selectedMaxPrice}
+        value={selectedMinPrice}
         onChange={handleMinChange}
         className="my-4 max-w-[300px] cursor-pointer"
       />
@@ -67,9 +58,9 @@ const PriceRangeSlider: React.FC = () => {
       <input
         type="range"
         aria-label="select maximum price"
-        min={minPrice}
+        min={selectedMinPrice}
         max={max}
-        value={maxPrice}
+        value={selectedMaxPrice}
         onChange={handleMaxChange}
         className="my-4 max-w-[300px] cursor-pointer"
       />
