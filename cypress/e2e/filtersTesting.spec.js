@@ -100,7 +100,7 @@ describe("PriceRangeSlider Component", () => {
     cy.get("span").contains("Min Price:").should("exist");
     cy.get("span").contains("Max Price:").should("exist");
   });
-
+  
   it("should update min price when min slider is changed", () => {
     const newMinPrice = 40;
     cy.wait(3000);
