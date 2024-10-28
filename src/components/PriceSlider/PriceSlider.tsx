@@ -26,23 +26,14 @@ const PriceRangeSlider: React.FC = () => {
     listOfCars.length > 0 ? listOfCars.map((car) => car.price.day) : [];
   const min = Math.min(...prices);
   const max = Math.max(...prices);
-  // const [minPrice, setMinPrice] = useState(selectedMinPrice);
-  // const [maxPrice, setMaxPrice] = useState(selectedMaxPrice);
-
-  // useEffect(()=> {
-  //   setMinPrice(selectedMinPrice);
-  //   setMaxPrice(selectedMaxPrice);
-  // },[selectedMaxPrice, selectedMinPrice])
-
+ 
   const handleMinChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
-    // setMinPrice(Number(value));
     dispatch(changeMinPrice(Number(value)))
   };
 
   const handleMaxChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
-    // setMaxPrice(Number(value));
     dispatch(changeMaxPrice(Number(value)));
   };
 
