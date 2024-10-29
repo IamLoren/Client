@@ -60,7 +60,7 @@ const App: React.FC = () => {
         <Route path="*" element={<LazyError />} />
       </Routes>
       {isModal && <Modal />}
-      <ToastContainer />
+      <ToastContainer  style={{ top: '60px' }}/>
       {isLoader && <Loader/>}
     </Suspense>
   );

@@ -8,7 +8,7 @@ const ClientPage: React.FC = () => {
     <>
       <Header />
       <main className="flex-1 secondary-background p-4">
-        <nav className="flex flex-wrap px-[20px] py-[10px] mb-[10px]">
+        <nav data-cy="internal navigation" className="flex flex-wrap px-[20px] py-[10px] mb-[10px]">
           <NavLink
             to="/client/settings"
             className={({ isActive }) =>

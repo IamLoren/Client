@@ -13,7 +13,7 @@ const onClickLogout = ()=> {
 }
 
   return (
-    <div>
+    <div data-cy="exit accepting">
       <p className="mt-[10px] mb-[20px]">Do you really want to close your profile?</p>
       <Button type="button" buttonName='Logout' style="block ml-auto" onClick={onClickLogout}></Button>
     </div>
