@@ -49,6 +49,7 @@ export const carRentalSlice = createSlice({
       { payload }: { payload: { name: string; time: string } }
     ) => {
       if (payload.name === "Pick-Up") {
+        console.log(payload)
         state.startDate = payload.time;
       }
       if (payload.name === "Drop-Off") {

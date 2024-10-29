@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="flex-1 secondary-background secondary-text p-4">
+      <main data-cy="store-provider" className="flex-1 secondary-background secondary-text p-4">
         <Container addStyles={isTablet ? "flex gap-[20px]" : ""}>
           {isTablet && <FiltersBar />}
           <Catalog />

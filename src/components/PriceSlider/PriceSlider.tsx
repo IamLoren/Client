@@ -29,6 +29,7 @@ const PriceRangeSlider: React.FC = () => {
  
   const handleMinChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
+    console.log(event.target.value)
     dispatch(changeMinPrice(Number(value)))
   };
 

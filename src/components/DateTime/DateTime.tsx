@@ -12,7 +12,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
 
-  const minDate = new Date();
+  const minDate = new Date(startDate);
 
   const handleDataChanging = (date: Date | null) => {
     if (date) {
@@ -35,6 +35,8 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
         minDate={minDate}
+        minTime={setHours(setMinutes(minDate, minDate.getMinutes()), minDate.getHours())}
+        maxTime={setHours(setMinutes(new Date(), 30), 23)}
         className="cursor-pointer"
       />
     </div>
