@@ -35,3 +35,6 @@
 //     }
 //   }
 // }
+Cypress.Commands.add("getReduxState", ()=> {
+    return cy.window().its("store").invoke("getState");
+})

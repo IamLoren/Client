@@ -12,7 +12,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
 
-  const minDate = new Date();
+  const minDate = new Date(startDate);
 
   const handleDataChanging = (date: Date | null) => {
     if (date) {
@@ -21,8 +21,8 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
   };
   
   return (
-    <div className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow">
-      <p>{name}</p>
+    <div data-cy={`${name}`} className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow">
+      <p >{name}</p>
       <DatePicker
         selected={name === "Pick-Up" ? new Date(startDate) : new Date(endDate)}
         onChange={(date) => handleDataChanging(date)}
@@ -35,6 +35,8 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
         minDate={minDate}
+        minTime={setHours(setMinutes(minDate, minDate.getMinutes()), minDate.getHours())}
+        maxTime={setHours(setMinutes(new Date(), 30), 23)}
         className="cursor-pointer"
       />
     </div>
