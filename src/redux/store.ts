@@ -13,6 +13,11 @@ export const store = configureStore({
   reducer: rootReducer,
 });
 
+// NOTE: source - https://www.cypress.io/blog/testing-redux-store
+// expose store when run in Cypress
+if ((window as any).Cypress) {
+  (window as any).store = store;
+}
 export type AppStore = typeof store;
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];

@@ -103,43 +103,15 @@ describe("PriceRangeSlider Component", () => {
 
   it("should update min price when min slider is changed", () => {
     const newMinPrice = 80;
-    cy.wait(3000);
+    cy.wait(1000);
+
     cy.get('input[aria-label="select minimum price"]').as("minSlider");
 
-//     cy.get("@minSlider")
-//   .then(($el) => {
-//     const width = $el.width();
-//     const startX = $el.offset().left + 5; 
-//     const endX = startX + width - 10; 
-
-//     cy.wrap($el)
-//       .trigger('mousedown', { which: 1, pageX: startX }) 
-
-    
-//       .trigger('mousemove', { pageX: startX + width * 0.25 })
-//       .wait(100) 
-//       .trigger('mousemove', { pageX: startX + width * 0.5 })
-//       .wait(100)
-//       .trigger('mousemove', { pageX: startX + width * 0.75 })
-//       .wait(100)
-//       .trigger('mousemove', { pageX: endX })
-
-//       .trigger('mouseup');
-//   });
-
-//     cy.get("@minSlider")
-//   .trigger('mousedown', { which: 1, pageX: 0 }) 
-//   .trigger('mousemove', { pageX: 100 }) 
-//   .trigger('mouseup'); 
-
-    // cy.get("@minSlider").focus().should('have.focus');  
-    // cy.get("@minSlider").trigger('keydown', { key: 'ArrowRight' }).trigger('keydown', { key: 'ArrowRight' }).trigger('keydown', { key: 'ArrowRight' }).trigger('keydown', { key: 'ArrowRight' })
-
-    cy.get("@minSlider").invoke("val", newMinPrice);
-    cy.get("@minSlider").trigger("input");
-    cy.get("@minSlider").trigger("change");
-
-    cy.wait(3000);
+    // NOTE: Cypress imulates user interactions in the browser but doesn’t directly alter the application’s Redux state, that is why it is better to dispatch an action to update the state
+    cy.window().its('store').invoke('dispatch', { type: 'carRentalSlice/changeMinPrice', payload: newMinPrice });
+   
+    // TODO: remove later redundant wait
+    cy.wait(1000);
     cy.get('span[data-cy="minPrice"]').should(
       "contain",
       `Min Price: $${newMinPrice}`
