@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   selectAllCars,
@@ -29,6 +29,7 @@ const PriceRangeSlider: React.FC = () => {
  
   const handleMinChange = (event: RangeChangeEvent) => {
     const value = event.target.value;
+    console.log(event.target.value)
     dispatch(changeMinPrice(Number(value)))
   };
 
