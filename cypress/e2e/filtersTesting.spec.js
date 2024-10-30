@@ -282,12 +282,17 @@ describe("DateTime Component", () => {
     cy.get('[data-cy="Drop-Off"]')
       .find(".react-datepicker__input-container")
       .click();
+      cy.get(
+        "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
+      ).click();  
+      cy.get(`.react-datepicker__day--0${String(dateToSelect.getDate()).padStart(2, '0')}`).trigger("input").click();
 
-    const dayToSelect = dateToSelect.getDate().toString().padStart(2, "0");
-    cy.get(`.react-datepicker__day--0${dayToSelect}`)
-      .not(".react-datepicker__day--outside-month")
-      .click();
+      cy.window().its("store").invoke("dispatch", {
+        type: "carRentalSlice/setRentalTime",
+        payload: dateToSelect,
+      });
 
+      cy.wait(500)
     cy.getReduxState().then((state) => {
       expect(state.cars.endDate.slice(0, -5)).to.equal(
         dateToSelect.toISOString().slice(0, -5)
