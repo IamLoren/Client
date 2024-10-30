@@ -43,7 +43,7 @@ describe("Card component - Favorites functionality", () => {
       .should("have.css", "fill", "rgba(0, 0, 0, 0)");
   });
 
-  it('should add car to favoriteList in Redux store and delete from store', ()=> {
+  it("should add car to favoriteList in Redux store and delete from store", () => {
     cy.get("button").contains("SIGN IN").click();
     cy.get('input[name="email"]').type("iryna@gmail.com");
     cy.get('input[name="password"]').type("asdfghjkl");
@@ -54,42 +54,46 @@ describe("Card component - Favorites functionality", () => {
     );
 
     cy.get("@favoriteIcon")
-    .find("svg[style='color: gray; fill: transparent;']")
-    .first()
-    .closest("span")
-    .invoke("attr", "data-tooltip-id")
-    .then((tooltipId) => {
-      const carId = tooltipId.split('-')[0];
-
-      cy.get("@favoriteIcon")
-        .find("svg[style='color: gray; fill: transparent;']")
-        .first()
-        .click();
-        cy.window().its("store").invoke("dispatch", {
-            type: "authSlice/updateFavoriteList",
-            payload: {carId},
-          });
-          cy.wait(300)
-      cy.getReduxState().then((state) => {
-        const favoriteList = state.auth.user.favorites;
-        const isCarInFavorites = favoriteList.some(car => car._id === carId);
-        expect(isCarInFavorites).to.be.true;
+      .find("svg[style='color: gray; fill: transparent;']")
+      .first()
+      .closest("span")
+      .invoke("attr", "data-tooltip-id")
+      .then((tooltipId) => {
+        const carId = tooltipId.split("-")[0];
 
         cy.get("@favoriteIcon")
-          .closest(`span[data-tooltip-id='${carId}-tooltip']`)
+          .find("svg[style='color: gray; fill: transparent;']")
           .first()
           .click();
+        cy.window().its("store").invoke("dispatch", {
+          type: "authSlice/updateFavoriteList",
+          payload: { carId },
+        });
+        cy.wait(300);
+        cy.getReduxState().then((state) => {
+          const favoriteList = state.auth.user.favorites;
+          const isCarInFavorites = favoriteList.some(
+            (car) => car._id === carId
+          );
+          expect(isCarInFavorites).to.be.true;
+
+          cy.get("@favoriteIcon")
+            .closest(`span[data-tooltip-id='${carId}-tooltip']`)
+            .first()
+            .click();
           cy.window().its("store").invoke("dispatch", {
             type: "authSlice/updateFavoriteList",
-            payload: {carId},
+            payload: { carId },
           });
-          cy.wait(300)
-        cy.getReduxState().then((state) => {
-          const updatedFavoriteList = state.auth.user.favorites;
-          const isCarInFavorites = updatedFavoriteList.some(car => car._id === carId);
-          expect(isCarInFavorites).to.be.false;
+          cy.wait(300);
+          cy.getReduxState().then((state) => {
+            const updatedFavoriteList = state.auth.user.favorites;
+            const isCarInFavorites = updatedFavoriteList.some(
+              (car) => car._id === carId
+            );
+            expect(isCarInFavorites).to.be.false;
+          });
         });
       });
-    });
-})
+  });
 });
