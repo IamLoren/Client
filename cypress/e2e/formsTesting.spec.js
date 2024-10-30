@@ -58,7 +58,36 @@ describe("SignUpForm validation testing", () => {
     cy.get('input[name="password"]').type("password123");
     cy.get('input[name="terms"]').check();
     cy.get('[data-cy="signUpForm"]').submit();
-    cy.contains("You have been registered as a new user").should("be.visible"); // Приклад
+    cy.contains("You have been registered as a new user").should("be.visible");
+    cy.log(Cypress.env())
+  });
+
+  it("deletes the registered user", () => {
+    const apiUrl = Cypress.env('api_server')
+     cy.wait(1000);
+    cy.request("POST", `${apiUrl}/api/auth/signin`, {
+      email: "john.doe@example.com",
+      password: "password123",
+    }).then((response) => {
+      const {
+        user: { userId },
+        token,
+      } = response.body;
+      expect(response.status).to.equal(200);
+
+      cy.request({
+        method: "DELETE",
+        url: `${apiUrl}/api/user/${userId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((deleteResponse) => {
+        expect(deleteResponse.status).to.equal(200);
+        expect(deleteResponse.body.message).to.equal(
+          "User and profile deleted successfully"
+        );
+      });
+    });
   });
 });
 
@@ -93,8 +122,8 @@ describe("SignInForm validation testing", () => {
 
   it("submits successfully when all fields are valid", () => {
     cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("john.doe@example.com");
-    cy.get('input[name="password"]').type("password123");
+    cy.get('input[name="email"]').type("iryna@gmail.com");
+    cy.get('input[name="password"]').type("asdfghjkl");
     cy.get('[data-cy="signInForm"]').submit();
     cy.contains("You succesfully accessed your personal profile").should(
       "be.visible"
@@ -103,12 +132,11 @@ describe("SignInForm validation testing", () => {
 });
 
 describe("OrderForm validation testing", () => {
-
   beforeEach(() => {
     cy.visit("/");
     cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("john.doe@example.com");
-    cy.get('input[name="password"]').type("password123");
+    cy.get('input[name="email"]').type("iryna@gmail.com");
+    cy.get('input[name="password"]').type("asdfghjkl");
     cy.get('[data-cy="signInForm"]').submit();
   });
 
@@ -158,7 +186,7 @@ describe("OrderForm validation testing", () => {
   });
 });
 
-describe('Order button without login', ()=> {
+describe("Order button without login", () => {
   it("displays a message when the user is not logged in", () => {
     cy.visit("/");
     cy.getReduxState().then((state) => {
@@ -166,33 +194,27 @@ describe('Order button without login', ()=> {
 
       if (isLogged) {
         cy.get('[aria-label="Exit button"]').click();
-        cy.get('#modal-root').within(() => {
-            cy.get('[data-cy="exit accepting"]').should('be.visible');
-          });
-         cy.get('[aria-label="Logout"]').click();
-         cy.window().its("store").invoke("dispatch", {
-            type: "authSlice/logoutThunk"
-          });
+        cy.get("#modal-root").within(() => {
+          cy.get('[data-cy="exit accepting"]').should("be.visible");
+        });
+        cy.get('[aria-label="Logout"]').click();
+        cy.window().its("store").invoke("dispatch", {
+          type: "authSlice/logoutThunk",
+        });
 
-          cy.wait(500);
-          cy.contains("button", "Rent now").first().click();
         cy.wait(500);
-        cy.get("[role='tooltip']").should(
-          "contain",
-          "You should sign up or sign in to rent a car"
-        ).should(
-          "be.visible"
-        );
+        cy.contains("button", "Rent now").first().click();
+        cy.wait(500);
+        cy.get("[role='tooltip']")
+          .should("contain", "You should sign up or sign in to rent a car")
+          .should("be.visible");
       } else {
         cy.contains("button", "Rent now").first().click();
         cy.wait(500);
-        cy.get("div").should(
-          "contain",
-          "You should sign up or sign in to rent a car"
-        ).should(
-          "be.visible"
-        );
+        cy.get("div")
+          .should("contain", "You should sign up or sign in to rent a car")
+          .should("be.visible");
       }
     });
   });
-})
+});
