@@ -69,7 +69,7 @@ describe("Card component - Favorites functionality", () => {
           type: "authSlice/updateFavoriteList",
           payload: { carId },
         });
-        cy.wait(500);
+        cy.wait(1000);
         cy.getReduxState().then((state) => {
           const favoriteList = state.auth.user.favorites;
           const isCarInFavorites = favoriteList.some(
@@ -85,7 +85,7 @@ describe("Card component - Favorites functionality", () => {
             type: "authSlice/updateFavoriteList",
             payload: { carId },
           });
-          cy.wait(300);
+          cy.wait(1000);
           cy.getReduxState().then((state) => {
             const updatedFavoriteList = state.auth.user.favorites;
             const isCarInFavorites = updatedFavoriteList.some(

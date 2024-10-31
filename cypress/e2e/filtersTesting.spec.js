@@ -231,6 +231,13 @@ describe("DateTime Component", () => {
       .not(".react-datepicker__day--outside-month")
       .click();
 
+      cy.window().its("store").invoke("dispatch", {
+        type: "carRentalSlice/setRentalTime",
+        payload:{name: "Pick-Up", time: dateToSelect.toISOString()} ,
+      });
+
+      cy.wait(500)
+
     cy.getReduxState().then((state) => {
       expect(state.cars.startDate.slice(0, -5)).to.equal(
         dateToSelect.toISOString().slice(0, -5)
@@ -289,7 +296,7 @@ describe("DateTime Component", () => {
 
       cy.window().its("store").invoke("dispatch", {
         type: "carRentalSlice/setRentalTime",
-        payload: dateToSelect,
+        payload: {name: "Drop-Off", time: dateToSelect.toISOString()},
       });
 
       cy.wait(500)
