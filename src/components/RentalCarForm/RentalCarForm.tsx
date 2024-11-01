@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   phoneNumber: Yup.string()
     .required("Phone number is required")
-    .matches(/^\+?\d{10,12}$/, "Invalid phone format"),
+    .matches(/^\+1\s\d{3}\s\d{3}\s\d{4}$/, "Invalid phone format"),
   carName: Yup.string().required("Car name is required"),
   startDate: Yup.date()
     .required("Start date is required")
@@ -130,6 +130,8 @@ const RentalCarForm: React.FC = () => {
             id="phoneNumber"
             name="phoneNumber"
             type="text"
+            pattern="^\+1\s\d{3}\s\d{3}\s\d{4}$"
+            placeholder="+1 000 000 0000"
             className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
           />
           <ErrorMessage
