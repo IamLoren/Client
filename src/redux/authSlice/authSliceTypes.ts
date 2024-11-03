@@ -6,7 +6,7 @@ export interface StateType {
     email: string;
     firstName: string;
     lastName: string;
-    role: null | "admin" | "user";
+    role: "admin" | "user";
     avatarURL: string;
     theme: "light" | "dark";
     favorites: CarInterface[] | [];
