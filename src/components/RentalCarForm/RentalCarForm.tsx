@@ -5,6 +5,8 @@ import Button from "../Button/Button";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getSelectedCar, selectEndRentalDate, selectStartRentalDate, userData } from "../../redux/selectors";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
+import { createOrderThunk } from "../../redux/ordersSlice/operations";
+import { calculateRentalCost } from "../../services";
 
 interface RentalFormValues {
   firstName: string;
@@ -56,9 +58,10 @@ const RentalCarForm: React.FC = () => {
   };
 
   const handleSubmit = (values: RentalFormValues) => {
-    console.log("Submitted values:", {...values, carId: selectedCar?._id, userId: user.userId});
+    const rentalCost = calculateRentalCost(startDate, endDate, selectedCar.price)
+    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost}))
+    console.log("Submitted values:", {...values, carId: selectedCar?._id, userId: user.userId, orderType: "rent"});
     dispatch(closeModal());
-
   };
 
   return (
