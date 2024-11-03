@@ -2,20 +2,18 @@ import { toast } from "react-toastify";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../axios/axios";
 import { RootState } from "../store";
-import { CreateOrderResponse, OrderTypes } from "./ordersSliceType";
+import { CreateOrderRequest, CreateOrderResponse } from "./ordersSliceType";
 
 export const createOrderThunk = createAsyncThunk<
 CreateOrderResponse,
-OrderTypes,
+CreateOrderRequest,
   {
     state: RootState;
     rejectValue: string;
   }
 >("order/create", async (orderToCreate, thunkApi) => {
-  const state = thunkApi.getState(); 
-    const role = state.auth.user.role;
   try {
-    const { data } = await api.post("api/orders/create", {...orderToCreate, createdBy: role});
+    const { data } = await api.post("api/orders/create", orderToCreate);
 
     return data;
   } catch (error: unknown) {
