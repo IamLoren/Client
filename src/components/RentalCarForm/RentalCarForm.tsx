@@ -58,8 +58,12 @@ const RentalCarForm: React.FC = () => {
   };
 
   const handleSubmit = (values: RentalFormValues) => {
+    if (!selectedCar || !user) {
+      console.error("Car or user is not selected");
+      return;
+  }
     const rentalCost = calculateRentalCost(startDate, endDate, selectedCar.price)
-    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost}))
+    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost, userRole: user.role, }))
     console.log("Submitted values:", {...values, carId: selectedCar?._id, userId: user.userId, orderType: "rent"});
     dispatch(closeModal());
   };
