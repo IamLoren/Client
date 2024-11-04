@@ -5,7 +5,7 @@ import {
   openSignInForm,
   openSignUpForm,
 } from "../../redux/modalSlice/modalSlice";
-import { selectIsLogged } from "../../redux/selectors";
+import { selectIsLogged, selectRole } from "../../redux/selectors";
 import Navigation from "../Navigation/Navigation";
 import Container from "../Container/Container";
 import { Link, useLocation } from "react-router-dom";
@@ -19,6 +19,7 @@ const Header: React.FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
+  const userRole = useAppSelector(selectRole);
 
   const handleClickREgister = () => {
     dispatch(openModal());
@@ -31,7 +32,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky z-10 top-0 primary-background p-4 primary-text box-shadow">
+    <header className={`sticky z-10 top-0 primary-background p-4 primary-text ${userRole=== "user" ? "box-shadow" : ""} `}>
       <Container addStyles="flex justify-between">
         <Link to="/" className="block p-[15px] accent-text font-bold" aria-label='pass to home page'>
           LOGO
@@ -52,8 +53,8 @@ const Header: React.FC = () => {
             ></Button>
           </div>
         )}
-        {isTablet && isLogged && <Navigation />}
-        {isLogged && <UserPanel />}
+        {isTablet && isLogged && (userRole=== "user" || (userRole === "admin" && location.pathname === "/"))  &&  <Navigation />}
+        {isLogged && (userRole=== "user" || (userRole === "admin" && location.pathname === "/"))  &&  <UserPanel />}
       </Container>
     </header>
   );

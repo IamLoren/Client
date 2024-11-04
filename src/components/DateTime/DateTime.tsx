@@ -5,7 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DateTime.modules.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setRentalTime } from "../../redux/carRentalSlice/carRentalSlice";
-import { selectEndRentalDate, selectStartRentalDate } from "../../redux/selectors";
+import {
+  selectEndRentalDate,
+  selectStartRentalDate,
+} from "../../redux/selectors";
 
 const DateTime: React.FC<{ name: string }> = ({ name }) => {
   const dispatch = useAppDispatch();
@@ -16,13 +19,17 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
 
   const handleDataChanging = (date: Date | null) => {
     if (date) {
-      dispatch(setRentalTime({ name, time: date.toISOString() }));
+      const isoDate = date.toISOString();
+      dispatch(setRentalTime({ name, time: isoDate }));
     }
   };
-  
+
   return (
-    <div data-cy={`${name}`} className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow">
-      <p >{name}</p>
+    <div
+      data-cy={`${name}`}
+      className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow"
+    >
+      <p>{name}</p>
       <DatePicker
         selected={name === "Pick-Up" ? new Date(startDate) : new Date(endDate)}
         onChange={(date) => handleDataChanging(date)}
@@ -35,7 +42,10 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
         minDate={minDate}
-        minTime={setHours(setMinutes(minDate, minDate.getMinutes()), minDate.getHours())}
+        minTime={setHours(
+          setMinutes(minDate, minDate.getMinutes()),
+          minDate.getHours()
+        )}
         maxTime={setHours(setMinutes(new Date(), 30), 23)}
         className="cursor-pointer"
       />
