@@ -1,6 +1,7 @@
 export interface OrdersStateType {
   userOrdersHistory: CreateOrderResponse[];
   activeOrders: CreateOrderResponse[];
+  allCompanyOrders: CreateOrderResponse[];
 }
 
 export type OrderTypes =
@@ -36,7 +37,7 @@ export type OrderTypes =
     export type CreateOrderRequest = {
         carId: string;
         clientId: string;
-        userRole: "user" | "admin";
+        createdBy: "user" | "admin";
         orderType: "rent" | "oil change" | "repair" | "maintenance" | "insurance";
         phoneNumber: string;
         clientEmail: string;
@@ -56,7 +57,12 @@ export type OrderTypes =
         clientEmail: string;
         time: { startDate: string; endDate: string };
         cost: number;
-        status: "active" | "inProgress" | "completed";
+        orderStatus: "active" | "inProgress" | "completed";
         adminApprove: boolean;
+        _id: string
+      }
+
+      export interface GetAllOrdersType {
+        orders: CreateOrderResponse[];
       }
       

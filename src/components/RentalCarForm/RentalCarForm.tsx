@@ -63,7 +63,7 @@ const RentalCarForm: React.FC = () => {
       return;
   }
     const rentalCost = calculateRentalCost(startDate, endDate, selectedCar.price)
-    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost, userRole: user.role, }))
+    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost, createdBy: user.role, }))
     console.log("Submitted values:", {...values, carId: selectedCar?._id, userId: user.userId, orderType: "rent"});
     dispatch(closeModal());
   };

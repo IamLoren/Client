@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { toast } from "react-toastify";
-import { CreateOrderResponse, OrdersStateType } from "./ordersSliceType";
-import { createOrderThunk } from "./operations";
+import { CreateOrderResponse, GetAllOrdersType, OrdersStateType } from "./ordersSliceType";
+import { createOrderThunk, getAllOrdersThunk } from "./operations";
 
 const initialState: OrdersStateType = {
     userOrdersHistory: [],
-    activeOrders: []
+    activeOrders: [],
+    allCompanyOrders: []
   };
 
 export const ordersSlice = createSlice({
@@ -26,6 +27,10 @@ export const ordersSlice = createSlice({
             } else if (action.payload.createdBy === "admin") {
                 state.activeOrders.push(action.payload)
             }
+        })
+        .addCase(getAllOrdersThunk.fulfilled, (state: OrdersStateType,  action: PayloadAction<GetAllOrdersType>) => {
+            state.allCompanyOrders = action.payload.orders;
+            state.activeOrders = action.payload.orders.filter(order => order.orderStatus=== "active") 
         })
     }
 });

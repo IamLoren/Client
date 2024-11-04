@@ -1,17 +1,25 @@
-import React from 'react'
-import Header from '../components/Header/Header'
-import Footer from '../components/Footer/Footer'
+import React, { useEffect } from "react";
+import Footer from "../components/Footer/Footer";
+import {  Outlet } from "react-router-dom";
+import { getAllOrdersThunk } from "../redux/ordersSlice/operations";
+import { useAppDispatch } from "../hooks";
+import AdminNavigation from "../components/AdminNavigation/AdminNavigation";
 
-const AdminPage:React.FC = () => {
+const AdminPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersThunk());
+  }, [dispatch]);
   return (
     <>
-    <Header />
-    <main className="h-96 flex-1 secondary-background secondary-text p-4">
-    Main content
-    </main>
-    <Footer />
+      <main className="flex-1 flex flex-col sm:flex-row primary-background secondary-text">
+        <AdminNavigation />
+        <Outlet />
+      </main>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default AdminPage
+export default AdminPage;
