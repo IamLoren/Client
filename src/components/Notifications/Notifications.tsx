@@ -2,7 +2,7 @@ import React from 'react'
 
 const Notifications:React.FC = () => {
   return (
-    <div>Notifications</div>
+    <div className='flex-1'>Notifications</div>
   )
 }
 

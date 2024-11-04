@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
         {role === "admin" && (
           <li>
             <NavLink to="/admin" className={({ isActive }) =>
-              `border-b-2 ${isActive ? 'block p-[15px] border-blue-500' : 'block p-[15px] border-transparent'} navigation-color` }>Admin Panel</NavLink>
+              `border-b-2 ${isActive ? 'block p-[15px] border-blue-500' : 'block p-[15px] border-transparent'} navigation-color` }>ADMIN PANEL</NavLink>
           </li>
         )}
       </ul>
