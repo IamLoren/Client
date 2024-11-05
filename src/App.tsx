@@ -16,6 +16,9 @@ import Notifications from "./components/Notifications/Notifications";
 import UserSettings from "./components/UserSettings/UserSettings";
 import ActiveOrders from "./components/ActiveOrders/ActiveOrders";
 import OrdersList from "./components/OrdersList/OrdersList";
+import AdminSearchPanel from "./components/AdminSearchPanel/AdminSearchPanel";
+import Analytics from "./components/Analytics/Analytics";
+import Schedules from "./components/Schedules/Schedules";
 
 const LazyHome: LazyExoticComponent<React.FC> = lazy(() => import("./pages/HomePage"));
 const LazyClient: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ClientPage"));
@@ -59,9 +62,12 @@ const App: React.FC = () => {
             </PrivateAdminRoute>
           }
         >
+          <Route index element={<AdminSearchPanel/>}/>
           <Route path="settings" element={<UserSettings/>}/>
         <Route path="history" element={<OrdersList/>}/>
         <Route path="active" element={<ActiveOrders/>}/>
+        <Route path="analytics" element={<Analytics/>}/>
+        <Route path="schedules" element={<Schedules/>}/>
         <Route path="notifications" element={<Notifications/>}/>
         </Route>
         <Route path="*" element={<LazyError />} />
