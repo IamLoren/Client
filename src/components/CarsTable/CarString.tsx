@@ -24,6 +24,9 @@ const CarString: React.FC<{car:CarInterface, index: number }> = ({
         {car.transmission}
       </td>
       <td  className={`p-2 border-b border-gray-200 text-center font-medium`}>
+        day: {car.price.day}, hour: {car.price.hour} 
+      </td>
+      <td  className={`p-2 border-b border-gray-200 text-center font-medium`}>
         {car.isRemoved === true ? "yes" : "No"}
       </td>
     </tr>

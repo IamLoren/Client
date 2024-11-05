@@ -19,6 +19,7 @@ const CarsTable: React.FC = () => {
             <th className="p-[10px]">Type</th>
             <th className="p-[10px]">Fuel</th>
             <th className="p-[10px]">Transmission</th>
+            <th className="p-[10px]">Price, $</th>
             <th className="p-[10px]">Removed</th>
           </tr>
         </thead>

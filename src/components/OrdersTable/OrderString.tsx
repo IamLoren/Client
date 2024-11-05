@@ -8,7 +8,7 @@ const OrderString: React.FC<{ order: CreateOrderResponse; index: number }> = ({
   return (
     <tr className="bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors">
       <td className="p-2 border-b border-gray-200 text-center">{index + 1}</td>
-      <td className="p-2 border-b border-gray-200 text-center">{order.time.startDate}</td>
+      <td className="p-2 border-b border-gray-200 text-center">{new Date(order.time.startDate).toLocaleString()}</td>
       <td className={`p-2 border-b border-gray-200 text-center font-medium ${
           order.orderType === "rent" ? "text-green-600" : "text-red-600"
         }`}>{order.orderType}</td>
