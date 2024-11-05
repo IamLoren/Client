@@ -2,9 +2,10 @@ import React from "react";
 import UserString from "./UserString";
 import { useAppSelector } from "../../hooks";
 import { selectAdminSearchResult } from "../../redux/selectors";
+import { oneUserTypes } from "../../redux/adminSlice/adminSliceTypes";
 
 const UsersTable: React.FC = () => {
-    const listForRender = useAppSelector(selectAdminSearchResult)
+    const listForRender = useAppSelector(selectAdminSearchResult) as oneUserTypes[]
   return (
     <div>
       <table className="w-full border-collapse rounded-lg overflow-hidden box-shadow">

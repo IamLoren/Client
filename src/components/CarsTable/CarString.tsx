@@ -1,6 +1,7 @@
 import React from "react";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 
-const CarString: React.FC<{ index: number }> = ({
+const CarString: React.FC<{car:CarInterface, index: number }> = ({
   car,
   index,
 }) => {
