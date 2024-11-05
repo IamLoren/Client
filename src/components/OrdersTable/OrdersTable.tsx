@@ -7,16 +7,15 @@ const OrdersTable: React.FC<{ ordersList: CreateOrderResponse[] }> = ({
 }) => {
   return (
     <div>
-      <table className="">
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Phone number</th>
-            <th>Sum</th>
-            <th></th>
+      <table className="w-full border-collapse rounded-lg overflow-hidden box-shadow">
+        <thead className="secondary-background">
+          <tr className="">
+            <th className="p-[10px]">Number</th>
+            <th className="p-[10px]">Date</th>
+            <th className="p-[10px]">Type</th>
+            <th className="p-[10px]">Status</th>
+            <th className="p-[10px]">Phone number</th>
+            <th className="p-[10px]">Sum, $</th>
           </tr>
         </thead>
         <tbody>

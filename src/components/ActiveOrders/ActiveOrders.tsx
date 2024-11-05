@@ -7,7 +7,7 @@ const ActiveOrders: React.FC = () => {
   const activeOrders = useAppSelector(selectActiveOrders);
 
   return (
-    <section>
+    <section className="p-[10px] md:p-[20px] flex-1">
         <h2 className='font-bold text-[20px] mb-1 sm:mb-2 md:mb-3 primary-text'>Active orders</h2>
       <OrdersTable ordersList={activeOrders} />
     </section>
