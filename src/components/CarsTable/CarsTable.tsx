@@ -2,9 +2,10 @@ import React from "react";
 import CarString from "./CarString";
 import { useAppSelector } from "../../hooks";
 import { selectAdminSearchResult } from "../../redux/selectors";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 
 const CarsTable: React.FC = () => {
-    const listForRender = useAppSelector(selectAdminSearchResult)
+    const listForRender = useAppSelector(selectAdminSearchResult) as CarInterface[]
   return (
     <div>
       <table className="w-full border-collapse rounded-lg overflow-hidden box-shadow">
