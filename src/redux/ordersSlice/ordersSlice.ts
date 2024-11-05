@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { toast } from "react-toastify";
 import { CreateOrderResponse, GetAllOrdersType, OrdersStateType } from "./ordersSliceType";
 import { createOrderThunk, getAllOrdersThunk } from "./operations";
+import { toast } from "react-toastify";
 
 const initialState: OrdersStateType = {
     userOrdersHistory: [],
@@ -21,7 +22,7 @@ export const ordersSlice = createSlice({
 
         // })
         .addCase(createOrderThunk.fulfilled, (state: OrdersStateType,  action: PayloadAction<CreateOrderResponse>) => {
-            console.log(action.payload);
+            toast.success("You have successfully submitted a car rental request. Our manager will contact you within 10 minutes.")
             if(action.payload.createdBy === "user") {
                 state.userOrdersHistory.push(action.payload)
             } else if (action.payload.createdBy === "admin") {
