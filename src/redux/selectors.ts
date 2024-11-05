@@ -25,3 +25,5 @@ export const userData = (state: RootState) => state.auth.user;
 export const getSelectedCar = (state: RootState) => state.cars.selectedCar;
 export const selectActiveOrders = (state:RootState) => state.orders.activeOrders;
 export const selectAllOrders = (state:RootState) => state.orders.allCompanyOrders;
+export const selectAllUsers = (state:RootState) => state.admin.usersList;
+export const selectAdminSearchResult = (state:RootState) => state.admin.adminSearchResult;

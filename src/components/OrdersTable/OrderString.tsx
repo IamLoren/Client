@@ -6,13 +6,21 @@ const OrderString: React.FC<{ order: CreateOrderResponse; index: number }> = ({
   index,
 }) => {
   return (
-    <tr>
-      <td>{index + 1}</td>
-      <td className="date">{order.time.startDate}</td>
-      <td className="type">{order.orderType}</td>
-      <td className="name">{order.orderStatus}</td>
-      <td className="comment">{order?.phoneNumber}</td>
-      <td>{order.cost}</td>
+    <tr className="bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors">
+      <td className="p-2 border-b border-gray-200 text-center">{index + 1}</td>
+      <td className="p-2 border-b border-gray-200 text-center">{order.time.startDate}</td>
+      <td className={`p-2 border-b border-gray-200 text-center font-medium ${
+          order.orderType === "rent" ? "text-green-600" : "text-red-600"
+        }`}>{order.orderType}</td>
+      <td className="p-2 border-b border-gray-200 text-center text-sm font-semibold">
+        {order.orderStatus}
+      </td>
+      <td className="p-2 border-b border-gray-200 text-center">{order?.phoneNumber}</td>
+      <td  className={`p-2 border-b border-gray-200 text-center font-medium ${
+          order.orderType === "rent" ? "text-green-600" : "text-red-600"
+        }`}>
+        {order.cost}
+      </td>
     </tr>
   );
 };
