@@ -1,7 +1,7 @@
 import React from "react";
-import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
+import { oneUserTypes } from "../../redux/adminSlice/adminSliceTypes";
 
-const UserString: React.FC<{  index: number }> = ({
+const UserString: React.FC<{ user: oneUserTypes, index: number }> = ({
   user,
   index,
 }) => {

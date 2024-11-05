@@ -2,9 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { api } from "../../axios/axios";
 import { toast } from "react-toastify";
+import { oneUserTypes } from "./adminSliceTypes";
 
 export const getAllUsers = createAsyncThunk<
-[],
+{allUsers: oneUserTypes[]},
   void,
   {
     state: RootState;
