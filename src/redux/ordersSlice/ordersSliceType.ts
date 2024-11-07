@@ -2,6 +2,8 @@ export interface OrdersStateType {
   userOrdersHistory: CreateOrderResponse[];
   activeOrders: CreateOrderResponse[];
   allCompanyOrders: CreateOrderResponse[];
+  orderForChanging: CreateOrderResponse | null;
+  notificationOrders: CreateOrderResponse[];
 }
 
 export type OrderTypes =
@@ -25,6 +27,7 @@ export type OrderTypes =
       carName: string;
       userRole: "admin";
       orderType: "oil change" | "repair" | "maintenance" | "insurance" | "rent";
+      orderStatus: "active" | "inProgress"| "completed"
       phoneNumber: string;
       clientEmail: string;
       time: {
@@ -32,6 +35,7 @@ export type OrderTypes =
         endDate: string;
       };
       cost: number;
+      adminApprove: boolean;
     };
 
     export type CreateOrderRequest = {

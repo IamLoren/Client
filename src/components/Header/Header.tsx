@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   openModal,
@@ -13,6 +13,7 @@ import UserPanel from "../UserPanel/UserPanel";
 import Button from "../Button/Button";
 import useResponsive from "../../hooks";
 import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
+import { getAllOrdersThunk, searchNotificationThunk } from "../../redux/ordersSlice/operations";
 
 const Header: React.FC = () => {
   const { isMobile, isSM, isTablet } = useResponsive();
@@ -20,6 +21,25 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLogged = useAppSelector(selectIsLogged);
   const userRole = useAppSelector(selectRole);
+
+  useEffect(() => {
+        let id;
+        if (isLogged && userRole === "admin") {
+          dispatch(getAllOrdersThunk())
+          dispatch(searchNotificationThunk())
+            id = setInterval(() => {
+                dispatch(searchNotificationThunk())  
+            }, 300000);
+        } else if (isLogged && userRole === "user") {
+          dispatch(searchNotificationThunk())
+            id = setInterval(() => {
+                dispatch(searchNotificationThunk())  
+            }, 300000);
+        }
+        return () => {
+            clearInterval(id);
+        };
+    }, [dispatch, isLogged, userRole]);
 
   const handleClickREgister = () => {
     dispatch(openModal());

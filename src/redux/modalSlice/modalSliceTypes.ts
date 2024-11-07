@@ -5,4 +5,7 @@ export interface StateType {
     isLogoutForm: boolean;
     isRentalCarForm: boolean;
     isMobileMenuOpen: boolean;
+    isAdminApprove: boolean;
+    isChangeOrderForm: boolean;
+    isAdminOrderForm: boolean;
 }

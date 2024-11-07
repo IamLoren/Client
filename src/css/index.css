@@ -124,3 +124,11 @@ dialog::backdrop {
   color: blue;
   transition: color 0.3s;
 }
+
+.icon-plus {
+  transition: color 0.3s;
+}
+.icon-plus:hover {
+  color: var(--accent-secondary);
+
+}

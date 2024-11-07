@@ -8,6 +8,9 @@ const initialState: StateType = {
   isLogoutForm: false,
   isRentalCarForm: false,
   isMobileMenuOpen: false,
+  isAdminApprove: false,
+  isChangeOrderForm: false,
+  isAdminOrderForm: false
 };
 
 const modalSlice = createSlice({
@@ -23,6 +26,9 @@ const modalSlice = createSlice({
       state.isSignInForm = false;
       state.isLogoutForm = false;
       state.isRentalCarForm = false;
+      state.isAdminApprove = false;
+      state.isChangeOrderForm = false;
+      state.isAdminOrderForm = false
       document.body.style.overflow = "auto";
     },
     openSignUpForm: (state: StateType) => {
@@ -40,6 +46,15 @@ const modalSlice = createSlice({
     openRentalCArForm: (state: StateType) => {
       state.isRentalCarForm = true;
     },
+    openAdminApproveForm: (state: StateType) => {
+      state.isAdminApprove = true;
+    },
+    openChangeOrderForm: (state: StateType) => {
+      state.isChangeOrderForm = true;
+    },
+    openAdminOrderForm: (state: StateType) => {
+      state.isAdminOrderForm = true;
+    },
   },
 });
 
@@ -51,5 +66,8 @@ export const {
   openLogoutForm,
   openMobailMenu,
   openRentalCArForm,
+  openAdminApproveForm,
+  openChangeOrderForm,
+  openAdminOrderForm,
 } = modalSlice.actions;
 export default modalSlice.reducer;

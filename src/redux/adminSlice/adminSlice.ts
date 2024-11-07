@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsers } from "./operations";
-import { adminStateTypes } from "./adminSliceTypes";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { findOneUser, getAllUsers } from "./operations";
+import { adminStateTypes, oneUserTypes } from "./adminSliceTypes";
 
 const initialState:adminStateTypes = {
   adminSearchResult: [],
   usersList: [],
+  foundedUser: null
 };
 
 export const adminSlice = createSlice({
@@ -19,9 +20,13 @@ export const adminSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllUsers.fulfilled, (state:adminStateTypes, action) => {
+    builder
+    .addCase(getAllUsers.fulfilled, (state:adminStateTypes, action) => {
       state.usersList = action.payload.allUsers;
-    });
+    })
+    .addCase(findOneUser.fulfilled, (state: adminStateTypes, action: PayloadAction<{ client: oneUserTypes }>) => {
+        state.foundedUser = action.payload.client;
+    })
   },
 });
 
