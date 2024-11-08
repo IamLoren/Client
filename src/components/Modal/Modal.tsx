@@ -10,11 +10,17 @@ import {
   isRentalCarForm,
   isSignInForm,
   isSignUpForm,
+  selectAdminApproveForm,
+  selectAdminOrderForm,
+  selectChangeOrderForm,
 } from "../../redux/selectors";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/SignInForm";
 import LogoutForm from "../LogoutForm/LogoutForm";
 import RentalCarForm from "../RentalCarForm/RentalCarForm";
+import AdminApproveForm from "../AdminApproveForm/AdminApproveForm";
+import ChangeOrderForm from "../ChangeOrderForm/ChangeOrderForm";
+import AdminOrderForm from "../AdminOrderForm/AdminOrderForm";
 // import CustomToasts from "../CustomToasts/CustomToasts";
 
 const Modal: React.FC = () => {
@@ -23,6 +29,9 @@ const Modal: React.FC = () => {
   const isSignIn = useAppSelector(isSignInForm);
   const isLogout = useAppSelector(isLogoutForm);
   const isRentalForm = useAppSelector(isRentalCarForm);
+  const isAdminApprove = useAppSelector(selectAdminApproveForm);
+  const isChangeOrderForm = useAppSelector(selectChangeOrderForm);
+  const isAdminOrderFormOpened = useAppSelector(selectAdminOrderForm);
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -62,6 +71,9 @@ const Modal: React.FC = () => {
         {isSignIn && <SignInForm />}
         {isLogout && <LogoutForm />}
         {isRentalForm && <RentalCarForm />}
+        {isAdminApprove && <AdminApproveForm/>}
+        {isChangeOrderForm && <ChangeOrderForm/>}
+         {isAdminOrderFormOpened && <AdminOrderForm/>}
       </div>
     </dialog>,
     modalRoot

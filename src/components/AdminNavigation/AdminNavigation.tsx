@@ -74,7 +74,7 @@ const AdminNavigation: React.FC = () => {
               } hover:shadow-lg`
             }
           >
-            Active orders
+            Orders Requiring Approval
           </NavLink>
         </li>
 
