@@ -4,6 +4,7 @@ import { CreateOrderResponse } from "../ordersSlice/ordersSliceType"
 export interface adminStateTypes {
     adminSearchResult: oneUserTypes[] | CarInterface[] | CreateOrderResponse[],
     usersList: oneUserTypes[],
+    foundedUser: oneUserTypes | null
 }
 
 export interface oneUserTypes {
