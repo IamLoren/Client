@@ -29,7 +29,7 @@ const handleOrderClick = () =>{
   return (
     <tr onClick={handleOrderClick} className="bg-white even:bg-gray-50 text-sm hover:bg-gray-100 transition-colors">
       <td className="p-2 border-b border-gray-200 text-center">{index + 1}</td>
-      <td className="p-2 border-b border-gray-200 text-center">{car.make} {car.model}</td>
+      <td className="p-2 border-b border-gray-200 text-center"> {car ? `${car.make} ${car.model}` : "Unknown"}</td>
       <td className="w-[200px] text-sm p-2 border-b border-gray-200 text-center">
         {" "}
         {new Date(order?.time?.startDate).toLocaleString()} -{" "}
