@@ -9,13 +9,14 @@ import { IoExitOutline } from "react-icons/io5";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { openLogoutForm, openModal } from "../../redux/modalSlice/modalSlice";
 import { changeTheme } from "../../redux/authSlice/authSlice";
+import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
 
 const UserPanel: React.FC = () => {
   const dispatch = useAppDispatch();
   const selectedMode = useAppSelector(selectTheme);
   const role = useAppSelector(selectRole);
   const active = useAppSelector(selectActiveOrders);
-  const ends = useAppSelector(selectNotificationOrders);
+  const ends = useAppSelector(selectNotificationOrders) as CreateOrderResponse[];
   const userApprovedOrders = useAppSelector(selectUserApprovedOrders);
   const userNotifications = useAppSelector(selectUserEndedOrders);
   const [isChecked, setIsChecked] = useState(
@@ -68,8 +69,8 @@ const UserPanel: React.FC = () => {
         aria-label="pass to notification page"
       >
         <IoIosNotifications style={{ fontSize: "30px", alignSelf: "center" }} />
-        {(active?.length > 0 || ends?.length > 0) && <div className="absolute top-0 right-[-5px] w-[15px] h-[15px] rounded-full text-white text-[10px] font-bold bg-red-700 flex justify-center self-center">{(active || ends) ? (active?.length + ends?.length): "0"}</div>}
-        {(userApprovedOrders && userNotifications) && <div className="absolute top-0 right-[-5px] w-[15px] h-[15px] rounded-full text-white text-[10px] font-bold bg-red-700 flex justify-center self-center">{(userApprovedOrders || userNotifications) ? (userApprovedOrders?.length + userNotifications?.length): "0"}</div>}
+        {role==="admin" && (active?.length > 0 || ends?.length > 0) && <div className="absolute top-0 right-[-5px] w-[15px] h-[15px] rounded-full text-white text-[10px] font-bold bg-red-700 flex justify-center self-center">{(active?.length>0 && ends?.length>0) ? (active?.length + ends?.length): (active?.length>0 && ends?.length===0) ? active?.length : (active?.length===0 && ends?.length>0) ? ends?.length : "0"}</div>}
+        {role==="user" && (userApprovedOrders && userNotifications) && <div className="absolute top-0 right-[-5px] w-[15px] h-[15px] rounded-full text-white text-[10px] font-bold bg-red-700 flex justify-center self-center">{(userApprovedOrders || userNotifications) ? (userApprovedOrders?.length + userNotifications?.length): "0"}</div>}
       </Link>
       <Link
         to={role === "user" ? "/client/settings" : "/admin/settings"}
