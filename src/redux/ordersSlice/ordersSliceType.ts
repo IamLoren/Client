@@ -3,7 +3,7 @@ export interface OrdersStateType {
   activeOrders: CreateOrderResponse[];
   allCompanyOrders: CreateOrderResponse[];
   orderForChanging: CreateOrderResponse | null;
-  notificationOrders: CreateOrderResponse[];
+  notificationOrders: CreateOrderResponse[] | {approvedOrders: CreateOrderResponse[], endedOrders: CreateOrderResponse[]};
 }
 
 export type OrderTypes =
