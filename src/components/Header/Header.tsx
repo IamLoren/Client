@@ -13,7 +13,11 @@ import UserPanel from "../UserPanel/UserPanel";
 import Button from "../Button/Button";
 import useResponsive from "../../hooks";
 import FiltersMobileMenu from "../FiltersMobileMenu/FiltersMobileMenu";
-import { getAllOrdersThunk, searchNotificationThunk } from "../../redux/ordersSlice/operations";
+import {
+  getAllOrdersThunk,
+  searchNotificationThunk,
+} from "../../redux/ordersSlice/operations";
+import { getAllCarsThunk } from "../../redux/carRentalSlice/operations";
 
 const Header: React.FC = () => {
   const { isMobile, isSM, isTablet } = useResponsive();
@@ -23,23 +27,24 @@ const Header: React.FC = () => {
   const userRole = useAppSelector(selectRole);
 
   useEffect(() => {
-        let id:NodeJS.Timeout;
-        if (isLogged && userRole === "admin") {
-          dispatch(getAllOrdersThunk())
-          dispatch(searchNotificationThunk())
-            id = setInterval(() => {
-                dispatch(searchNotificationThunk())  
-            }, 300000);
-        } else if (isLogged && userRole === "user") {
-          dispatch(searchNotificationThunk())
-            id = setInterval(() => {
-                dispatch(searchNotificationThunk())  
-            }, 300000);
-        }
-        return () => {
-            clearInterval(id);
-        };
-    }, [dispatch, isLogged, userRole]);
+    dispatch(getAllCarsThunk());
+    let id: NodeJS.Timeout;
+    if (isLogged && userRole === "admin") {
+      dispatch(getAllOrdersThunk());
+      dispatch(searchNotificationThunk());
+      id = setInterval(() => {
+        dispatch(searchNotificationThunk());
+      }, 300000);
+    } else if (isLogged && userRole === "user") {
+      dispatch(searchNotificationThunk());
+      id = setInterval(() => {
+        dispatch(searchNotificationThunk());
+      }, 300000);
+    }
+    return () => {
+      clearInterval(id);
+    };
+  }, [dispatch, isLogged, userRole]);
 
   const handleClickREgister = () => {
     dispatch(openModal());
@@ -52,9 +57,17 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={`sticky z-10 top-0 primary-background p-4 primary-text ${userRole=== "user" ? "box-shadow" : ""} `}>
+    <header
+      className={`sticky z-10 top-0 primary-background p-4 primary-text ${
+        userRole === "user" ? "box-shadow" : ""
+      } `}
+    >
       <Container addStyles="flex justify-between">
-        <Link to="/" className="block p-[15px] accent-text font-bold" aria-label='pass to home page'>
+        <Link
+          to="/"
+          className="block p-[15px] accent-text font-bold"
+          aria-label="pass to home page"
+        >
           LOGO
         </Link>
         {isMobile && location.pathname === "/" && <FiltersMobileMenu />}
@@ -73,8 +86,17 @@ const Header: React.FC = () => {
             ></Button>
           </div>
         )}
-        {isTablet && isLogged && (userRole=== "user" || (userRole === "admin" && location.pathname === "/"))  &&  <Navigation />}
-        {isLogged && (userRole=== "user" || (userRole === "admin" && location.pathname === "/"))  &&  <UserPanel />}
+        {isTablet &&
+          isLogged &&
+          (userRole === "user" ||
+            (userRole === "admin" && location.pathname === "/")) && (
+            <Navigation />
+          )}
+        {isLogged &&
+          (userRole === "user" ||
+            (userRole === "admin" && location.pathname === "/")) && (
+            <UserPanel />
+          )}
       </Container>
     </header>
   );

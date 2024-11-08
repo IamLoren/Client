@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "../Card/Card";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getAllCarsThunk } from "../../redux/carRentalSlice/operations";
+import { useAppSelector } from "../../hooks";
 import {
   selectAllCars,
   selectCarTypeFilter,
@@ -13,7 +12,6 @@ import {
 } from "../../redux/selectors";
 
 const CardsList: React.FC = () => {
-  const dispatch = useAppDispatch();
   const cars = useAppSelector(selectAllCars);
   const role = useAppSelector(selectRole);
   const carsUserList = useAppSelector(selectUserListOfCars);
@@ -44,10 +42,6 @@ const CardsList: React.FC = () => {
   if(selectedMaxPrice > 0) {
     carsForRender = carsForRender.filter(car => (car.price.day >= selectedMinPrice) && (car.price.day <= selectedMaxPrice))
   }
-
-  useEffect(() => {
-    dispatch(getAllCarsThunk());
-  }, [dispatch]);
 
   return (
     <div className="w-[100%]">

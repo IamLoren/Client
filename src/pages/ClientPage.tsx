@@ -12,7 +12,7 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/settings"
             className={({ isActive }) =>
-              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+              `w-[100%] width-400 sm:w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
                 isActive ? "primary-background box-shadow accent-text font-bold" : ""
               } hover:shadow-lg `
             }
@@ -22,7 +22,7 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/history"
             className={({ isActive }) =>
-              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+              `w-[100%] width-400 sm:w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
                 isActive ? "primary-background box-shadow accent-text font-bold" : ""
               } hover:shadow-lg`
             }
@@ -32,7 +32,7 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/favorites"
             className={({ isActive }) =>
-              `w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+              `w-[100%] width-400 sm:w-[132px] flex filters-color justify-center border border-blue-200 p-[10px] ${
                 isActive ? "primary-background box-shadow accent-text font-bold" : ""
               } hover:shadow-lg`
             }
@@ -42,7 +42,7 @@ const ClientPage: React.FC = () => {
           <NavLink
             to="/client/notifications"
             className={({ isActive }) =>
-              `w-[128px] flex filters-color justify-center border border-blue-200 p-[10px] ${
+              `w-[100%] width-400 sm:w-[128px] flex filters-color justify-center border border-blue-200 p-[10px] ${
                 isActive ? "primary-background box-shadow accent-text font-bold" : ""
               } hover:shadow-lg `
             }
