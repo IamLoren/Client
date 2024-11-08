@@ -41,7 +41,7 @@ const OrdersList: React.FC = () => {
         </li>
         <li className="w-[145px] h-[50px] border border-color rounded-md p-[5px] shadow-lg">
           <p className="text-center secondary-text text-[12px] font-medium">
-            Active orders
+            Unapproved orders
           </p>
           <span className=" block text-center">{activeOrders.length}</span>
         </li>

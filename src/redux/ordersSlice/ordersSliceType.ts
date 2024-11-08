@@ -50,6 +50,7 @@ export type OrderTypes =
           endDate: string;
         };
         cost: number;
+        adminApprove?: boolean;
       };
       
       export interface CreateOrderResponse {
@@ -69,4 +70,39 @@ export type OrderTypes =
       export interface GetAllOrdersType {
         orders: CreateOrderResponse[];
       }
+
+      export type orderToUpdateTypes =
+      | {
+        carId?: string;
+        clientId?: string;
+        carName?: string;
+        userRole?: "user";
+        orderType?: "rent";
+        phoneNumber?: string;
+        clientEmail?: string;
+        time?: {
+          startDate: string;
+          endDate: string;
+        };
+        cost?: number;
+        createdBy: boolean
+      }
+    | {
+        carId?: string;
+        clientId?: string;
+        carName?: string;
+        userRole?: "admin";
+        orderType?: "oil change" | "repair" | "maintenance" | "insurance" | "rent";
+        orderStatus?: "active" | "inProgress"| "completed"
+        phoneNumber?: string;
+        clientEmail?: string;
+        time?: {
+          startDate: string;
+          endDate: string;
+        };
+        cost?: number;
+        adminApprove?: boolean;
+        createdBy: "admin" | "user"
+      };
+  
       

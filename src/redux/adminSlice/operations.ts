@@ -35,7 +35,7 @@ export const getAllUsers = createAsyncThunk<
 });
 
 export const findOneUser = createAsyncThunk<
-  oneUserTypes,
+  {client: oneUserTypes},
 string,
   {
     state: RootState;

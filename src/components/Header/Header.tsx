@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const userRole = useAppSelector(selectRole);
 
   useEffect(() => {
-        let id;
+        let id:NodeJS.Timeout;
         if (isLogged && userRole === "admin") {
           dispatch(getAllOrdersThunk())
           dispatch(searchNotificationThunk())

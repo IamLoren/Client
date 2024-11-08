@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { CreateOrderResponse, GetAllOrdersType, OrdersStateType } from "./ordersSliceType";
 import { createOrderThunk, getAllOrdersThunk, getClientHistory, searchNotificationThunk, updateOrderThunk } from "./operations";
-import { toast } from "react-toastify";
 
 const initialState: OrdersStateType = {
     userOrdersHistory: [],
@@ -47,7 +46,7 @@ export const ordersSlice = createSlice({
         .addCase(searchNotificationThunk.fulfilled, (state: OrdersStateType,  action: PayloadAction<GetAllOrdersType>) => {
             state.notificationOrders = action.payload.orders;
         })
-        .addCase(getClientHistory.fulfilled, (state: OrdersStateType,  action: PayloadAction<{orders: GetAllOrdersType}>) => {
+        .addCase(getClientHistory.fulfilled, (state: OrdersStateType,  action: PayloadAction<GetAllOrdersType>) => {
             state.userOrdersHistory = action.payload.orders;
         })
     }

@@ -6,16 +6,16 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   selectAllCars,
   selectAllUsers,
-  selectEndRentalDate,
   selectOrderForChanging,
-  selectStartRentalDate,
-  userData,
 } from "../../redux/selectors";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import {
   getAllOrdersThunk,
   updateOrderThunk,
 } from "../../redux/ordersSlice/operations";
+import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
+import { oneUserTypes } from "../../redux/adminSlice/adminSliceTypes";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 
 interface ChangeOrderFormValues {
   firstName: string;
@@ -25,6 +25,9 @@ interface ChangeOrderFormValues {
   carName: string;
   startDate: string;
   endDate: string;
+  finalCost: number;
+  orderType: "oil change" | "maintenance" | "repair" | "insurance" | "rent";
+  orderStatus: "active" | "inProgress" | "completed";
 }
 
 const validationSchema = Yup.object({
@@ -46,16 +49,16 @@ const validationSchema = Yup.object({
 
 const ChangeOrderForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const order = useAppSelector(selectOrderForChanging);
-  const allUsers = useAppSelector(selectAllUsers);
-  const allCars = useAppSelector(selectAllCars);
+  const order = useAppSelector(selectOrderForChanging) as CreateOrderResponse;
+  const allUsers = useAppSelector(selectAllUsers) as oneUserTypes[];
+  const allCars = useAppSelector(selectAllCars) as CarInterface[];
 
-  const contact = allUsers.find((user) => user._id === order?.clientId);
-  const car = allCars.find((car) => car._id === order?.carId);
-  console.log(car);
-  const startDate = useAppSelector(selectStartRentalDate);
-  const endDate = useAppSelector(selectEndRentalDate);
+  const contact = allUsers?.find((user) => user._id === order?.clientId);
+  const car = allCars?.find((car) => car._id === order?.carId);
 
+  if(!contact) {
+    throw new Error("contact was not founded")
+  }
   const initialValues: ChangeOrderFormValues = {
     firstName: contact.firstName || "",
     lastName: contact.lastName || "",
@@ -79,12 +82,12 @@ const ChangeOrderForm: React.FC = () => {
         orderToUpdate: {
           phoneNumber: values.phoneNumber,
           time: { startDate, endDate},
-          createdBy: "admin",
           carId: order.carId,
           clientId: order.clientId,
           clientEmail: values.email,
           orderType: values.orderType,
           cost: values.finalCost,
+          createdBy: order.createdBy,
           orderStatus: values.orderStatus,
         },
       })
@@ -284,7 +287,7 @@ const ChangeOrderForm: React.FC = () => {
               <option value="completed" label="Completed" />
             </Field>
             <ErrorMessage
-              name="orderType"
+              name="orderStatus"
               component="div"
               className="text-red-600 text-sm"
             />

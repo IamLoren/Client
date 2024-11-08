@@ -6,7 +6,7 @@ import {
   CreateOrderRequest,
   CreateOrderResponse,
   GetAllOrdersType,
-  OrderTypes,
+  orderToUpdateTypes,
 } from "./ordersSliceType";
 
 export const createOrderThunk = createAsyncThunk<
@@ -33,8 +33,8 @@ export const createOrderThunk = createAsyncThunk<
 });
 
 export const updateOrderThunk = createAsyncThunk<
-  void,
-  { id: string; orderToUpdate: OrderTypes },
+{updatedOrder: CreateOrderResponse},
+  { id: string; orderToUpdate: orderToUpdateTypes },
   {
     state: RootState;
     rejectValue: string;
@@ -102,7 +102,7 @@ export const searchNotificationThunk = createAsyncThunk<
   }
 });
 
-export const getClientHistory = createAsyncThunk<GetAllOrdersType[],string, {
+export const getClientHistory = createAsyncThunk<GetAllOrdersType,string, {
     state: RootState;
     rejectValue: string;
   }
