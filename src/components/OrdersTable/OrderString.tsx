@@ -22,6 +22,7 @@ const handleOrderClick = () =>{
          dispatch(openAdminApproveForm())
     } else {
         dispatch(openChangeOrderForm())
+       
     }
     dispatch(selectOrderForChanging(order))
 }
