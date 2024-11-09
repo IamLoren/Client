@@ -17,7 +17,7 @@ const AdminApproveForm: React.FC = () => {
     : [];
 
   if (!order) {
-    return <div>Order data is unavailable.</div>;
+    return <div className="text-center text-red-600">Order data is unavailable.</div>;
   }
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,6 @@ const AdminApproveForm: React.FC = () => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isChecked) {
-      console.log("Форма надіслана!");
       const { _id, ...orderWithoutId } = order;
       delete orderWithoutId.createdAt;
       delete orderWithoutId.updatedAt;
@@ -41,15 +40,15 @@ const AdminApproveForm: React.FC = () => {
     dispatch(closeModal());
   };
   return (
-    <div>
-      <p className="mb-[10px] text-[12px] text-red-700">{`This request was created on /*{date}*/ and requires your immediate attention. Please contact the client using the provided contact details, and only after confirmation by both parties, mark the request as 'approved'.`}</p>
+    <div className="w-[100%] sm:w-[350px]">
+      <p className="mb-[10px] text-[12px] text-red-700">{`This request was created ${new Date(order.createdAt).toLocaleString()} and requires your immediate attention. Please contact the client using the provided contact details, and only after confirmation by both parties, mark the request as 'approved'.`}</p>
       <p>Order</p>
-      <ul className="mb-[10px]">
+      <ul className="mb-[10px] text-sm">
         {order &&
           keys.map((k) => {
             if (k === "time" && order.time) {
               return (
-                <li key={k}>{`${k}: start: ${new Date(
+                <li key={k} className="mb-1">{`${k}: start: ${new Date(
                   order.time.startDate
                 ).toLocaleString()} returning: ${new Date(
                   order.time.endDate
@@ -57,14 +56,14 @@ const AdminApproveForm: React.FC = () => {
               );
             }
             return (
-              <li key={k}>{`${k}: ${
+              <li key={k} className="mb-1">{`${k}: ${
                 order[k as keyof CreateOrderResponse]
               }`}</li>
             );
           })}
       </ul>
       <form className="flex justify-between" onSubmit={handleFormSubmit}>
-        <label className="self-center">
+        <label className="self-center text-sm">
           <input required type="checkbox" onChange={handleCheckboxChange} /> I
           approve this order.
         </label>

@@ -1,17 +1,14 @@
-import React from "react";
+import React, {useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../Button/Button";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import {
-  getSelectedCar,
-  selectEndRentalDate,
-  selectStartRentalDate,
-  userData,
-} from "../../redux/selectors";
+import { getSelectedCar, selectAllCars, selectEndRentalDate, selectStartRentalDate, userData } from "../../redux/selectors";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import { createOrderThunk } from "../../redux/ordersSlice/operations";
-import { calculateRentalCost } from "../../services";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
+import DateTime from "../DateTime/DateTime";
+import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
 
 interface RentalFormValues {
   firstName: string;
@@ -42,61 +39,80 @@ const validationSchema = Yup.object({
     .required("End date is required")
     .nullable()
     .min(Yup.ref("startDate"), "End date cannot be earlier than start date"),
-    finalCost: Yup.number().required("Cost is required"),
-    orderType: Yup.string().required("Order type is required"),
-    orderStatus: Yup.string().required("Order status is required"),
-    additionally: Yup.string().required("Indicate who the executor is and the means of communication with him"),
+  finalCost: Yup.number().required("Cost is required").positive("Cost must be a positive number"),
+  orderType: Yup.string().required("Order type is required"),
+  orderStatus: Yup.string().required("Order status is required"),
+  additionally: Yup.string().required(
+    "Indicate who the executor is and the means of communication with him"
+  ),
 });
 
 const AdminOrderForm: React.FC = () => {
+  const dispatch = useAppDispatch(); 
   const user = useAppSelector(userData);
-  const selectedCar = useAppSelector(getSelectedCar);
+  const cars = useAppSelector(selectAllCars);
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
-  const dispatch = useAppDispatch();
+  const selectedCarObject = useAppSelector(getSelectedCar);
+ 
+  const [selectedCar, setSelectedCar] = useState("");
+  const [filteredCars, setFilteredCars] = useState<CarInterface[]>([]);
+
+  const selectCar = (event) => {
+    const param = event.target.value;
+    const inputCar = cars.filter(
+      (car) =>
+        car.make.toLowerCase().includes(param.toLowerCase()) ||
+        car.model.toLowerCase().includes(param.toLowerCase())
+    );
+    if(inputCar.length=== 1) {
+      dispatch(changeSelectedCar(...inputCar))
+    }
+    setSelectedCar(param)
+    setFilteredCars(inputCar)
+  };
+  const handleCarClick = (car) => {
+    dispatch(changeSelectedCar(car))
+    console.log('Selected car:', car); 
+    setSelectedCar(`${car.make} ${car.model}`);
+    setFilteredCars([]);
+    console.log(filteredCars)
+  };
 
   const initialValues: RentalFormValues = {
     firstName: user.firstName || "",
     lastName: user.lastName || "",
     email: user.email || "",
     phoneNumber: "",
-    carName: `${selectedCar?.make} ${selectedCar?.model} `,
-    startDate: new Date(startDate).toLocaleString(),
-    endDate: new Date(endDate).toLocaleString(),
+    carName: selectedCar,
+    startDate: startDate,
+    endDate: endDate,
     finalCost: 0,
     orderType: "oil change",
     orderStatus: "active",
-    additionally: ""
+    additionally: "",
   };
 
   const handleSubmit = (values: RentalFormValues) => {
-    if (!selectedCar || !user) {
-      console.error("Car or user is not selected");
-      return;
-    }
-    const rentalCost = calculateRentalCost(
-      startDate,
-      endDate,
-      selectedCar.price
-    );
+    console.log("JKFHGVKFDJC")
     dispatch(
       createOrderThunk({
         clientEmail: values.email,
         phoneNumber: values.phoneNumber,
-        carId: selectedCar?._id,
+        carId: selectedCarObject?._id,
         clientId: user.userId,
-        orderType: "rent",
-        time: { startDate: values.startDate, endDate: values.endDate },
-        cost: rentalCost,
+        orderType: values.orderType,
+        orderStatus: values.orderStatus,
+        time: { startDate, endDate},
+        cost: values.finalCost,
         createdBy: user.role,
         adminApprove: true,
       })
     );
     console.log("Submitted values:", {
       ...values,
-      carId: selectedCar?._id,
+      carId: selectedCarObject?._id,
       userId: user.userId,
-      orderType: "rent",
     });
     dispatch(closeModal());
   };
@@ -107,8 +123,8 @@ const AdminOrderForm: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
         enableReinitialize={true}
+        onSubmit={handleSubmit}
       >
         <Form
           className="flex gap-[20px] max-w-lg mx-auto secondary-text"
@@ -123,6 +139,7 @@ const AdminOrderForm: React.FC = () => {
                 id="firstName"
                 name="firstName"
                 type="text"
+                disabled={true}
                 className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
               />
               <ErrorMessage
@@ -140,6 +157,7 @@ const AdminOrderForm: React.FC = () => {
                 id="lastName"
                 name="lastName"
                 type="text"
+                disabled={true}
                 className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
               />
               <ErrorMessage
@@ -185,39 +203,44 @@ const AdminOrderForm: React.FC = () => {
               />
             </div>
 
-            <div className="mb-2">
+            <div className="mb-2 relative">
               <label htmlFor="carName" className="block font-medium">
                 Car name
               </label>
               <Field
+                onChange={selectCar}
                 id="carName"
                 name="carName"
                 type="text"
+                value={selectedCar}
+                autoComplete="off"
                 className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
-                disabled={true}
               />
-              <ErrorMessage
+              {(filteredCars.length > 0) && (
+                <ul className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1">
+                  {filteredCars.map((car) => (
+                    <li
+                      key={car._id}
+                      onClick={() => handleCarClick(car)}
+                      className="px-4 py-2 cursor-pointer hover:bg-primary-100"
+                    >
+                      {car.make} {car.model}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            <ErrorMessage
                 name="carName"
                 component="div"
                 className="text-red-600 text-sm"
               />
-            </div>
+            </div>  
 
             <div className="mb-2">
               <label htmlFor="startDate" className="block font-medium">
                 Start date
               </label>
-              <Field
-                id="startDate"
-                name="startDate"
-                readOnly
-                className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
-              />
-              <ErrorMessage
-                name="startDate"
-                component="div"
-                className="text-red-600 text-sm"
-              />
+              <DateTime name="Pick-Up"/>
             </div>
           </div>
 
@@ -226,17 +249,7 @@ const AdminOrderForm: React.FC = () => {
               <label htmlFor="endDate" className="block font-medium">
                 End date
               </label>
-              <Field
-                id="endDate"
-                name="endDate"
-                readOnly
-                className="block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
-              />
-              <ErrorMessage
-                name="endDate"
-                component="div"
-                className="text-red-600 text-sm"
-              />
+              <DateTime name="Drop-Off"/>
             </div>
 
             <div className="mb-2">
@@ -308,7 +321,7 @@ const AdminOrderForm: React.FC = () => {
                 name="additionally"
                 placeholder="Indicate who the executor is and the means of communication with him"
                 className="block w-full h-[98px] px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
-              /> 
+              />
               <ErrorMessage
                 name="additionally"
                 component="div"
@@ -316,7 +329,11 @@ const AdminOrderForm: React.FC = () => {
               />
             </div>
 
-            <Button type="submit" buttonName="Place Order" style="block ml-auto" />
+            <Button
+              type="submit"
+              buttonName="Place Order"
+              style="block ml-auto"
+            />
           </div>
         </Form>
       </Formik>

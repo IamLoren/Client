@@ -25,11 +25,12 @@ export const ordersSlice = createSlice({
 
         // })
         .addCase(createOrderThunk.fulfilled, (state: OrdersStateType,  action: PayloadAction<CreateOrderResponse>) => {
-            toast.success("You have successfully submitted a car rental request. Our manager will contact you within 10 minutes.")
             if(action.payload.createdBy === "user") {
+                toast.success("You have successfully submitted a car rental request. Our manager will contact you within 10 minutes.")
                 state.userOrdersHistory.push(action.payload)
             } else if (action.payload.createdBy === "admin") {
-                state.activeOrders.push(action.payload)
+                toast.success("You have successfully submitted order.")
+                state.allCompanyOrders.push(action.payload)
             }
         })
         .addCase(getAllOrdersThunk.fulfilled, (state: OrdersStateType,  action: PayloadAction<GetAllOrdersType>) => {
