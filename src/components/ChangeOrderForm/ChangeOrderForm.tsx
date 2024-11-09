@@ -11,6 +11,7 @@ import {
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import {
   getAllOrdersThunk,
+  searchNotificationThunk,
   updateOrderThunk,
 } from "../../redux/ordersSlice/operations";
 import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
@@ -93,6 +94,7 @@ const ChangeOrderForm: React.FC = () => {
       })
     );
     await dispatch(getAllOrdersThunk());
+    dispatch(searchNotificationThunk())
     dispatch(closeModal());
   };
 

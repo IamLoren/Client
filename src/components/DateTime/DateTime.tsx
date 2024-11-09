@@ -7,11 +7,15 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setRentalTime } from "../../redux/carRentalSlice/carRentalSlice";
 import {
   selectEndRentalDate,
+  selectRole,
   selectStartRentalDate,
 } from "../../redux/selectors";
+import { useLocation } from "react-router-dom";
 
 const DateTime: React.FC<{ name: string }> = ({ name }) => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const role = useAppSelector(selectRole);
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
 
@@ -27,9 +31,9 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
   return (
     <div
       data-cy={`${name}`}
-      className=" w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow"
+      className={`${(role==="admin" && location.pathname === "/admin/history") && "block w-full px-4 py-1 secondary-background border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"} ${(role==="user" || (role==="admin" && location.pathname === "/")) && "w-[100%] max-w-[350px] md:max-w-[45%] m-auto sm:w-[45%] mb-[10px] primary-background rounded-lg p-[10px] box-shadow"}`}
     >
-      <p>{name}</p>
+      {(role==="user" || (role==="admin" && location.pathname === "/")) && <p>{name}</p>}
       <DatePicker
         selected={name === "Pick-Up" ? new Date(startDate) : new Date(endDate)}
         onChange={(date) => handleDataChanging(date)}
@@ -47,7 +51,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
           minDate.getHours()
         )}
         maxTime={setHours(setMinutes(new Date(), 30), 23)}
-        className="cursor-pointer"
+        className={`cursor-pointer ${(role==="admin" && location.pathname === "/admin/history") && "block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"}`}
       />
     </div>
   );
