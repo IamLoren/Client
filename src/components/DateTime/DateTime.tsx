@@ -45,7 +45,7 @@ const DateTime: React.FC<{ name: string }> = ({ name }) => {
           setHours(setMinutes(new Date(), 30), 17),
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
-        minDate={minDate}
+        minDate={name==="Pick-Up" ? currentDate : minDate}
         minTime={isSameDay(minDate, currentDate)
           ? setHours(setMinutes(minDate, minDate.getMinutes()), minDate.getHours())
           : setHours(setMinutes(new Date(), 0), 0)}
