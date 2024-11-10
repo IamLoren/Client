@@ -3,10 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../Button/Button";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getSelectedCar, selectEndRentalDate, selectStartRentalDate, userData } from "../../redux/selectors";
+import {
+  getSelectedCar,
+  selectEndRentalDate,
+  selectStartRentalDate,
+  userData,
+} from "../../redux/selectors";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import { createOrderThunk } from "../../redux/ordersSlice/operations";
-import { calculateRentalCost } from "../../services";
+import { calculateRentalCost, isPeriodAvailable } from "../../services";
+import { toast } from "react-toastify";
 
 interface RentalFormValues {
   firstName: string;
@@ -28,16 +34,11 @@ const validationSchema = Yup.object({
     .required("Phone number is required")
     .matches(/^\+1\s\d{3}\s\d{3}\s\d{4}$/, "Invalid phone format"),
   carName: Yup.string().required("Car name is required"),
-  startDate: Yup.date()
-    .required("Start date is required")
-    .nullable(),
+  startDate: Yup.date().required("Start date is required").nullable(),
   endDate: Yup.date()
     .required("End date is required")
     .nullable()
-    .min(
-      Yup.ref("startDate"),
-      "End date cannot be earlier than start date"
-    ),
+    .min(Yup.ref("startDate"), "End date cannot be earlier than start date"),
 });
 
 const RentalCarForm: React.FC = () => {
@@ -45,7 +46,7 @@ const RentalCarForm: React.FC = () => {
   const selectedCar = useAppSelector(getSelectedCar);
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const initialValues: RentalFormValues = {
     firstName: user.firstName || "",
@@ -61,10 +62,38 @@ const RentalCarForm: React.FC = () => {
     if (!selectedCar || !user) {
       console.error("Car or user is not selected");
       return;
-  }
-    const rentalCost = calculateRentalCost(startDate, endDate, selectedCar.price)
-    dispatch(createOrderThunk({clientEmail:values.email, phoneNumber:values.phoneNumber, carId: selectedCar?._id, clientId: user.userId, orderType: "rent", time: {startDate:values.startDate, endDate:values.endDate}, cost: rentalCost, createdBy: user.role, }))
-    console.log("Submitted values:", {...values, carId: selectedCar?._id, userId: user.userId, orderType: "rent"});
+    }
+    const isAvailable = isPeriodAvailable(selectedCar, startDate, endDate);
+    if (!isAvailable) {
+      toast.error(
+        "This car is unavailable during that time period. Please choose another."
+      );
+      dispatch(closeModal());
+      return;
+    }
+    const rentalCost = calculateRentalCost(
+      startDate,
+      endDate,
+      selectedCar.price
+    );
+    dispatch(
+      createOrderThunk({
+        clientEmail: values.email,
+        phoneNumber: values.phoneNumber,
+        carId: selectedCar?._id,
+        clientId: user.userId,
+        orderType: "rent",
+        time: { startDate: values.startDate, endDate: values.endDate },
+        cost: rentalCost,
+        createdBy: user.role,
+      })
+    );
+    console.log("Submitted values:", {
+      ...values,
+      carId: selectedCar?._id,
+      userId: user.userId,
+      orderType: "rent",
+    });
     dispatch(closeModal());
   };
 

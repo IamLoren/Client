@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import { closeModal } from "../../redux/modalSlice/modalSlice";
 import { updateOrderThunk } from "../../redux/ordersSlice/operations";
 import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
+import { updateCarThunk } from "../../redux/carRentalSlice/operations";
 
 const AdminApproveForm: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,12 +37,15 @@ const AdminApproveForm: React.FC = () => {
           orderToUpdate: { ...orderWithoutId, adminApprove: true },
         })
       );
+      dispatch(updateCarThunk({id: order.carId, carToUpdate: {orderId: _id,...order.time}}))
     }
     dispatch(closeModal());
   };
   return (
     <div className="w-[100%] sm:w-[350px]">
-      <p className="mb-[10px] text-[12px] text-red-700">{`This request was created ${new Date(order.createdAt).toLocaleString()} and requires your immediate attention. Please contact the client using the provided contact details, and only after confirmation by both parties, mark the request as 'approved'.`}</p>
+      <p className="mb-[10px] text-[12px] text-red-700">{`This request was created ${
+          order.createdAt ? new Date(order.createdAt).toLocaleString() : "N/A"
+        } and requires your immediate attention. Please contact the client using the provided contact details, and only after confirmation by both parties, mark the request as 'approved'.`}</p>
       <p>Order</p>
       <ul className="mb-[10px] text-sm">
         {order &&

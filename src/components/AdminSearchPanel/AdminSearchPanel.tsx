@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { selectAllCars, selectAllUsers } from "../../redux/selectors";
@@ -6,6 +6,7 @@ import {
   changeSearchResult,
   clearAdminSearchResult,
 } from "../../redux/adminSlice/adminSlice";
+import { getAllUsers } from "../../redux/adminSlice/operations";
 import UsersTable from "../UsersTable/UsersTable";
 import CarsTable from "../CarsTable/CarsTable";
 import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
@@ -30,6 +31,13 @@ const AdminSearchPanel: React.FC = () => {
   type CarKeys = keyof CarInterface;
   type UserKeys = keyof oneUserTypes;
   const [selectedItem, setSelectedItem] = useState("user");
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+    return () => {
+      dispatch(clearAdminSearchResult());
+    };
+  }, [dispatch]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(clearAdminSearchResult());
