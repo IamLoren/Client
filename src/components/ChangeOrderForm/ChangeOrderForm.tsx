@@ -17,6 +17,7 @@ import {
 import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
 import { oneUserTypes } from "../../redux/adminSlice/adminSliceTypes";
 import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
+import { updateCarAvailability } from "../../redux/carRentalSlice/operations";
 
 interface ChangeOrderFormValues {
   firstName: string;
@@ -93,6 +94,10 @@ const ChangeOrderForm: React.FC = () => {
         },
       })
     );
+    if((order.orderStatus==="inProgress" || order.orderStatus==="active") && values.orderStatus==="completed") {
+      const orderId = order._id;
+      dispatch(updateCarAvailability({id:order.carId, orderId:orderId}))
+    }
     await dispatch(getAllOrdersThunk());
     dispatch(searchNotificationThunk())
     dispatch(closeModal());
@@ -105,7 +110,6 @@ const ChangeOrderForm: React.FC = () => {
       onSubmit={handleSubmit}
       enableReinitialize={true}
     >
-      {/* <h2 className="text-lg font-bold mb-2">Change Rental Order Form</h2> */}
       <Form
         className=" flex gap-[30px] max-w-lg mx-auto secondary-text text-sm"
         data-cy="rentalCarForm"

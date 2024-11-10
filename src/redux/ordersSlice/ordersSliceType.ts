@@ -50,6 +50,7 @@ export type CreateOrderRequest = {
   orderType: "rent" | "oil change" | "repair" | "maintenance" | "insurance";
   phoneNumber: string;
   clientEmail: string;
+  orderStatus?: "active" | "inProgress" | "completed";
   time: {
     startDate: string;
     endDate: string;
