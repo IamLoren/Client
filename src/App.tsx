@@ -20,10 +20,18 @@ import AdminSearchPanel from "./components/AdminSearchPanel/AdminSearchPanel";
 import Analytics from "./components/Analytics/Analytics";
 import Schedules from "./components/Schedules/Schedules";
 
-const LazyHome: LazyExoticComponent<React.FC> = lazy(() => import("./pages/HomePage"));
-const LazyClient: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ClientPage"));
-const LazyAdmin: LazyExoticComponent<React.FC> = lazy(() => import("./pages/AdminPage"));
-const LazyError: LazyExoticComponent<React.FC> = lazy(() => import("./pages/ErrorPage"));
+const LazyHome: LazyExoticComponent<React.FC> = lazy(
+  () => import("./pages/HomePage")
+);
+const LazyClient: LazyExoticComponent<React.FC> = lazy(
+  () => import("./pages/ClientPage")
+);
+const LazyAdmin: LazyExoticComponent<React.FC> = lazy(
+  () => import("./pages/AdminPage")
+);
+const LazyError: LazyExoticComponent<React.FC> = lazy(
+  () => import("./pages/ErrorPage")
+);
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,11 +56,11 @@ const App: React.FC = () => {
               <LazyClient />
             </PrivateUserRoute>
           }
-        > 
-        <Route path="settings" element={<UserSettings/>}/>
-        <Route path="history" element={<ClientsHistory/>}/>
-        <Route path="favorites" element={<Favorites/>}/>
-        <Route path="notifications" element={<Notifications/>}/>
+        >
+          <Route path="settings" element={<UserSettings />} />
+          <Route path="history" element={<ClientsHistory />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="notifications" element={<Notifications />} />
         </Route>
         <Route
           path="/admin"
@@ -62,19 +70,19 @@ const App: React.FC = () => {
             </PrivateAdminRoute>
           }
         >
-          <Route index element={<AdminSearchPanel/>}/>
-          <Route path="settings" element={<UserSettings/>}/>
-        <Route path="history" element={<OrdersList/>}/>
-        <Route path="active" element={<ActiveOrders/>}/>
-        <Route path="analytics" element={<Analytics/>}/>
-        <Route path="schedules" element={<Schedules/>}/>
-        <Route path="notifications" element={<Notifications/>}/>
+          <Route index element={<AdminSearchPanel />} />
+          <Route path="settings" element={<UserSettings />} />
+          <Route path="history" element={<OrdersList />} />
+          <Route path="active" element={<ActiveOrders />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="schedules" element={<Schedules />} />
+          <Route path="notifications" element={<Notifications />} />
         </Route>
         <Route path="*" element={<LazyError />} />
       </Routes>
       {isModal && <Modal />}
-      <ToastContainer  style={{ top: '60px' }}/>
-      {isLoader && <Loader/>}
+      <ToastContainer style={{ top: "60px" }} />
+      {isLoader && <Loader />}
     </Suspense>
   );
 };
