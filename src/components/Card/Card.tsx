@@ -93,7 +93,7 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
         />
       </span>
       <div className=" p-[10px] md:p-[15px]">
-        <h3 className="sm:h-[56px] text-md sm:text-xl font-medium primary-text">
+        <h3 className="mb-[10px] text-md sm:text-xl font-medium primary-text">
           {make} {model}
         </h3>
         <div className="flex justify-between">

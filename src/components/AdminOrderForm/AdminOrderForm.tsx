@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {ChangeEvent, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../Button/Button";
@@ -53,12 +53,12 @@ const AdminOrderForm: React.FC = () => {
   const cars = useAppSelector(selectAllCars);
   const startDate = useAppSelector(selectStartRentalDate);
   const endDate = useAppSelector(selectEndRentalDate);
-  const selectedCarObject = useAppSelector(getSelectedCar);
+  const selectedCarObject = useAppSelector(getSelectedCar) as CarInterface;
  
   const [selectedCar, setSelectedCar] = useState("");
   const [filteredCars, setFilteredCars] = useState<CarInterface[]>([]);
 
-  const selectCar = (event) => {
+  const selectCar = (event:ChangeEvent<HTMLInputElement>) => {
     const param = event.target.value;
     const inputCar = cars.filter(
       (car) =>
@@ -66,17 +66,15 @@ const AdminOrderForm: React.FC = () => {
         car.model.toLowerCase().includes(param.toLowerCase())
     );
     if(inputCar.length=== 1) {
-      dispatch(changeSelectedCar(...inputCar))
+      dispatch(changeSelectedCar(inputCar[0]))
     }
     setSelectedCar(param)
     setFilteredCars(inputCar)
   };
-  const handleCarClick = (car) => {
+  const handleCarClick = (car:CarInterface) => {
     dispatch(changeSelectedCar(car))
-    console.log('Selected car:', car); 
     setSelectedCar(`${car.make} ${car.model}`);
     setFilteredCars([]);
-    console.log(filteredCars)
   };
 
   const initialValues: RentalFormValues = {
@@ -94,7 +92,6 @@ const AdminOrderForm: React.FC = () => {
   };
 
   const handleSubmit = (values: RentalFormValues) => {
-    console.log("JKFHGVKFDJC")
     dispatch(
       createOrderThunk({
         clientEmail: values.email,
@@ -109,11 +106,6 @@ const AdminOrderForm: React.FC = () => {
         adminApprove: true,
       })
     );
-    console.log("Submitted values:", {
-      ...values,
-      carId: selectedCarObject?._id,
-      userId: user.userId,
-    });
     dispatch(closeModal());
   };
 

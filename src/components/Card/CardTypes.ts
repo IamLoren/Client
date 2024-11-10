@@ -10,7 +10,7 @@ interface CardProperties {
     price: { hour: number; day: number };
     color: string;
     img: string;
-    availability: /*{ start: Date; end: Date }[]*/ | [];
+    availability: [{ orderId: string; startDate: string; endDate: string; }] | [];
     isRemoved: boolean;
   }
   

@@ -13,7 +13,7 @@ export interface CarInterface {
   transmission: "manual" | "automatic";
   color: string;
   img: string;
-  availability: [];
+  availability?: [{orderId: string, startDate: string, endDate:string}] |[];
   isRemoved: boolean;
 }
 

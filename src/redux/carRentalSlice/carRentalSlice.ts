@@ -83,7 +83,7 @@ export const carRentalSlice = createSlice({
       .addCase(getAllCarsThunk.rejected, (state: CarsStateType) => {
         toast.error("OOOps! Something went wrong... Reload the site");
         state.isLoading = false;
-      });
+      })     
   },
 });
 
