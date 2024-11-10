@@ -10,9 +10,10 @@ import {
   selectRole,
   selectUserListOfCars,
 } from "../../redux/selectors";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 
 const CardsList: React.FC = () => {
-  const cars = useAppSelector(selectAllCars);
+  const cars = useAppSelector(selectAllCars) as CarInterface[];
   const role = useAppSelector(selectRole);
   const carsUserList = useAppSelector(selectUserListOfCars);
   const selectedMinPrice = useAppSelector(selectMinPrice);
