@@ -5,7 +5,6 @@ import { BsFuelPump } from "react-icons/bs";
 import { TbSteeringWheel } from "react-icons/tb";
 import Button from "../Button/Button";
 import NotAvailable from "../NotAvailable/NotAvailable";
-import { CardProps } from "./CardTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { selectFavoriteCars, selectIsLogged } from "../../redux/selectors";
 import { updateFavoriteList } from "../../redux/authSlice/operations";
@@ -15,8 +14,9 @@ import {
 } from "../../redux/modalSlice/modalSlice";
 import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
 import { toast } from "react-toastify";
+import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 
-const Card: React.FC<CardProps> = ({ carProps }) => {
+const Card: React.FC<{carProps:CarInterface}> = ({ carProps }) => {
   const {
     _id,
     make,
@@ -101,11 +101,12 @@ const Card: React.FC<CardProps> = ({ carProps }) => {
           <span>{year}</span>
         </div>
         <div className="mb-2">
-          {availability.length === 0 ? (
+          {availability?.length === 0 && (
             <span className="mb-1 text-sm text-green-700">
               "Available at any time for you!"
             </span>
-          ) : (
+          ) } 
+          {(availability && availability.length >0) && (
             <NotAvailable availability={availability} />
           )}
         </div>
