@@ -41,6 +41,7 @@ export type OrderTypes =
       };
       cost: number;
       adminApprove: boolean;
+      additionally: string
     };
 
 export type CreateOrderRequest = {
@@ -57,6 +58,7 @@ export type CreateOrderRequest = {
   };
   cost: number;
   adminApprove?: boolean;
+  additionally?: string
 };
 
 export interface CreateOrderResponse {
@@ -73,6 +75,7 @@ export interface CreateOrderResponse {
   _id: string;
   createdAt?: string;
   updatedAt?: string;
+  additionally: string
 }
 
 export interface GetAllOrdersType {
