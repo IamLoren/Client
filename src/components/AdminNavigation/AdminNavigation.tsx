@@ -26,7 +26,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg `
+              }`
             }
           >
             Home
@@ -42,7 +42,7 @@ const AdminNavigation: React.FC = () => {
                 isActive && location.pathname === "/admin"
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg `
+              }`
             }
           >
             Search pannel
@@ -57,7 +57,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg`
+              }`
             }
           >
             Orders History
@@ -71,7 +71,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg`
+              }`
             }
           >
             Orders Requiring Approval
@@ -86,7 +86,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg`
+              }`
             }
           >
             Analytics
@@ -101,7 +101,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg`
+              }`
             }
           >
            Schedules
@@ -117,7 +117,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg `
+              }`
             }
           >
             Notifications
@@ -133,7 +133,7 @@ const AdminNavigation: React.FC = () => {
                 isActive
                   ? "primary-background box-shadow accent-text font-bold"
                   : ""
-              } hover:shadow-lg `
+              }`
             }
           >
             Settings
