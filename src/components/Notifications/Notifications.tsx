@@ -23,14 +23,14 @@ const Notifications: React.FC = () => {
     {((role === "user" && userNotifications.length > 0) || (role === "admin" && notifications.length > 0)) && 
       <section className={`w-[100%] ${role === "user" && "lg:w-[550px]"}  p-[20px] md:py-[40px] md:px-[60px] rounded-lg box-shadow primary-background border border-color`}>
         {role === "user" && 
-          <h2 className="text-red-700 text-center font-bold mb-[20px] text-[16px]">
+          <h2 className="accent-text text-left font-bold mb-[20px] text-[16px]">
             You have orders whose duration ends today! Don't forget to return of
             the car to its place.
           </h2>
         }
 
         {role === "admin" && (
-          <h2 className="text-red-700 text-center font-bold mb-[20px] text-[16px]">
+          <h2 className="accent-text text-left font-bold mb-[20px] text-[16px]">
             You have orders whose duration ends today! Don't forget to confirm
             the return of the car to its place.
           </h2>
@@ -50,13 +50,13 @@ const Notifications: React.FC = () => {
       {( (role === "user" && userApprovedOrders.length > 0) || (role === "admin" && activeOrders.length > 0) ) && 
       <section className={`w-[100%] ${role === "user" && "lg:w-[550px]"}  p-[20px] md:py-[40px] md:px-[60px] rounded-lg box-shadow primary-background border border-color`}>
         {(role === "user") && (
-          <h2 className="text-red-700 text-center font-bold mb-[20px] text-[16px]">
+          <h2 className="accent-text text-left font-bold mb-[20px] text-[16px]">
             Your order has been confirmed by the company manager. We are
             expecting you to pick up the car at the agreed time.
           </h2>
         )}
         {role === "admin" && (
-          <h2 className="text-red-700 text-center font-bold mb-[20px] text-[16px]">
+          <h2 className="accent-text text-left font-bold mb-[20px] text-[16px]">
             You have new orders that require your urgent confirmation.
           </h2>
         )}

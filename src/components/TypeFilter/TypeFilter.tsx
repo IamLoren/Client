@@ -51,7 +51,7 @@ const TypeFilter: React.FC = () => {
               onChange={() => handleCheckboxChange(type)}
               className="mr-[10px] filters-color"
             />
-            {type}
+            {type.charAt(0).toUpperCase() + type.slice(1)}
           </label>
         </div>
       ))}
