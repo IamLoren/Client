@@ -21,7 +21,7 @@ const Notifications: React.FC = () => {
   return (
     <div className={`flex-1 ${role === "user" && "md:flex justify-center md:gap-[50px]"} p-[20px] text-sm`}>
     {((role === "user" && userNotifications.length > 0) || (role === "admin" && notifications.length > 0)) && 
-      <section className={`w-[100%] ${role === "user" && "lg:w-[550px]"}  p-[20px] md:py-[40px] md:px-[60px] rounded-lg box-shadow primary-background border border-color`}>
+      <section className={`w-[100%] mb-[20px] ${role === "user" && "lg:w-[550px]"}  p-[20px] md:py-[40px] md:px-[60px] rounded-lg box-shadow primary-background border border-color`}>
         {role === "user" && 
           <h2 className="accent-text text-left font-bold mb-[20px] text-[16px]">
             You have orders whose duration ends today! Don't forget to return of
