@@ -41,7 +41,7 @@ const handleOrderClick = () =>{
           order.orderType === "rent" ? "text-green-600" : "text-red-600"
         }`}
       >
-        {order.orderType}
+        <span className={`inline-flex items-center rounded-md ${ order.orderType === "rent" ? "bg-green-50 text-green-700 ring-green-600/20" : "text-red-600 bg-red-50 ring-red-600/20"} px-2 py-1 text-xs font-medium ring-1 ring-inset`}>{order.orderType}</span>
       </td>
       <td className="p-2 border-b border-gray-200 text-center text-sm font-semibold">
         {order.orderStatus}
