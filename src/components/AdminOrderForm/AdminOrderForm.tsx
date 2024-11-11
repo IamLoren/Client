@@ -10,6 +10,7 @@ import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 import DateTime from "../DateTime/DateTime";
 import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
 import { updateCarThunk } from "../../redux/carRentalSlice/operations";
+import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
 
 interface RentalFormValues {
   firstName: string;
@@ -17,6 +18,7 @@ interface RentalFormValues {
   email: string;
   phoneNumber: string;
   carName: string;
+  carId?: string;
   startDate: string;
   endDate: string;
   finalCost: number;
@@ -83,6 +85,7 @@ const AdminOrderForm: React.FC = () => {
     lastName: user.lastName || "",
     email: user.email || "",
     phoneNumber: "",
+    carId: selectedCarObject?._id,
     carName: selectedCar,
     startDate: startDate,
     endDate: endDate,
@@ -112,11 +115,15 @@ const AdminOrderForm: React.FC = () => {
     if(!newOrder) {
       throw new Error("Order was not created")
     }
-    console.log(newOrder.payload)
-    dispatch(updateCarThunk({id:selectedCarObject._id, carToUpdate:{orderId: newOrder.payload?._id,  startDate, endDate}}))
+    const orderId = (newOrder.payload as CreateOrderResponse)?._id;
+    dispatch(updateCarThunk({id:selectedCarObject._id, carToUpdate:{orderId,  startDate, endDate}}))
     dispatch(closeModal());
-    } catch (error) {
-      throw new Error(error?.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error("An unknown error occurred");
+      }
     }
   
   };
