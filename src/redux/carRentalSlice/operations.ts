@@ -99,3 +99,35 @@ export const updateCarAvailability = createAsyncThunk<{ updatedCar: CarInterface
     return thunkApi.rejectWithValue("An unexpected error occurred");
   }
 });
+
+export const changeAvailability = createAsyncThunk<
+{ updatedCar: CarInterface },
+{
+  id: string;
+  carToUpdate: {
+    orderId: string;
+    startDate: string;
+    endDate: string;
+  };
+},
+{
+  state: RootState;
+  rejectValue: string;
+}
+>("cars/update", async (allData, thunkApi) => {
+try {
+  const { data } = await api.put(
+    `api/cars/changeavailability/${allData.id}`,
+    allData.carToUpdate
+  );
+  return data;
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    toast.error(error.message);
+    return thunkApi.rejectWithValue(error.message);
+  } else {
+    toast.error("An unexpected error occurred");
+  }
+  return thunkApi.rejectWithValue("An unexpected error occurred");
+}
+});

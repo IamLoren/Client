@@ -9,6 +9,7 @@ import { createOrderThunk } from "../../redux/ordersSlice/operations";
 import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
 import DateTime from "../DateTime/DateTime";
 import { changeSelectedCar } from "../../redux/carRentalSlice/carRentalSlice";
+import { updateCarThunk } from "../../redux/carRentalSlice/operations";
 
 interface RentalFormValues {
   firstName: string;
@@ -91,8 +92,9 @@ const AdminOrderForm: React.FC = () => {
     additionally: "",
   };
 
-  const handleSubmit = (values: RentalFormValues) => {
-    dispatch(
+  const handleSubmit = async (values: RentalFormValues) => {
+    try {
+      const newOrder = await dispatch(
       createOrderThunk({
         clientEmail: values.email,
         phoneNumber: values.phoneNumber,
@@ -104,9 +106,19 @@ const AdminOrderForm: React.FC = () => {
         cost: values.finalCost,
         createdBy: user.role,
         adminApprove: true,
+        additionally: values.additionally
       })
     );
+    if(!newOrder) {
+      throw new Error("Order was not created")
+    }
+    console.log(newOrder.payload)
+    dispatch(updateCarThunk({id:selectedCarObject._id, carToUpdate:{orderId: newOrder.payload?._id,  startDate, endDate}}))
     dispatch(closeModal());
+    } catch (error) {
+      throw new Error(error?.message)
+    }
+  
   };
 
   return (
