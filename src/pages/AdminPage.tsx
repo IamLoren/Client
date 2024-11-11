@@ -5,6 +5,7 @@ import { getAllOrdersThunk } from "../redux/ordersSlice/operations";
 import { useAppDispatch } from "../hooks";
 import AdminNavigation from "../components/AdminNavigation/AdminNavigation";
 import { getAllUsers } from "../redux/adminSlice/operations";
+import { getAllCarsThunk } from "../redux/carRentalSlice/operations";
 
 const AdminPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     dispatch(getAllOrdersThunk());
     dispatch(getAllUsers());
+    dispatch(getAllCarsThunk());
   }, [dispatch]);
   return (
     <>

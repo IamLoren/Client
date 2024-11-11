@@ -17,7 +17,7 @@ import {
 import { CreateOrderResponse } from "../../redux/ordersSlice/ordersSliceType";
 import { oneUserTypes } from "../../redux/adminSlice/adminSliceTypes";
 import { CarInterface } from "../../redux/carRentalSlice/carRentalSliceTypes";
-import { updateCarAvailability } from "../../redux/carRentalSlice/operations";
+import { changeAvailability, updateCarAvailability } from "../../redux/carRentalSlice/operations";
 
 interface ChangeOrderFormValues {
   firstName: string;
@@ -58,8 +58,8 @@ const ChangeOrderForm: React.FC = () => {
   const contact = allUsers?.find((user) => user._id === order?.clientId);
   const car = allCars?.find((car) => car._id === order?.carId);
 
-  if(!contact) {
-    throw new Error("contact was not founded")
+  if (!contact) {
+    throw new Error("contact was not founded");
   }
   const initialValues: ChangeOrderFormValues = {
     firstName: contact.firstName || "",
@@ -74,16 +74,20 @@ const ChangeOrderForm: React.FC = () => {
     orderStatus: order.orderStatus,
   };
 
-  const handleSubmit =  async (values: ChangeOrderFormValues) => {
+  const handleSubmit = async (values: ChangeOrderFormValues) => {
     const startDate = new Date(values.startDate).toISOString();
     const endDate = new Date(values.endDate).toISOString();
-    console.log("Submitted values:", values);
-   await dispatch(
+    const currentStartDate = new Date(order.time.startDate).toISOString();
+    const currentEndDate = new Date(order.time.endDate).toISOString();
+    const datesChanged =
+      startDate !== currentStartDate || endDate !== currentEndDate;
+
+    await dispatch(
       updateOrderThunk({
         id: order._id,
         orderToUpdate: {
           phoneNumber: values.phoneNumber,
-          time: { startDate, endDate},
+          time: { startDate, endDate },
           carId: order.carId,
           clientId: order.clientId,
           clientEmail: values.email,
@@ -94,12 +98,19 @@ const ChangeOrderForm: React.FC = () => {
         },
       })
     );
-    if((order.orderStatus==="inProgress" || order.orderStatus==="active") && values.orderStatus==="completed") {
+
+    if(datesChanged) {
+      dispatch(changeAvailability({id: order.carId, carToUpdate: {orderId:order._id, startDate, endDate}}))
+    }
+    if (
+      (order.orderStatus === "inProgress" || order.orderStatus === "active") &&
+      values.orderStatus === "completed"
+    ) {
       const orderId = order._id;
-      dispatch(updateCarAvailability({id:order.carId, orderId:orderId}))
+      dispatch(updateCarAvailability({ id: order.carId, orderId: orderId }));
     }
     await dispatch(getAllOrdersThunk());
-    dispatch(searchNotificationThunk())
+    dispatch(searchNotificationThunk());
     dispatch(closeModal());
   };
 
