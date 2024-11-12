@@ -4,6 +4,7 @@ import modalReducer from './modalSlice/modalSlice';
 import { carRentalReducer } from "./carRentalSlice/carRentalSlice";
 import { ordersReducer } from "./ordersSlice/ordersSlice";
 import { adminReducer } from "./adminSlice/adminSlice";
+import { analyticReducer } from "./analyticSlice/analyticSlice";
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     cars: carRentalReducer,
     orders: ordersReducer,
     admin: adminReducer,
+    analytic: analyticReducer
   });
 
 export const store = configureStore({

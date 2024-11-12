@@ -71,7 +71,7 @@ dialog::backdrop {
 }
 
 .navigation-color:hover {
-  color: purple;
+  color: #800080;
   text-shadow: 2px 2px 4px rgba(128, 0, 128, 0.5);
 }
 
