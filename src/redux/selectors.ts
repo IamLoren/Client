@@ -63,3 +63,10 @@ export const selectUserEndedOrders = (state: RootState) => {
   }
   return [];
 };
+
+export const selectMonthForChart = (state: RootState) =>
+  state.analytic.selectedMonth;
+export const selectIncomeOrders = (state: RootState) =>
+  state.analytic.incomeOrders;
+export const selectExpensesOrders = (state: RootState) =>
+  state.analytic.expensesOrders;
