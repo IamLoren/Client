@@ -75,7 +75,7 @@ export interface CreateOrderResponse {
   _id: string;
   createdAt?: string;
   updatedAt?: string;
-  additionally: string
+  additionally?: string
 }
 
 export interface GetAllOrdersType {
