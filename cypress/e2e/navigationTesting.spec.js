@@ -71,7 +71,7 @@ describe("Navigation Test", () => {
     cy.url().should("include", "/client/favorites");
     cy.get("a").should("exist").and("contain", "Favorites");
     cy.get("a").contains("Orders History").click();
-    cy.get("div").contains("ClientsHistory").should("exist");
+    cy.get("div").contains("Your orders history").should("exist");
 
     cy.go("back");
     cy.url().should("include", "/client/favorites");

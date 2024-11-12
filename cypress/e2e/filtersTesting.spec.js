@@ -63,9 +63,9 @@ describe("TransmissionFilter Component", () => {
   });
 
   it("should select and deselect transmission types and change list of cars", () => {
-    const transmissionType = "automatic";
+    const transmissionType = "Automatic";
     cy.get(`label`)
-      .contains("automatic")
+      .contains("Automatic")
       .find('input[type="checkbox"]')
       .check()
       .should("be.checked");
@@ -214,7 +214,7 @@ describe("DateTime Component", () => {
 
         cy.get('[data-cy="Pick-Up"]')
           .find("input")
-          .should("have.value", `November 20, 2024 ${selectedTime.trim()}`);
+          .should("have.value", `December 20, 2024 ${selectedTime.trim()}`);
       });
   });
 
@@ -278,7 +278,7 @@ describe("DateTime Component", () => {
 
         cy.get('[data-cy="Drop-Off"]')
           .find("input")
-          .should("have.value", `November 21, 2024 ${selectedTime.trim()}`);
+          .should("have.value", `December 21, 2024 ${selectedTime.trim()}`);
       });
   });
 
