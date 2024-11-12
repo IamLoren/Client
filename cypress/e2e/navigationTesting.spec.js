@@ -115,7 +115,7 @@ describe("Navigation Test", () => {
     cy.get("a").contains("Settings").click();
     cy.get("h2").contains("You can update your user data").should("exist");
     cy.get("a").contains("Orders History").click();
-    cy.get("div").contains("ClientsHistory").should("exist");
+    cy.get("div").contains("Your orders history").should("exist");
   });
 
   it("should switch mode to dark and light after clicking switch-mode icon", () => {
