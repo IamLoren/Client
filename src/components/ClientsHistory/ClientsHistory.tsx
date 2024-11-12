@@ -15,6 +15,7 @@ const ClientsHistory: React.FC = () => {
 
   return (
     <>
+    <h2 className="pl-[20px] accent-text font-bold">Your orders history</h2>
       {history?.length === 0 && <p>You have not created orders yet</p>}
       {history?.length > 0 && (
         <ul className="flex flex-wrap gap-[10px] p-[20px]">
