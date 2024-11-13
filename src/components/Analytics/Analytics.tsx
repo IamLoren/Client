@@ -50,7 +50,13 @@ const Analytics: React.FC = () => {
       (order) => order.orderStatus === "completed" && order.orderType !== "rent"
     );
     dispatch(splitOrders({ incomeOrders, expensesOrders }));
-  }, [dispatch, monthOrders]);
+  }, [dispatch, monthOrders,]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(changeSelectedMonth(""));
+    };
+  }, [dispatch]); 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(changeSelectedMonth(event.target.value));
@@ -72,10 +78,10 @@ const Analytics: React.FC = () => {
       </h2>{" "}
       <div className="flex justify-center">
         <select
-        value={selectedMonth}
+        value={selectedMonth ? selectedMonth : "select"}
           onChange={handleChange}
           id="month"
-          className="block w-[100%] sm:w-[150px] rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 accent-text text-lg font-bold"
+          className="block w-[100%] sm:w-[150px] rounded-md outline-blue-200 border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 accent-text text-lg font-bold"
         >
           <option disabled value="select" className="block max-w-full">
             Select month
