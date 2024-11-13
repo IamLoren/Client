@@ -25,9 +25,6 @@ const analyticSlice = createSlice({
         state.expensesOrders = action.payload.expensesOrders;
       },
   },
-//   extraReducers: (builder) => {
-
-//   }
 });
 
 export const { changeSelectedMonth, splitOrders } = analyticSlice.actions;
