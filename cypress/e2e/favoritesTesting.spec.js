@@ -17,10 +17,7 @@ describe("Card component - Favorites functionality", () => {
   });
 
   it("should change icon color and tooltip after adding and removing a car from favorites when heart icon is clicked", () => {
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+    cy.loginToApplication()
 
     cy.get('[aria-label="press to add this car to favorites"]').as(
       "favoriteIcon"
@@ -44,10 +41,7 @@ describe("Card component - Favorites functionality", () => {
   });
 
   it("should add car to favoriteList in Redux store and delete from store", () => {
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+    cy.loginToApplication()
 
     cy.get('[aria-label="press to add this car to favorites"]').as(
       "favoriteIcon"

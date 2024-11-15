@@ -38,3 +38,25 @@
 Cypress.Commands.add("getReduxState", ()=> {
     return cy.window().its("store").invoke("getState");
 })
+
+Cypress.Commands.add("loginToApplication", () => {
+   const userCredentials = {
+            "email": "iryna@gmail.com",
+            "password": "asdfghjkl"
+    }
+
+    cy.request("POST", "https://server-osz5.onrender.com/api/auth/signin", userCredentials).its('body').then(body => {
+        const token = body.token;
+        cy.visit("/", {
+            onLoad(win) {
+                win.localStorage.setItem("authToken", token)
+            },
+        });
+    })
+
+    // cy.visit("/");
+    // cy.get("button").contains("SIGN IN").click();
+    // cy.get('input[name="email"]').type("iryna@gmail.com");
+    // cy.get('input[name="password"]').type("asdfghjkl");
+    // cy.get('[data-cy="signInForm"]').submit();
+})

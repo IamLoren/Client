@@ -133,11 +133,7 @@ describe("SignInForm validation testing", () => {
 
 describe("OrderForm validation testing", () => {
   beforeEach(() => {
-    cy.visit("/");
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+    cy.loginToApplication()
   });
 
   it("displays validation errors when submitting form without phone number", () => {

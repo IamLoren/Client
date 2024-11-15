@@ -2,11 +2,7 @@
 
 describe("Navigation Test", () => {
   beforeEach(() => {
-    cy.visit("/");
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+   cy.loginToApplication()
   });
 
   it("should navigate to Client profile page", () => {
