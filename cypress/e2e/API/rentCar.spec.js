@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 describe("API Order Creation Tests", () => {
+    const apiUrl = Cypress.env("api_server");
   const validOrderData = {
     createdBy: "user",
     carId: "123",
@@ -40,7 +41,7 @@ describe("API Order Creation Tests", () => {
         expect(userToken).to.not.be.null;
         cy.request({
           method: "POST",
-          url: "https://server-osz5.onrender.com/api/orders/create",
+          url: `${apiUrl}/api/orders/create`,
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
@@ -66,7 +67,7 @@ describe("API Order Creation Tests", () => {
         };
         cy.request({
           method: "POST",
-          url: "https://server-osz5.onrender.com/api/orders/create",
+          url: `${apiUrl}/api/orders/create`,
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -92,7 +93,7 @@ describe("API Order Creation Tests", () => {
         };
         cy.request({
           method: "POST",
-          url: "https://server-osz5.onrender.com/api/orders/create",
+          url: `${apiUrl}/api/orders/create`,
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -117,7 +118,7 @@ describe("API Order Creation Tests", () => {
         };
         cy.request({
           method: "POST",
-          url: "https://server-osz5.onrender.com/api/orders/create",
+          url: `${apiUrl}/api/orders/create`,
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -144,7 +145,7 @@ describe("API Order Creation Tests", () => {
           };
           cy.request({
             method: "POST",
-            url: "https://server-osz5.onrender.com/api/orders/create",
+            url: `${apiUrl}/api/orders/create`,
             headers: {
               Authorization: `Bearer ${adminToken}`,
             },
@@ -170,7 +171,7 @@ describe("API Order Creation Tests", () => {
           };
           cy.request({
             method: "POST",
-            url: "https://server-osz5.onrender.com/api/orders/create",
+            url: `${apiUrl}/api/orders/create`,
             headers: {
               Authorization: `Bearer ${adminToken}`,
             },
@@ -196,7 +197,7 @@ describe("API Order Creation Tests", () => {
           };
           cy.request({
             method: "POST",
-            url: "https://server-osz5.onrender.com/api/orders/create",
+            url: `${apiUrl}/api/orders/create`,
             headers: {
               Authorization: `Bearer ${adminToken}`,
             },

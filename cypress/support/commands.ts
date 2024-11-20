@@ -5,12 +5,13 @@ Cypress.Commands.add("getReduxState", ()=> {
 })
 
 Cypress.Commands.add("loginToApplication", () => {
+    const apiUrl = Cypress.env("api_server");
    const userCredentials = {
             "email": "iryna@gmail.com",
             "password": "asdfghjkl"
     }
 
-    cy.request("POST", "https://server-osz5.onrender.com/api/auth/signin", userCredentials).its('body').then(body => {
+    cy.request("POST", `${apiUrl}/api/auth/signin`, userCredentials).its('body').then(body => {
         const token = body.token;
         cy.visit("/", {
             onLoad(win) {
@@ -22,12 +23,13 @@ Cypress.Commands.add("loginToApplication", () => {
 })
 
 Cypress.Commands.add("loginAdmin", () => {
+    const apiUrl = Cypress.env("api_server");
     const userCredentials = {
              "email": "carrental795@gmail.com",
              "password": "asdfghjkl"
      }
  
-     cy.request("POST", "https://server-osz5.onrender.com/api/auth/signin", userCredentials).its('body').then(body => {
+     cy.request("POST", `${apiUrl}/api/auth/signin`, userCredentials).its('body').then(body => {
          const token = body.token;
          cy.visit("/", {
              onLoad(win) {
