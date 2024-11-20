@@ -9,7 +9,6 @@ describe("SignIn API testing", ()=> {
 
       it("should return userCredentials and ProfileData after signIn", ()=> {
         const apiUrl = Cypress.env("api_server");
-        cy.intercept("POST", `${apiUrl}/api/auth/signin`).as("SignIn");
 
         cy.request({
             method: "POST",
@@ -36,7 +35,6 @@ describe("SignIn API testing", ()=> {
 
       it("should return 400 for missing required fields", () => {
         const apiUrl = Cypress.env("api_server");
-        cy.intercept("POST", `${apiUrl}/api/auth/signin`).as("SignIn");
     
         cy.request({
           method: "POST",
@@ -54,7 +52,6 @@ describe("SignIn API testing", ()=> {
 
       it("should return 404 for invalid email", () => {
         const apiUrl = Cypress.env("api_server");
-        cy.intercept("POST", `${apiUrl}/api/auth/signin`).as("SignIn");
     
         cy.request({
           method: "POST",
@@ -72,7 +69,6 @@ describe("SignIn API testing", ()=> {
 
       it("should return 401 for invalid password", () => {
         const apiUrl = Cypress.env("api_server");
-        cy.intercept("POST", `${apiUrl}/api/auth/signin`).as("SignIn");
     
         cy.request({
           method: "POST",

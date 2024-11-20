@@ -10,35 +10,29 @@ describe("SignUp API testing", () => {
 
   it("should return userCredentials after signUp", () => {
     const apiUrl = Cypress.env("api_server");
-    cy.intercept("POST", `${apiUrl}/api/auth/signup`).as("SignUp");
 
-    homePage.clickOnSignUpButton();
-    ModalForms.validSignUpData();
-    homePage.signUpFormSubmit();
-
-    cy.wait("@SignUp").then((resp) => {
-      expect(resp.response.statusCode).to.equal(201);
-
-      const expectedRequestBody = {
-        email: "john.doe@example.com",
+    cy.request({
+      method: "POST",
+      url: `${apiUrl}/api/auth/signup`,
+      body: {
         firstName: "John",
         lastName: "Doe",
-        password: "password123",
-        role: "user",
+        email: "john.doe@example.com",
+        password: "asdfghjkl",
         terms: true,
-      };
-
-      const userId = resp.response.body.user.id;
-      const token = resp.response.body.token;
-
-      expect(resp.request.body).to.deep.equal(expectedRequestBody);
-      expect(resp.response.body).haveOwnProperty("token");
-      expect(resp.response.body).haveOwnProperty("user");
-      expect(resp.response.body.user).haveOwnProperty("email");
-      expect(resp.response.body.user).haveOwnProperty("firstName");
-      expect(resp.response.body.user).haveOwnProperty("lastName");
-      expect(resp.response.body.user).haveOwnProperty("id");
-      expect(resp.response.body.user).haveOwnProperty("role");
+        role: "user"
+      },
+    }).then((resp) => {
+      expect(resp.status).to.equal(201);
+      const userId = resp.body.user.id;
+      const token = resp.body.token;
+      expect(resp.body).haveOwnProperty("token");
+      expect(resp.body).haveOwnProperty("user");
+      expect(resp.body.user).haveOwnProperty("email").to.equal("john.doe@example.com");
+      expect(resp.body.user).haveOwnProperty("firstName").to.equal("John");
+      expect(resp.body.user).haveOwnProperty("lastName").to.equal("Doe");
+      expect(resp.body.user).haveOwnProperty("id");
+      expect(resp.body.user).haveOwnProperty("role").to.equal("user");
 
       cy.request({
         method: "DELETE",
@@ -57,7 +51,6 @@ describe("SignUp API testing", () => {
 
   it("should return 400 for missing required fields", () => {
     const apiUrl = Cypress.env("api_server");
-    cy.intercept("POST", `${apiUrl}/api/auth/signup`).as("SignUp");
 
     cy.request({
       method: "POST",
