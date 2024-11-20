@@ -1,16 +1,19 @@
 /// <reference types="cypress" />
 
+import { default as homePage } from "./pages/homePage";
+import { default as ModalForms } from "./pages/ModalForms";
+
 describe("SignUpForm validation testing", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("displays validation errors when submitting empty form", () => {
-    cy.get("button").contains("SIGN UP").click();
+    homePage.clickOnSignUpButton();
     cy.get("#modal-root").within(() => {
       cy.get('[data-cy="signUpForm"]').should("be.visible");
     });
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.signUpFormSubmit();
     cy.contains("Required").should("be.visible");
     cy.contains("Required").should("be.visible");
     cy.contains("Required").should("be.visible");
@@ -20,51 +23,47 @@ describe("SignUpForm validation testing", () => {
   });
 
   it("displays error for short names", () => {
-    cy.get("button").contains("SIGN UP").click();
+    homePage.clickOnSignUpButton();
     cy.get('input[name="firstName"]').type("A");
     cy.get('input[name="lastName"]').type("B");
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.signUpFormSubmit();
     cy.contains("Must be at least 2 characters").should("be.visible");
   });
 
   it("displays error for invalid email", () => {
-    cy.get("button").contains("SIGN UP").click();
+    homePage.clickOnSignUpButton();
     cy.get('input[name="email"]').type("invalid-email");
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.signUpFormSubmit();
     cy.contains("Invalid email address").should("be.visible");
   });
 
   it("displays error for short password", () => {
-    cy.get("button").contains("SIGN UP").click();
+    homePage.clickOnSignUpButton();
     cy.get('input[name="password"]').type("123");
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.signUpFormSubmit();
     cy.contains("Password must be at least 8 characters").should("be.visible");
   });
 
   it("requires terms and conditions to be checked", () => {
-    cy.get("button").contains("SIGN UP").click();
+    homePage.clickOnSignUpButton();
     cy.get('input[name="terms"]').uncheck();
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.signUpFormSubmit();
     cy.contains("You must accept the terms and conditions").should(
       "be.visible"
     );
   });
 
   it("submits successfully when all fields are valid", () => {
-    cy.get("button").contains("SIGN UP").click();
-    cy.get('input[name="firstName"]').type("John");
-    cy.get('input[name="lastName"]').type("Doe");
-    cy.get('input[name="email"]').type("john.doe@example.com");
-    cy.get('input[name="password"]').type("password123");
-    cy.get('input[name="terms"]').check();
-    cy.get('[data-cy="signUpForm"]').submit();
+    homePage.clickOnSignUpButton();
+    ModalForms.validSignUpData();
+    homePage.signUpFormSubmit();
     cy.contains("You have been registered as a new user").should("be.visible");
-    cy.log(Cypress.env())
+    cy.log(Cypress.env());
   });
 
   it("deletes the registered user", () => {
-    const apiUrl = Cypress.env('api_server')
-     cy.wait(1000);
+    const apiUrl = Cypress.env("api_server");
+    cy.wait(1000);
     cy.request("POST", `${apiUrl}/api/auth/signin`, {
       email: "john.doe@example.com",
       password: "password123",
@@ -93,38 +92,37 @@ describe("SignUpForm validation testing", () => {
 
 describe("SignInForm validation testing", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("displays validation errors when submitting empty form", () => {
-    cy.get("button").contains("SIGN IN").click();
+    homePage.clickOnSignInButton();
     cy.get("#modal-root").within(() => {
       cy.get('[data-cy="signInForm"]').should("be.visible");
     });
-    cy.get('[data-cy="signInForm"]').submit();
+    homePage.signInFormSubmit();
     cy.contains("Email is required").should("be.visible");
     cy.contains("Password is required").should("be.visible");
   });
 
   it("displays error for invalid email", () => {
-    cy.get("button").contains("SIGN IN").click();
+    homePage.clickOnSignInButton();
     cy.get('input[name="email"]').type("invalid-email");
-    cy.get('[data-cy="signInForm"]').submit();
+    homePage.signInFormSubmit();
     cy.contains("Invalid email address").should("be.visible");
   });
 
   it("displays error for short password", () => {
-    cy.get("button").contains("SIGN IN").click();
+    homePage.clickOnSignInButton();
     cy.get('input[name="password"]').type("123");
-    cy.get('[data-cy="signInForm"]').submit();
+    homePage.signInFormSubmit();
     cy.contains("Must be at least 8 characters").should("be.visible");
   });
 
   it("submits successfully when all fields are valid", () => {
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+    homePage.clickOnSignInButton();
+    ModalForms.validSignInData();
+    homePage.signInFormSubmit();
     cy.contains("You succesfully accessed your personal profile").should(
       "be.visible"
     );
@@ -133,63 +131,63 @@ describe("SignInForm validation testing", () => {
 
 describe("OrderForm validation testing", () => {
   beforeEach(() => {
-    cy.loginToApplication()
+    cy.loginToApplication();
   });
 
   it("displays validation errors when submitting form without phone number", () => {
-    cy.contains("button", "Rent now").first().click();
+    homePage.getFirstRentButton();
     cy.get("#modal-root").within(() => {
       cy.get('[data-cy="rentalCarForm"]').should("be.visible");
     });
-    cy.get('[data-cy="rentalCarForm"]').submit();
+    homePage.rentalCarFormSubmit();
     cy.contains("Phone number is required").should("be.visible");
   });
 
   it("displays validation errors when submitting empty form", () => {
-    cy.contains("button", "Rent now").first().click();
+    homePage.getFirstRentButton();
     cy.get("#modal-root").within(() => {
       cy.get('[data-cy="rentalCarForm"]').should("be.visible");
     });
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="lastName"]').clear();
     cy.get('input[name="email"]').clear();
-    cy.get('[data-cy="rentalCarForm"]').submit();
+    homePage.rentalCarFormSubmit();
     cy.contains("Phone number is required").should("be.visible");
     cy.contains("First Name is required").should("be.visible");
     cy.contains("Last Name is required").should("be.visible");
   });
 
   it("displays error for invalid email", () => {
-    cy.get("button").contains("Rent now").first().click();
+    homePage.getFirstRentButton();
     cy.get('input[name="phoneNumber"]').type("0501234567");
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("invalid-email");
-    cy.get('[data-cy="rentalCarForm"]').submit();
+    homePage.rentalCarFormSubmit();
     cy.contains("Invalid email format").should("be.visible");
   });
 
   it("displays error for invalid phone format", () => {
-    cy.get("button").contains("Rent now").first().click();
+    homePage.getFirstRentButton();
     cy.get('input[name="phoneNumber"]').type("invalid-phone");
-    cy.get('[data-cy="rentalCarForm"]').submit();
+    homePage.rentalCarFormSubmit();
     cy.contains("Invalid phone format").should("be.visible");
   });
 
   it("submits successfully when all fields are valid", () => {
-    cy.get("button").contains("Rent now").first().click();
+    homePage.getFirstRentButton();
     cy.get('input[name="phoneNumber"]').type("0501234567");
-    cy.get('[data-cy="rentalCarForm"]').submit();
+    homePage.rentalCarFormSubmit();
   });
 });
 
 describe("Order button without login", () => {
   it("displays a message when the user is not logged in", () => {
-    cy.visit("/");
+    homePage.visit();
     cy.getReduxState().then((state) => {
       const isLogged = state.auth.isLogged;
 
       if (isLogged) {
-        cy.get('[aria-label="Exit button"]').click();
+        cy.clickOnExitButton();
         cy.get("#modal-root").within(() => {
           cy.get('[data-cy="exit accepting"]').should("be.visible");
         });
@@ -199,13 +197,13 @@ describe("Order button without login", () => {
         });
 
         cy.wait(500);
-        cy.contains("button", "Rent now").first().click();
+        homePage.getFirstRentButton();
         cy.wait(500);
         cy.get("[role='tooltip']")
           .should("contain", "You should sign up or sign in to rent a car")
           .should("be.visible");
       } else {
-        cy.contains("button", "Rent now").first().click();
+        homePage.getFirstRentButton();
         cy.wait(500);
         cy.get("div")
           .should("contain", "You should sign up or sign in to rent a car")
