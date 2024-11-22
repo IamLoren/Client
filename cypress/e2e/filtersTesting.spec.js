@@ -1,8 +1,10 @@
 /// <reference types="cypress" />
 
+import { default as homePage } from "./pages/homePage";
+
 describe("TypeFilter Component", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("should display all car types as checkboxes", () => {
@@ -13,7 +15,7 @@ describe("TypeFilter Component", () => {
       expectedCarTypes.length
     );
 
-    cy.get('[data-cy="carsList"]')
+    homePage.getCarsList()
       .should("contain", "SUV")
       .and("contain", "crossover")
       .and("contain", "sedan")
@@ -26,7 +28,7 @@ describe("TypeFilter Component", () => {
       .check()
       .should("be.checked");
 
-    cy.get('[data-cy="carsList"]')
+      homePage.getCarsList()
       .should("contain", "SUV")
       .and("not.contain", "crossover")
       .and("not.contain", "sedan")
@@ -36,7 +38,7 @@ describe("TypeFilter Component", () => {
       .uncheck()
       .should("not.be.checked");
 
-    cy.get('[data-cy="carsList"]')
+      homePage.getCarsList()
       .should("contain", "SUV")
       .and("contain", "crossover")
       .and("contain", "sedan")
@@ -46,7 +48,7 @@ describe("TypeFilter Component", () => {
 
 describe("TransmissionFilter Component", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("should display all car types as checkboxes", () => {
@@ -57,7 +59,7 @@ describe("TransmissionFilter Component", () => {
       expectedTransmissionTypes.length
     );
 
-    cy.get('[data-cy="carsList"]')
+    homePage.getCarsList()
       .should("contain", "automatic")
       .and("contain", "manual");
   });
@@ -70,7 +72,7 @@ describe("TransmissionFilter Component", () => {
       .check()
       .should("be.checked");
 
-    cy.get('[data-cy="carsList"]')
+      homePage.getCarsList()
       .should("contain", "automatic")
       .and("not.contain", "manual");
 
@@ -80,7 +82,7 @@ describe("TransmissionFilter Component", () => {
       .uncheck()
       .should("not.be.checked");
 
-    cy.get('[data-cy="carsList"]')
+      homePage.getCarsList()
       .should("contain", "automatic")
       .and("contain", "manual");
   });
@@ -88,12 +90,12 @@ describe("TransmissionFilter Component", () => {
 
 describe("PriceRangeSlider Component", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("should display min and max price sliders", () => {
-    cy.get('input[aria-label="select minimum price"]').should("exist");
-    cy.get('input[aria-label="select maximum price"]').should("exist");
+    homePage.selectMinimumPriceInput().should("exist");
+    homePage.selectMaximumPriceInput().should("exist");
   });
 
   it("should display correct min and max prices", () => {
@@ -104,7 +106,7 @@ describe("PriceRangeSlider Component", () => {
   it("should update Redux store and min price when min slider is changed", () => {
     const newMinPrice = 80;
     cy.wait(1000);
-    cy.get('input[aria-label="select minimum price"]').as("minSlider");
+    homePage.selectMinimumPriceInput().as("minSlider");
 
     cy.get("@minSlider").invoke("val", newMinPrice).trigger("change");
     cy.window().its("store").invoke("dispatch", {
@@ -124,7 +126,7 @@ describe("PriceRangeSlider Component", () => {
   it("should update Redux store and max price when max slider is changed", () => {
     const newMaxPrice = 100;
     cy.wait(500);
-    cy.get('input[aria-label="select maximum price"]')
+    homePage.selectMaximumPriceInput()
       .invoke("val", newMaxPrice)
       .trigger("change");
     cy.window().its("store").invoke("dispatch", {
@@ -142,7 +144,7 @@ describe("PriceRangeSlider Component", () => {
   });
 
   it("should not allow min price to exceed max price", () => {
-    cy.get('input[aria-label="select maximum price"]')
+    homePage.selectMaximumPriceInput()
       .invoke("val", 80)
       .trigger("change");
     cy.window().its("store").invoke("dispatch", {
@@ -150,7 +152,7 @@ describe("PriceRangeSlider Component", () => {
       payload: 80,
     });
 
-    cy.get('input[aria-label="select minimum price"]')
+    homePage.selectMinimumPriceInput()
       .invoke("val", 90)
       .trigger("change");
 
@@ -162,10 +164,10 @@ describe("PriceRangeSlider Component", () => {
 
   it("should not allow max price to be below min price", () => {
     cy.wait(1000);
-    cy.get('input[aria-label="select minimum price"]')
+    homePage.selectMinimumPriceInput()
       .invoke("val", 30)
       .trigger("change");
-    cy.get('input[aria-label="select maximum price"]')
+      homePage.selectMaximumPriceInput()
       .invoke("val", 20)
       .trigger("change");
 
@@ -177,7 +179,7 @@ describe("PriceRangeSlider Component", () => {
 
 describe("DateTime Component", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("should render the DateTime component with correct title", () => {
@@ -193,9 +195,7 @@ describe("DateTime Component", () => {
   });
 
   it("should allow selecting a Pick-Up date", () => {
-    cy.get('[data-cy="Pick-Up"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnPickUPCalendar();
     cy.get(
       "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
     ).click();
@@ -222,9 +222,7 @@ describe("DateTime Component", () => {
     const dateToSelect = new Date();
     dateToSelect.setDate(dateToSelect.getDate() + 1);
 
-    cy.get('[data-cy="Pick-Up"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnPickUPCalendar();
 
     const dayToSelect = dateToSelect.getDate().toString().padStart(2, "0");
     cy.get(`.react-datepicker__day--0${dayToSelect}`)
@@ -246,9 +244,7 @@ describe("DateTime Component", () => {
   });
 
   it("should not allow selecting past dates as a Pick-Up day", () => {
-    cy.get('[data-cy="Pick-Up"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnPickUPCalendar();
 
     cy.get(".react-datepicker__day--001").should(
       "have.class",
@@ -257,9 +253,7 @@ describe("DateTime Component", () => {
   });
 
   it("should allow selecting a Drop-Off date", () => {
-    cy.get('[data-cy="Drop-Off"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnDropOffCalendar();
     cy.get(
       "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
     ).click();
@@ -286,9 +280,7 @@ describe("DateTime Component", () => {
     const dateToSelect = new Date();
     dateToSelect.setDate(dateToSelect.getDate() + 2);
 
-    cy.get('[data-cy="Drop-Off"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnDropOffCalendar();
       cy.get(
         "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
       ).click();  
@@ -308,9 +300,7 @@ describe("DateTime Component", () => {
   });
 
   it("should not allow selecting a Drop-Off day below a Pick-Up day", () => {
-    cy.get('[data-cy="Pick-Up"]')
-      .find(".react-datepicker__input-container")
-      .click();
+    homePage.clickOnPickUPCalendar();
     cy.get(
       "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
     ).click();
@@ -322,9 +312,7 @@ describe("DateTime Component", () => {
       .trigger("input")
       .click();
 
-    cy.get('[data-cy="Drop-Off"]')
-      .find(".react-datepicker__input-container")
-      .click();
+      homePage.clickOnDropOffCalendar();
     cy.get(
       "[class='react-datepicker__navigation react-datepicker__navigation--next react-datepicker__navigation--next--with-time']"
     ).click();
