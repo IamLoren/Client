@@ -2,20 +2,23 @@
 
 import homePage from "../pages/homePage";
 
-describe("SignIn API testing", ()=> {
+describe("API: SignIn", ()=> {
+  const apiUrl = Cypress.env("api_server");
+  const apiSignIn = Cypress.env("APIsignIn");
+
     beforeEach(() => {
         homePage.visit();
       });
 
       it("should return userCredentials and ProfileData after signIn", ()=> {
-        const apiUrl = Cypress.env("api_server");
+        const userValidPassword = Cypress.env("user_valid_password")
 
         cy.request({
             method: "POST",
-            url: `${apiUrl}/api/auth/signin`,
+            url: `${apiUrl}${apiSignIn}`,
             body: {
               email: "iryna@gmail.com",
-              password: "asdfghjkl",
+              password: userValidPassword,
             },
           }).then((resp) => {
             expect(resp.status).to.equal(200);
@@ -34,11 +37,9 @@ describe("SignIn API testing", ()=> {
       })
 
       it("should return 400 for missing required fields", () => {
-        const apiUrl = Cypress.env("api_server");
-    
         cy.request({
           method: "POST",
-          url: `${apiUrl}/api/auth/signin`,
+          url: `${apiUrl}${apiSignIn}`,
           failOnStatusCode: false,
           body: {
             email: "",
@@ -51,11 +52,9 @@ describe("SignIn API testing", ()=> {
       });
 
       it("should return 404 for invalid email", () => {
-        const apiUrl = Cypress.env("api_server");
-    
         cy.request({
           method: "POST",
-          url: `${apiUrl}/api/auth/signin`,
+          url: `${apiUrl}${apiSignIn}`,
           failOnStatusCode: false,
           body: {
             email: "invalid@test.com",
@@ -68,11 +67,9 @@ describe("SignIn API testing", ()=> {
       });
 
       it("should return 401 for invalid password", () => {
-        const apiUrl = Cypress.env("api_server");
-    
         cy.request({
           method: "POST",
-          url: `${apiUrl}/api/auth/signin`,
+          url: `${apiUrl}${apiSignIn}`,
           failOnStatusCode: false,
           body: {
             email: "iryna@gmail.com",

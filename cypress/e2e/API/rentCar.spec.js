@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("API Order Creation Tests", () => {
+describe("API: createOrder", () => {
     const apiUrl = Cypress.env("api_server");
   const validOrderData = {
     createdBy: "user",

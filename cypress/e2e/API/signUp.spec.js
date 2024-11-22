@@ -3,22 +3,26 @@
 import { default as homePage } from "../pages/homePage";
 import { default as ModalForms } from "../pages/ModalForms";
 
-describe("SignUp API testing", () => {
+describe("API: SignUp", () => {
+  const apiUrl = Cypress.env("api_server");
+  const APIsignUp = Cypress.env("APIsignUp");
+
+
   beforeEach(() => {
     homePage.visit();
   });
 
   it("should return userCredentials after signUp", () => {
-    const apiUrl = Cypress.env("api_server");
+    const userValidPassword = Cypress.env("user_valid_password")
 
     cy.request({
       method: "POST",
-      url: `${apiUrl}/api/auth/signup`,
+      url: `${apiUrl}${APIsignUp}`,
       body: {
         firstName: "John",
         lastName: "Doe",
         email: "john.doe@example.com",
-        password: "asdfghjkl",
+        password: userValidPassword,
         terms: true,
         role: "user"
       },
@@ -50,11 +54,11 @@ describe("SignUp API testing", () => {
   });
 
   it("should return 400 for missing required fields", () => {
-    const apiUrl = Cypress.env("api_server");
+  
 
     cy.request({
       method: "POST",
-      url: `${apiUrl}/api/auth/signup`,
+      url: `${apiUrl}${APIsignUp}`,
       failOnStatusCode: false,
       body: {
         email: "",
@@ -77,14 +81,14 @@ describe("SignUp API testing", () => {
       terms: true,
     };
 
-    cy.request("POST", `${apiUrl}/api/auth/signup`, userData).then((resp) => {
+    cy.request("POST", `${apiUrl}${APIsignUp}`, userData).then((resp) => {
       expect(resp.status).to.equal(201);
       const userId = resp.body.user.id;
       const token = resp.body.token;
 
       cy.request({
         method: "POST",
-        url: `${apiUrl}/api/auth/signup`,
+        url: `${apiUrl}${APIsignUp}`,
         failOnStatusCode: false,
         body: userData,
       }).then((resp) => {
@@ -121,7 +125,7 @@ describe("SignUp API testing", () => {
 
     cy.request({
       method: "POST",
-      url: `${apiUrl}/api/auth/signup`,
+      url: `${apiUrl}${APIsignUp}`,
       failOnStatusCode: false,
       body: userData,
     }).then((resp) => {
