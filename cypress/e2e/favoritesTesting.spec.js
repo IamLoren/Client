@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
+import { default as homePage } from "./pages/homePage";
+
 describe("Card component - Favorites functionality", () => {
   beforeEach(() => {
-    cy.visit("/");
+    homePage.visit();
   });
 
   it("should show login tooltip message when a user is not logged in", () => {
-    cy.get('[aria-label="press to add this car to favorites"]')
-      .first()
-      .trigger("mouseover");
+    homePage.getFirstHeartIcon().trigger("mouseover");
     cy.wait(300);
     cy.get("[role='tooltip']").should(
       "contain",
@@ -17,12 +17,8 @@ describe("Card component - Favorites functionality", () => {
   });
 
   it("should change icon color and tooltip after adding and removing a car from favorites when heart icon is clicked", () => {
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
-
-    cy.get('[aria-label="press to add this car to favorites"]').as(
+    cy.loginToApplication();
+    homePage.getFirstHeartIcon().as(
       "favoriteIcon"
     );
 
@@ -44,10 +40,7 @@ describe("Card component - Favorites functionality", () => {
   });
 
   it("should add car to favoriteList in Redux store and delete from store", () => {
-    cy.get("button").contains("SIGN IN").click();
-    cy.get('input[name="email"]').type("iryna@gmail.com");
-    cy.get('input[name="password"]').type("asdfghjkl");
-    cy.get('[data-cy="signInForm"]').submit();
+    cy.loginToApplication();
 
     cy.get('[aria-label="press to add this car to favorites"]').as(
       "favoriteIcon"
@@ -96,4 +89,6 @@ describe("Card component - Favorites functionality", () => {
         });
       });
   });
+
+  
 });
