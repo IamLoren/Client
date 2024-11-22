@@ -6,9 +6,10 @@ Cypress.Commands.add("getReduxState", ()=> {
 
 Cypress.Commands.add("loginToApplication", () => {
     const apiUrl = Cypress.env("api_server");
+    const password = Cypress.env("user_valid_password");
    const userCredentials = {
             "email": "iryna@gmail.com",
-            "password": "asdfghjkl"
+            "password": password
     }
 
     cy.request("POST", `${apiUrl}/api/auth/signin`, userCredentials).its('body').then(body => {
@@ -24,9 +25,10 @@ Cypress.Commands.add("loginToApplication", () => {
 
 Cypress.Commands.add("loginAdmin", () => {
     const apiUrl = Cypress.env("api_server");
+    const password = Cypress.env("user_valid_password");
     const userCredentials = {
              "email": "carrental795@gmail.com",
-             "password": "asdfghjkl"
+             "password": password
      }
  
      cy.request("POST", `${apiUrl}/api/auth/signin`, userCredentials).its('body').then(body => {

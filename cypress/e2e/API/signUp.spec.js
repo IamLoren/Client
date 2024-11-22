@@ -28,7 +28,8 @@ describe("API: SignUp", () => {
       },
     }).then((resp) => {
       expect(resp.status).to.equal(201);
-      const userId = resp.body.user.id;
+     
+      const userId = resp.body.user.id; cy.log(userId)
       const token = resp.body.token;
       expect(resp.body).haveOwnProperty("token");
       expect(resp.body).haveOwnProperty("user");
