@@ -8,19 +8,10 @@ describe("API: findOneUser", () => {
   let testUserId;
 
   before(() => {
-    cy.request("POST", `${apiUrl}${signUpRoute}`, {
-      email: "testuser@example.com",
-      password: "password123",
-      firstName: "Test",
-      lastName: "User",
-      role: "user",
-      terms: true,
-    }).then((response) => {
-      expect(response.status).to.eq(201);
-      cy.log(response.body.user.id);
-      testUserId = response.body.user.id;
-    });
-    cy.log(testUserId)
+    cy.newUserRegistration();
+    cy.then(() => {
+        testUserId = Cypress.env("testUserId");
+      });
     cy.loginAdmin();
   });
 
@@ -45,20 +36,8 @@ describe("API: findOneUser", () => {
         );
         expect(response.body.client._id).to.eq(testUserId);
       });
-      cy.log(testUserId)
-      cy.log(adminToken)
-      cy.request({
-        method: "DELETE",
-        url: `${apiUrl}/api/user/${testUserId}`,
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-        },
-      }).then((deleteResponse) => {
-        expect(deleteResponse.status).to.equal(200);
-        expect(deleteResponse.body.message).to.equal(
-          "User and profile deleted successfully"
-        );
-      });
+
+      cy.deleteTestUser(testUserId, adminToken);
     });
   });
 
