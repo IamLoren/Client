@@ -1,4 +1,4 @@
-class HomePage {
+class HomePage { 
     visit() {
         cy.visit('/');
     }
