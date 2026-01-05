@@ -4,12 +4,15 @@ npm-debug.log
 .gitignore
 .env
 .env.*
-dist
-build
 *.md
 .vscode
 .idea
 cypress
 cypress.config.js
 cypress.env.json
+src
+public
+package*.json
+*.config.*
+tsconfig*.json
 
